@@ -14,12 +14,15 @@
   --rating-color: #ffc908;
   --border-color:rgba(168, 168, 168, 0.544);
   --font-weight : 500;
+  --transition:all .2s ;
 }
 
 body {
   font-family: var(--font-family) !important;
 }
-
+ul{
+    margin: 0;
+}
 .nav-link {
   transition: unset !important;
 }

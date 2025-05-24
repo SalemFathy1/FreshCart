@@ -1,5 +1,4 @@
-@import "primeicons/primeicons.css";
-
+// Start of Upper
 .icon{
     margin-right: 60px;
 }
@@ -9,7 +8,7 @@
 .search-bar{
     padding: .55rem 1rem;
     font-size: .9rem;
-    width: 400px;
+    width: 500px;
     color: var(--font-color);
     font-weight: var(--font-weight);
 }
@@ -35,7 +34,7 @@
     color: var(--font-color);
     padding: .55rem 1rem;
     background-color: #FFF;
-    transition: all .3s ease;
+    transition: var(--transition);
     i{
         margin-right: .55rem;
     }
@@ -47,6 +46,66 @@
 
 
 
-.icon-links ul li a{
+.icon-links ul li a {
     color: var(--font-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
 }
+
+.icon-links ul li a i {
+    font-size: 1.25rem; /* Match your fs-5 class */
+}
+
+.icon-links ul li a span {
+    background-color: #198754;
+    color: #FFF;
+    font-size: 0.65rem;
+    min-width: 1.15rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -0.15rem;
+    right: -0.15rem;
+    padding: 0.15rem;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+}
+// End of Upper
+
+
+// Start of Lower
+.lower{
+    padding: 0 1rem 1rem 1rem;
+}
+.lower button{
+    background-color: var(--main-color);
+    color: #FFF;
+    transition: var(--transition);
+}
+
+.lower button:hover{
+    background-color: #099309;
+}
+
+.lower .list ul li a{
+    font-size: 14px;
+    font-weight: var(--font-weight);
+    transition: var(--transition);
+    i{
+        font-size: 10px;
+        color: var(--border-color);
+    }
+}
+
+.lower .list ul li:hover a{
+    color: var(--main-color);
+}
+
+// End of Lower
