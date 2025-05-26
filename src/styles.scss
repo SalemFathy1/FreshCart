@@ -27,9 +27,7 @@ ul{
   transition: unset !important;
 }
 .active-link {
-  background-color: var(--main-color) !important;
-  color: var(--light-color) !important;
-  border-radius: 5px;
+  color: var(--main-color);
 }
 
 .rating-color {

@@ -61,7 +61,7 @@
 }
 
 .icon-links ul li a span {
-    background-color: #198754;
+    background-color: var(--main-color);
     color: #FFF;
     font-size: 0.65rem;
     min-width: 1.15rem;
@@ -82,7 +82,7 @@
 
 // Start of Lower
 .lower{
-    padding: 0 1rem 1rem 1rem;
+    padding: 0 1rem 1rem 0;
 }
 .lower button{
     background-color: var(--main-color);
