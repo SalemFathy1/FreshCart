@@ -3,10 +3,10 @@
     <div class="upper d-flex align-items-center justify-content-between py-3">
       <div class="search d-flex">
         <div class="icon">
-          <img
+          <a routerLink="home"><img
             src="../../assets/svgs/freshcart-logo.svg"
             alt="FreshCart-Logo"
-          />
+          /></a>
         </div>
         <div class="search d-flex gap-2">
           <div class="position-relative">
@@ -28,15 +28,15 @@
       <div class="icon-links">
         <ul class="list-unstyled d-flex align-items-center">
           <li class="mx-2 fs-5">
-            <a href=""
+            <a routerLink="home"
               ><i class="pi pi-heart"><span>5</span></i></a
             >
           </li>
           <li class="mx-2 fs-5">
-            <a href=""><i class="pi pi-user"></i></a>
+            <a routerLink="login"><i class="pi pi-user"></i></a>
           </li>
           <li class="mx-2 fs-5">
-            <a href=""
+            <a routerLink="home"
               ><i class="pi pi-shopping-cart"><span>1</span></i></a
             >
           </li>
@@ -72,6 +72,9 @@
               routerLink="cart"
               >Cart<i class="pi pi-chevron-down"></i
             ></a>
+          </li>
+          <li>
+            <p-megamenu [model]="items" />
           </li>
         </ul>
       </div>

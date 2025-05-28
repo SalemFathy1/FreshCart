@@ -1,0 +1,50 @@
+swiper-container {
+    &::part(bullet-active) {
+    background-color: var(--main-color);
+    width: 15px;
+    height: 8px;
+    border-radius: 5px;
+    transition: var(--transition);
+}
+}
+
+.slide{
+    min-height: 35rem;
+    margin: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+}
+.slide img{
+    position: absolute;
+    width: 100%;      /* Ensures width fills the container */
+    height: 100%;     /* Ensures height fills the container */
+    object-fit: cover; /* Covers the area, may crop edges */
+    top: 0;
+    left: 0;
+}
+
+.slide .title{
+    width: 40%;
+    padding-left: 50px;
+    .heads{
+        color: rgb(0, 30, 43);
+        font-size: 3rem;
+        font-weight: 700;
+        span{
+            color: var(--main-color);
+        }
+    }
+    button{
+        background-color: #001E2B;
+        padding: 10px 15px;
+        color: #FFF;
+        border-radius: 10px;
+        border: 0;
+        transition: var(--transition);
+
+    }
+    button:hover{
+        background-color: #012838bb;
+    }
+}

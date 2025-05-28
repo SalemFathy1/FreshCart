@@ -1,1 +1,180 @@
-<p>register works!</p>
+<section>
+  <div class="container">
+    <div class="form-container m-auto p-3 rounded rounded-4">
+      <div class="form-head">
+        <h2 class="input-main fw-bold">Sign Up</h2>
+      </div>
+      <div class="form-body">
+        <form [formGroup]="RegisterForm" (ngSubmit)="registerSubmit()">
+          <div class="my-2">
+            <label class="mb-2" for="name">Name</label>
+            <input
+              placeholder="Enter Your Name"
+              id="name"
+              type="text"
+              class="form-control"
+              formControlName="name"
+            />
+
+            @if (RegisterForm.get('name')?.errors &&
+            RegisterForm.get('name')?.touched) {
+            <div class="alert alert-danger">
+              @if (RegisterForm.get('name')?.getError('required')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Name Is Required
+                !
+              </p>
+              }@else if (RegisterForm.get('name')?.getError('minlength')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Name Should be
+                more than or equal 3 chars
+              </p>
+              }@else if (RegisterForm.get('name')?.getError('maxlength')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Name Should be
+                less than or equal 20 chars
+              </p>
+              }
+            </div>
+            }
+          </div>
+          <div class="my-2">
+            <label class="mb-2" for="email">Email</label>
+            <input
+              placeholder="Enter Email address"
+              id="email"
+              type="email"
+              class="form-control"
+              formControlName="email"
+            />
+
+            @if (RegisterForm.get('email')?.errors &&
+            RegisterForm.get('email')?.touched) {
+            <div class="alert alert-danger">
+              @if (RegisterForm.get('email')?.getError('required')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Email is required
+                !
+              </p>
+              } @else if (RegisterForm.get('email')?.getError('email')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Enter Vaild Email
+                !
+              </p>
+              }
+            </div>
+            }
+          </div>
+          <div class="my-2">
+            <label class="mb-2" for="password">Password</label>
+            <input
+              placeholder="Enter Password"
+              id="password"
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
+
+              @if (RegisterForm.get('password')?.errors &&
+              RegisterForm.get('password')?.touched){
+
+
+            <div class="alert alert-danger">
+              @if (RegisterForm.get('password')?.getError('required')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Password is
+                required !
+              </p>
+              } @else if (RegisterForm.get('password')?.getError('pattern')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Password shoud be
+                6 or more digits !
+              </p>
+              }
+            </div>
+            }
+          </div>
+          <div class="my-2">
+            <label class="mb-2" for="repassword">Re-Passwrod</label>
+            <input
+              placeholder="Repeat Your Password"
+              id="repassword"
+              type="password"
+              class="form-control"
+              formControlName="rePassword"
+            />
+            @if (RegisterForm.getError('misMatch') &&
+            RegisterForm.get('rePassword')?.touched) {
+            <div class="alert alert-danger">
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> rePassword does
+                Not match the Password !
+              </p>
+            </div>
+            }
+          </div>
+          <div class="my-2">
+            <label class="mb-2" for="phone">Phone</label>
+            <input
+              placeholder="Enter Your Phone Number"
+              id="phone"
+              type="text"
+              class="form-control mb-1"
+              formControlName="phone"
+            />
+            @if (RegisterForm.get('phone')?.errors &&
+            RegisterForm.get('phone')?.touched) {
+            <div class="alert alert-danger">
+              @if (RegisterForm.get('phone')?.getError('required')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Phone Number is
+                required !
+              </p>
+              } @else if (RegisterForm.get('phone')?.getError('pattern')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Enter Egyptian
+                Phone Number (010,011,012,015) !
+              </p>
+              }
+            </div>
+            }
+            <p class="lead">
+              By Signup, you agree to our Terms of
+              <span><a href="#">Service</a></span> &
+              <span><a href="#">Privacy Policy</a></span> &
+            </p>
+          </div>
+          <button [disabled]="RegisterForm.invalid || isLoading" class="btn-main mb-2 d-flex gap-2">
+            Sign Up
+            
+            @if (isLoading) {
+            <span><i class="fa fa-spin fa-spinner"></i></span>
+            }
+
+          </button>
+          @if (msgError != "") 
+          {
+          <p class="ms-auto alert alert-danger text-center">{{ msgError }}</p>
+          }
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- reactive forms -->
+<!-- FormGroup   (register) -->
+<!-- |FormControl 1  (name)-->
+<!--    |FormControl 2  (email)-->
+<!--    |FormControl 3 -->
+
+<!-- 
+    steps to make a formgroup
+        1- TS to make the FormGroup and the FormControls
+        2- DEsign the FormGroup in the HTML
+
+
+-->
+
+<!-- not used alot -->
+<!-- template Driven Forms -->
