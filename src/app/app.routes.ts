@@ -7,10 +7,12 @@ import { CartComponent } from './components/cart/cart.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { authGuard } from './core/guards/auth.guard';
+import { loginGuard } from './core/guards/login.guard';
 
 export const routes: Routes = [
     {
-        path:"",component:AuthLayoutComponent,
+        path:"",component:AuthLayoutComponent,canActivate:[loginGuard],
         children:[
             {path: '', redirectTo: 'login', pathMatch: 'full' },
             {path:"login",component:LoginComponent,title:"FreshCart | Login"},
@@ -20,9 +22,9 @@ export const routes: Routes = [
         path:"",component:MainLayoutComponent,
         children:[
             {path: '', redirectTo: 'home', pathMatch: 'full' },
-            {path:"home",component:HomeComponent,title:"FreshCart | Home"},
+            {path:"home",component:HomeComponent,title:"FreshCart | Home",canActivate:[authGuard]},
             {path:"shop",component:ShopComponent,title:"FreshCart | Shop"},
-            {path:"cart",component:CartComponent,title:"FreshCart | Cart"}
+            {path:"cart",component:CartComponent,title:"FreshCart | Cart",canActivate:[authGuard]}
     ]},
 
     {

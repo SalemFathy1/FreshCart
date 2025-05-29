@@ -127,9 +127,14 @@ input::placeholder{
 }
 input:focus {
 outline: none;  
-border: 1px solid var(--main-color) !important;
+border: 1px solid var(--main-color) ;
 box-shadow: 0 0 0 4px rgba(#0aad0a, 0.3) !important;
 }
+.invalid-focus {
+  outline: none;  
+  border: 1px solid var red !important;
+  box-shadow: 0 0 0 4px rgba(#ad0a0ac3, 0.3) !important;
+  }
 input:focus::placeholder{
   opacity: 0;
 }
@@ -148,3 +153,5 @@ span a{
   padding: 5px !important;
 }
 // --------
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

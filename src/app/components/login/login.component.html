@@ -1,1 +1,82 @@
-<p>login works!</p>
+<section class="my-5">
+  <div class="container">
+    <div class="form-container m-auto p-3 rounded rounded-4">
+      <div class="form-head">
+        <h2 class="input-main fw-bold">Login</h2>
+      </div>
+      <div class="form-body">
+        <form [formGroup]="LoginForm" (ngSubmit)="loginSubmit()">
+          <div class="my-2">
+            <label class="mb-2" for="email">Email</label>
+            <input
+              placeholder="Enter Email address"
+              id="email"
+              type="email"
+              class="form-control"
+            formControlName="email"
+            />
+
+            @if (LoginForm.get('email')?.errors &&
+            LoginForm.get('email')?.touched) {
+            <div class="alert alert-danger">
+              @if (LoginForm.get('email')?.getError('required')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Email is required
+                !
+              </p>
+              } @else if (LoginForm.get('email')?.getError('email')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Enter Vaild Email
+                !
+              </p>
+              }
+            </div>
+            }
+          </div>
+          <div class="my-2">
+            <label class="mb-2" for="password">Password</label>
+            <input
+              placeholder="Enter Password"
+              id="password"
+              type="password"
+              class="form-control"
+              formControlName="password"
+            />
+
+            @if (LoginForm.get('password')?.errors &&
+            LoginForm.get('password')?.touched){
+
+            <div class="alert alert-danger">
+              @if (LoginForm.get('password')?.getError('required')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Password is
+                required !
+              </p>
+              } @else if (LoginForm.get('password')?.getError('pattern')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> Password shoud be
+                6 or more digits !
+              </p>
+              }
+            </div>
+            }
+          </div>
+          <div class="forget-pass d-flex justify-content-end">
+            <a class="fs-6 text-main" href="#">Forget passweod ?</a>
+          </div>
+          <button
+            [disabled]="LoginForm.invalid || isLoading"
+            class="btn-main mb-2 d-flex gap-2"
+          >
+            Login @if (isLoading) {
+            <span><i class="fa fa-spin fa-spinner"></i></span>
+            }
+          </button>
+          @if (msgError != "") {
+          <p class="ms-auto alert alert-danger text-center">{{ msgError }}</p>
+          }
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
