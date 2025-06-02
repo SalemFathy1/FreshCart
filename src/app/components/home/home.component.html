@@ -1,6 +1,8 @@
 <section class="main-slider">
   <div class="container">
     <swiper-container
+      autoplay-delay="3000"
+      autoplay-disable-on-interaction="false"
       pagination="true"
       loop="true"
       space-between="10"
@@ -22,7 +24,9 @@
               Introduced a new model for online grocery shopping and convenient
               home delivery.
             </p>
-            <button>Shop Now <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="home-btns">
+              Shop Now <i class="fa-solid fa-arrow-right"></i>
+            </button>
           </div>
         </div>
       </swiper-slide>
@@ -44,11 +48,172 @@
               Free Shipping to First-Time Customers Only, After promotions and
               discounts are applied.
             </p>
-            <button>Shop Now <i class="fa-solid fa-arrow-right"></i></button>
+            <button class="home-btns">
+              Shop Now <i class="fa-solid fa-arrow-right"></i>
+            </button>
           </div>
         </div>
       </swiper-slide>
     </swiper-container>
   </div>
 </section>
+<section class="featured-categories">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Featured Categories</h2>
+      <div class="slider-controls">
+        <button class="swiper-button-prev">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="swiper-button-next">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+    </div>
 
+    <div class="categories-slider-container position-relative">
+      <div
+        *ngIf="!categoriesList"
+        class="loading w-100 d-flex justify-content-center align-items-center border rounded py-5"
+      >
+        <i class="fa fa-spin fa-spinner"></i>
+      </div>
+      <div class="fade-right"></div>
+      <swiper-container
+        #swiper
+        autoplay-delay="3000" autoplay-disable-on-interaction="false"
+        class="categories-swiper p-1"
+        [loop]="true"
+        slides-per-view="6"
+        space-between="10"
+        navigation-next-el=".swiper-button-next"
+        navigation-prev-el=".swiper-button-prev"
+      >
+        @for (category of categoriesList; track $index) {
+        <swiper-slide class="category-item">
+          <div class="category-icon">
+            <img [src]="category.image" [alt]="category" />
+          </div>
+          <h3 class="category-title">{{ category.name }}</h3>
+        </swiper-slide>
+        }
+      </swiper-container>
+      <div class="fade-left"></div>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="card border-0 position-relative overflow-hidden">
+          <div class="title position-absolute">
+            <h3>Fruits & Vegetables</h3>
+            <p class="text-secondary fw-semibold">
+              Get Up to <span class="fw-bolder">30%</span> Off
+            </p>
+
+            <button class="home-btns">Shop Now</button>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="card border-0 position-relative overflow-hidden">
+          <div class="title position-absolute">
+            <h3>Freshly Baked Buns</h3>
+            <p class="text-secondary fw-semibold">
+              Get Up to <span class="fw-bolder">25%</span> Off
+            </p>
+            <button class="home-btns">Shop Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="products">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Popular Products</h2>
+    </div>
+    <div class="row g-3">
+      @for (product of productsList | slice:initProduct:lastProduct; track
+      product.id) {
+      <div class="col-12 col-md-4 col-lg-3">
+        <div
+          [routerLink]="['/details', product.id]"
+          class="product cursor-pointer p-3 position-relative"
+        >
+          <div class="btns position-absolute">
+            <i class="fa-regular fa-eye"></i>
+            <i class="fa-regular fa-heart"></i>
+          </div>
+          <div class="product-img position-relative">
+            <img [src]="product.imageCover" [alt]="product.title" />
+            <div class="img-fade"></div>
+          </div>
+          <div class="product-details">
+            <h4 class="text-secondary fw-semibold">
+              {{ product.category.name }}
+            </h4>
+            <h4>{{ product.title }}</h4>
+            <div class="rating mb-3 d-flex align-items-center gap-1">
+              <p-rating
+                [ngModel]="calculateRate(product.ratingsAverage)"
+                [readonly]="true"
+              />
+              <p class="m-0 text-secondary opacity-75">
+                {{ product.ratingsAverage }}({{ product.ratingsQuantity }})
+              </p>
+            </div>
+            <div
+              class="adding d-flex justify-content-between align-items-center"
+            >
+              <p class="price m-0 fs-6">
+                ${{ product.price }}
+                <span class="text-decoration-line-through"
+                  >${{ product.price + randomFakeSale }}</span
+                >
+              </p>
+              <button class="btn btn text-light">
+                <i class="fa-solid fa-plus"></i> Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</section>
+<section class="subscription my-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="left h-100 d-flex flex-column align-items-center">
+          <div class="title h-100 d-flex flex-column justify-content-center">
+            <p class="text-light fw-bold">$30 discount for your first order</p>
+            <h3>Get top deals, latest trends, and more.</h3>
+            <p class="text-secondary fw-bold">
+              Join our email subscription now to get updates on promotions and
+              coupons.
+            </p>
+            <div>
+              <input type="email" placeholder="Enter Email Address" />
+              <button class="btn-main">Sign Up</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="right text-center">
+          <img
+            class="mx-auto"
+            src="./assets/images/girl-email.png"
+            alt="girl-Email"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

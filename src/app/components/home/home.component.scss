@@ -1,7 +1,12 @@
 swiper-container {
+  &::part(bullet){
+    background-color: #ffffff;
+    opacity: 90%;
+    transition: var(--transition);
+  }
     &::part(bullet-active) {
     background-color: var(--main-color);
-    width: 15px;
+    width: 8px;
     height: 8px;
     border-radius: 5px;
     transition: var(--transition);
@@ -9,7 +14,7 @@ swiper-container {
 }
 
 .slide{
-    min-height: 35rem;
+  min-height: 35rem;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -34,7 +39,10 @@ swiper-container {
             color: var(--main-color);
         }
     }
-    button{
+
+}
+
+    .home-btns{
         background-color: #001E2B;
         padding: 10px 15px;
         color: #FFF;
@@ -43,7 +51,280 @@ swiper-container {
         transition: var(--transition);
 
     }
-    button:hover{
+    .home-btns:hover{
         background-color: #012838bb;
     }
+
+// categories slider section
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
+.section-title {
+      font-size: 25px;
+      color: #001e2b;
+      font-weight: 600;
+      margin: 0;
+    }
+.featured-categories {
+    
+
+    
+    .slider-controls {
+      display: flex;
+      gap: 5px;
+    }
+    
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 32px;
+      height: 32px;
+      background: #ecf0ef;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      color: #333;
+      transition: var(--transition);
+      
+      &:hover {
+        background: var(--main-color);
+      }
+      
+      i {
+        font-size: 14px;
+        color: #889397;
+
+      }
+      &:hover i{
+        color: #FFF;
+    }
+    }
+    
+    .category-item {
+      height: 250px;
+      border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      cursor: pointer;
+      padding: 10px;
+      transition:var(--transition) ;
+      &:hover {
+        border: 1px solid var(--main-color);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      }
+    }
+    
+    .category-icon {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: #f8f8f8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 12px;
+      
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+      }
+    }
+    
+    .category-title {
+      font-size: 14px;
+      font-weight: 500;
+      color: #333;
+      text-align: center;
+      margin: 0;
+    }
+    
+  }
+  .fade-right,.fade-left{
+    position: absolute;
+  }
+  .fade-right{
+    background: linear-gradient(to left, white,rgba(255, 255, 255, 0.455), transparent);
+    height: 100%;
+    width: 200px;
+    right: 0;
+    top: 0;
+    z-index: 999;
+  }
+  .fade-left{
+      background: linear-gradient(to right, white,rgba(255, 255, 255, 0.455), transparent);
+      height: 100%;
+      width: 200px;
+      left: 0;
+      top: 0;
+      z-index: 999;
+    }
+//---------
+
+//two-cards section 
+.col-6:nth-child(1) .card{
+  background: url('/assets/images/grocery-banner.png');
+}
+.col-6:nth-child(2) .card{
+  background: url('/assets/images/grocery-banner-2.jpg');
+}
+.card{ 
+  border-radius: 10px;
+  height: 210px;
+    background-size: cover;
+    background-position: center;
+.title{
+  top: 50%;
+  transform: translateY(-50%);
+  margin-left: 30px;
+  h3{
+    color: #001e2b;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+}
+}
+:host ::ng-deep .p-rating .p-rating-icon.p-rating-icon-active {
+  color: var(--main-color);
+}
+//---------------
+
+.product{
+  .btns{
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    top: 30px;
+    right: 0px;
+    opacity: 0;
+    transition: var(--transition);
+    i{
+      background-color: #fff;
+      padding: 10px ;
+      margin: 0;
+      border-radius: 10px;
+      box-shadow: 0 0px 10px rgba(0, 0, 0, 0.12);
+      font-size: 14px;
+      transition: var(--transition);
+    }
+  }
+  &:hover .btns{
+    opacity: 1;
+    transform: translateX(-30px);
+    i:hover{
+      background-color: var(--main-color);
+      color: #FFF;
+    }
+  }
+  .product-img{
+    // position: relative;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: .75rem;
+    height: 320px;
+    transition: var(--transition);
+    &:hover{
+      border: 1px solid var(--border-color);
+    }
+    &:hover img {
+      transform: scale(1.2);
+    }
+    &:hover .img-fade {
+      transform: translateY(100%);
+    }
+    img{
+      width: auto;
+      transform: scale(1.1);
+      transition: var(--transition);
+      object-fit: cover;
+      max-width: 100%;
+    }
+    .img-fade{
+      transition: all .5s;
+      position: absolute;
+      height: 70px;
+      width: 100%;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to top, white,rgba(255, 255, 255, 0.455), transparent);
+    }
+  }
+  .product-details{
+    h4:nth-child(1){
+      font-size: 12px;
+      opacity: 70%;
+      margin: 0;
+    }
+    h4:nth-child(2){
+      font-size: 1rem;
+      color: #001E2B;
+      font-weight: 700;
+      white-space: nowrap; /* Prevents the text from wrapping to the next line */
+      overflow: hidden;    /* Hides any content that overflows the element's box */
+      text-overflow: ellipsis;
+    }
+    .price{
+      color: #001E2B;
+      font-weight: 600;
+      span{
+        font-weight: 400;
+      color: rgba(150, 150, 150, 0.607);
+      font-size: 12px;
+      }
+    }
+    button{
+      padding: 5px 8px !important;
+      font-size: 12px;
+      background-color: var(--main-color);
+      &:hover{
+      background-color: #0d850d;
+      }
+    }
+  }
+}
+.p-rating-option-active .p-rating-icon {
+  color: var(--main-color);
+}
+
+
+
+
+
+.subscription{
+  background: url('../../../assets/svgs/cover.svg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #001E2B;
+  color: #FFF;
+  padding: 0;
+
+}
+  .left{
+    .title{
+      h3{
+        font-size: 30px;
+        font-weight: 600;
+      }
+      input{
+        margin: 0;
+        height: 100%;
+        border: 0;
+        border-radius: 5px;
+        margin-right: 5px;
+      }
+      button{
+        border-radius: 5px;
+        font-weight: 600;
+      }
+    }
+  }

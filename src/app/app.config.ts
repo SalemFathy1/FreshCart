@@ -1,5 +1,5 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideRouter, withInMemoryScrolling, withViewTransitions } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -11,7 +11,10 @@ import { MessageService } from 'primeng/api';
 register();
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideClientHydration(),provideAnimationsAsync(),
+  providers: [provideRouter(routes,withInMemoryScrolling({
+    scrollPositionRestoration: 'top', // Reset to top on navigation
+    anchorScrolling: 'enabled',       // Enable anchor scrolling
+  })), provideClientHydration(),provideAnimationsAsync(),
     providePrimeNG({
         theme: {
             preset: Aura

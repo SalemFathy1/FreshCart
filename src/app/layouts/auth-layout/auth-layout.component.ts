@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthNavComponent } from "../../auth-nav/auth-nav.component";
+import { AuthNavComponent } from "../../components/auth-nav/auth-nav.component";
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { FooterComponent } from "../../components/footer/footer.component";
 

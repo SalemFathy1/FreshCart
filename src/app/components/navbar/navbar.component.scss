@@ -1,0 +1,115 @@
+// Start of Upper
+.icon{
+    margin-right: 60px;
+}
+.search{
+    position: relative;
+}
+.search-bar{
+    padding: .55rem 1rem;
+    font-size: .9rem;
+    width: 500px;
+    color: var(--font-color);
+    font-weight: var(--font-weight);
+}
+
+.search-bar::placeholder {
+    color:var(--font-color);
+    opacity: 1;  
+}
+
+.search span{
+    position: absolute;
+    border: 0;
+    right: 0;
+    top: 0;
+    button{
+        border: 0;
+        border-radius: 0 8px 8px 0;
+        background-color: transparent;
+    }
+}
+
+.search button{
+    color: var(--font-color);
+    padding: .55rem 1rem;
+    background-color: #FFF;
+    transition: var(--transition);
+    i{
+        margin-right: .55rem;
+    }
+}
+.search button:hover{
+    background-color: #C1C7C6;
+    
+}
+
+
+
+.icon-links ul li a {
+    color: var(--font-color);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+}
+
+.icon-links ul li a i {
+    font-size: 1.25rem; /* Match your fs-5 class */
+}
+
+.icon-links ul li a span {
+    background-color: var(--main-color);
+    color: #FFF;
+    font-size: 0.65rem;
+    min-width: 1.15rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: -0.15rem;
+    right: -0.15rem;
+    padding: 0.15rem;
+    font-family: var(--font-family);
+    font-weight: var(--font-weight);
+}
+
+.logout-btn{
+    background-color: red;
+}
+// End of Upper
+
+
+// Start of Lower
+.lower{
+    padding: 0 1rem 1rem 0;
+}
+.lower button{
+    background-color: var(--main-color);
+    color: #FFF;
+    transition: var(--transition);
+}
+
+.lower button:hover{
+    background-color: #099309;
+}
+
+.lower .list ul li a{
+    font-size: 14px;
+    font-weight: var(--font-weight);
+    transition: var(--transition);
+    i{
+        font-size: 10px;
+        color: var(--border-color);
+    }
+}
+
+.lower .list ul li:hover a{
+    color: var(--main-color);
+}
+
+// End of Lower
