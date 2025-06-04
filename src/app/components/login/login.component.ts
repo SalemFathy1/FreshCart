@@ -1,13 +1,13 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/Services/auth.service';
 import { MessageService } from 'primeng/api';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
     selector: 'app-login',
-    imports: [ReactiveFormsModule],
+    imports: [ReactiveFormsModule,RouterLink],
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
@@ -42,7 +42,7 @@ loginSubmit():void{
                 if(res.message == "success"){
                     setTimeout(() => {
                         this._Router.navigate(['/home'])
-                    }, 3000);
+                    }, 1000);
                 }
                 this.isLoading = false
                 this.LoginForm.reset()

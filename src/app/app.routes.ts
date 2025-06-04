@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { NotfoundComponent } from './components/notfound/notfound.component';
+import { NotfoundComponent } from './shared/notfound/notfound.component';
 import { MainLayoutComponent } from './layouts/main-layout/main-layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { ShopComponent } from './components/shop/shop.component';
@@ -10,6 +10,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { authGuard } from './core/guards/auth.guard';
 import { loginGuard } from './core/guards/login.guard';
 import { ProductComponent } from './components/product/product.component';
+import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassword.component';
 
 export const routes: Routes = [
     {
@@ -17,7 +19,8 @@ export const routes: Routes = [
         children:[
             {path: '', redirectTo: 'login', pathMatch: 'full' },
             {path:"login",component:LoginComponent,title:"FreshCart | Login"},
-            {path:"register",component:RegisterComponent,title:"FreshCart | Register"}
+            {path:"register",component:RegisterComponent,title:"FreshCart | Register"},
+            {path:"forgetpassword",component:ForgetpasswordComponent,title:"FreshCart | ForgetPassword"}
     ]},
      {
         path:"",component:MainLayoutComponent,canActivate:[authGuard],
@@ -26,6 +29,7 @@ export const routes: Routes = [
             {path:"home",component:HomeComponent,title:"FreshCart | Home"},
             {path:"shop",component:ShopComponent,title:"FreshCart | Shop"},
             {path:"cart",component:CartComponent,title:"FreshCart | Cart"},
+            {path:"wishlist",component:WishlistComponent,title:"FreshCart | wishlist"},
             {path:"details/:productId",component:ProductComponent,title:"FreshCart | Product Details"}
     ]},
 

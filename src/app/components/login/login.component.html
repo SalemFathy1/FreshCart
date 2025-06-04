@@ -15,7 +15,6 @@
               class="form-control"
             formControlName="email"
             />
-
             @if (LoginForm.get('email')?.errors &&
             LoginForm.get('email')?.touched) {
             <div class="alert alert-danger">
@@ -62,7 +61,7 @@
             }
           </div>
           <div class="forget-pass d-flex justify-content-end">
-            <a class="fs-6 text-main" href="#">Forget passweod ?</a>
+            <a class="text-main fa-x opacity-75" routerLink="/forgetpassword">Forget passweod ?</a>
           </div>
           <button
             [disabled]="LoginForm.invalid || isLoading"
