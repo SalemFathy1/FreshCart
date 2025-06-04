@@ -8,10 +8,12 @@ import { FormsModule } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { SwiperContainer } from 'swiper/element';
 import { RouterLink } from '@angular/router';
+import { SkeletonModule } from 'primeng/skeleton';
+import { IProduct } from '../../core/interfaces/iproduct';
 
 @Component({
     selector: 'app-home',
-    imports: [ButtonModule,Rating,CommonModule,FormsModule,RouterLink],
+    imports: [ButtonModule,Rating,CommonModule,FormsModule,RouterLink,SkeletonModule],
     templateUrl: './home.component.html',
     styleUrl: './home.component.scss',
     schemas:[CUSTOM_ELEMENTS_SCHEMA]
@@ -23,30 +25,47 @@ export class HomeComponent implements OnInit,OnDestroy {
     initProduct = Math.floor(Math.random() * 20)
     lastProduct = this.initProduct + 12
     randomFakeSale = Math.floor(Math.random() * 200)
-    categoriesList!:any[] 
-    productsList!:any[] 
+    categoriesList:any[] = []
+    productsList:IProduct[] = [
+
+    ] 
     getAllproductSub!:Subscription
+    isLoading:boolean = false
 
     ngOnInit(): void {
         this.getCategoies()
+        console.log(this.isLoading);
+        
         this.getProducts()
+        console.log(this.isLoading);
+
     }
 
     getCategoies():void{
+        this.isLoading = true
         this._CategoiresService.getAllCategories().subscribe({
             next:(res)=>{
-                this.categoriesList = res.data  
+                this.categoriesList = res.data 
+                console.log(res.data);
+                this.isLoading = false
+
             },
             error:(err)=>{
+                this.isLoading = false
+
             }
         })
     }
     getProducts():void{
+        this.isLoading = true
         this.getAllproductSub = this._ProductService.getAllProducts().subscribe({
             next:(res)=>{
                 this.productsList = res.data
                 console.log(this.productsList);
+                this.isLoading = false
+
             },error:(err)=>{
+                this.isLoading = false
             }
         })
     }

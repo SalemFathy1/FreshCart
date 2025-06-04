@@ -1,1 +1,163 @@
-<p>product works!</p>
+<section>
+  <div class="container">
+    <div class="bread-crumb mb-3" *ngIf="productData">
+      <p class="m-0 d-flex gap-3">
+        <a routerLink="/home" class="text-main"><i class="fa fa-home"></i></a> / @if (isLoading) {
+        <p-skeleton width="5rem" />
+        }@else {
+        <a class="text-main">{{ productData.category.name }}</a>
+        } / @if (isLoading) {
+        <p-skeleton width="15rem" />
+        }@else {
+        <a>{{ productData.title }}</a>
+        }
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="product-imgs d-flex flex-column gap-2">
+          @if (isLoading) {
+          <p-skeleton width="100%" height="25rem" />
+          }@else {
+          <swiper-container
+            class="main-swiper"
+            thumbs-swiper=".mySwiper2"
+            space-between="0"
+            navigation="false"
+          >
+            @for (img of productImages; track $index) {
+            <swiper-slide>
+              <img [src]="img" />
+            </swiper-slide>
+            }
+          </swiper-container>
+          <swiper-container
+            class="mySwiper2"
+            space-between="10"
+            slides-per-view="4"
+            free-mode="true"
+            watch-slides-progress="true"
+          >
+            @for (img of productImages; track $index) {
+            <swiper-slide>
+              <img [src]="img" />
+            </swiper-slide>
+            }
+          </swiper-container>
+          }
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="product-details ps-0 ps-md-3 ps-lg-3 ps-sm-0">
+          @if (isLoading) {
+          <p-skeleton width="10rem" styleClass="mb-2" />
+          <p-skeleton width="100%" styleClass="mb-2" />
+          <p-skeleton width="100%" height="5rem" styleClass="mb-2" />
+          <p-skeleton width="30%" styleClass="mb-2" />
+          <p-skeleton width="10%" styleClass="mb-2" />
+
+          }@else {
+          <a class="cat cursor-pointer">{{ productData.category.name }}</a>
+          <h1>{{ productData.title }}</h1>
+          <p class="text-secondary">{{ productData.description }}</p>
+          <div class="rating mb-3 d-flex align-items-center gap-3">
+            <p-rating
+              [ngModel]="calculateRate(productData.ratingsAverage)"
+              [readonly]="true"
+            />
+            <p class="m-0">({{ productData.ratingsQuantity }} reviews)</p>
+          </div>
+          <div class="pricing d-flex gap-2 align-items-center">
+            <span *ngIf="!productData.priceAfterDiscount" class="price"
+              >${{ productData.price }}</span
+            >
+            @if (productData.priceAfterDiscount) {
+            <span
+              class="price"
+              [class.text-decoration-line-through]="
+                !productData.priceAfterDiscount
+              "
+              >${{ productData.priceAfterDiscount }}</span
+            >
+            } @if (productData.priceAfterDiscount) {
+            <span
+              [class.text-decoration-line-through]="
+                productData.priceAfterDiscount
+              "
+              class="AfterDisc text-secondary"
+              >${{ productData.price }}</span
+            >
+            <span
+              class="text-danger"
+              *ngIf="productData?.price && productData?.priceAfterDiscount"
+            >
+              {{
+                calculateDiscountPercentage(
+                  productData.price,
+                  productData.priceAfterDiscount
+                )
+              }}% off
+            </span>
+            }
+          </div>
+          }
+          <hr />
+          <div class="adding-to-cart d-flex flex-column gap-3">
+            <div class="sizes d-flex gap-1">
+              <button>L</button>
+              <button>XL</button>
+              <button>XXL</button>
+            </div>
+            <div class="quantity d-flex">
+              <span
+                [class.disabled]="buyQuantity == 1"
+                (click)="ControlQuantity(buyQuantity, -1)"
+                class="text-secondary cursor-pointer"
+                ><i class="fa-solid fa-minus"></i
+              ></span>
+              <span>{{ buyQuantity }}</span>
+              <span
+                [class.disabled]="buyQuantity == 10"
+                (click)="ControlQuantity(buyQuantity, 1)"
+                class="text-secondary cursor-pointer"
+                ><i class="fa-solid fa-plus"></i
+              ></span>
+            </div>
+            <div class="btns d-flex gap-2">
+              <button>
+                <i class="fa-solid fa-bag-shopping me-3"></i>Add to cart
+              </button>
+              <button><i class="fa-regular fa-heart"></i></button>
+            </div>
+          </div>
+          <hr />
+          <table class="table table-borderless mb-0">
+            <tbody>
+              <tr>
+                <td class="p-3 text-secondary">Availability:</td>
+
+                @if (productData.quantity > 0) {
+                <td class="p-3 text-secondary">
+                  In Stock
+                  <span class="text-success">({{ productData.quantity }})</span>
+                </td>
+                } @else {
+                <td class="p-3 text-secondary">Out of Stock</td>
+
+                }
+              </tr>
+              <tr>
+                <td class="p-3 text-secondary">Shipping:</td>
+                <td class="p-3 text-secondary">1 day shipping</td>
+              </tr>
+              <tr>
+                <td class="p-3 text-secondary">Brand:</td>
+                <td class="p-3 text-secondary">{{ productData.brand.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

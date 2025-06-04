@@ -72,16 +72,10 @@
     </div>
 
     <div class="categories-slider-container position-relative">
-      <div
-        *ngIf="!categoriesList"
-        class="loading w-100 d-flex justify-content-center align-items-center border rounded py-5"
-      >
-        <i class="fa fa-spin fa-spinner"></i>
-      </div>
-      <div class="fade-right"></div>
       <swiper-container
         #swiper
-        autoplay-delay="3000" autoplay-disable-on-interaction="false"
+        autoplay-delay="3000"
+        autoplay-disable-on-interaction="false"
         class="categories-swiper p-1"
         [loop]="true"
         slides-per-view="6"
@@ -98,7 +92,6 @@
         </swiper-slide>
         }
       </swiper-container>
-      <div class="fade-left"></div>
     </div>
   </div>
 </section>
@@ -137,6 +130,37 @@
       <h2 class="section-title">Popular Products</h2>
     </div>
     <div class="row g-3">
+      @if (isLoading) {
+      <!-- Skeleton Loading State -->
+      @for (i of [1,2,3,4,5,6,7,8,9,10,11,12]; track $index) {
+      <div class="col-12 col-md-4 col-lg-3">
+        <div class="product p-3 position-relative">
+          <!-- Image Skeleton -->
+          <p-skeleton
+            width="100%"
+            height="200px"
+            styleClass="mb-3"
+          ></p-skeleton>
+
+          <!-- Content Skeletons -->
+          <p-skeleton width="60%" height="20px" styleClass="mb-2"></p-skeleton>
+          <p-skeleton width="80%" height="24px" styleClass="mb-2"></p-skeleton>
+
+          <!-- Rating Skeleton -->
+          <div class="d-flex align-items-center gap-2 mb-3">
+            <p-skeleton width="100px" height="20px"></p-skeleton>
+            <p-skeleton width="60px" height="20px"></p-skeleton>
+          </div>
+
+          <!-- Price Skeleton -->
+          <div class="d-flex justify-content-between">
+            <p-skeleton width="80px" height="30px"></p-skeleton>
+            <p-skeleton width="40px" height="30px"></p-skeleton>
+          </div>
+        </div>
+      </div>
+      } } @else {
+      <!-- Product Display State -->
       @for (product of productsList | slice:initProduct:lastProduct; track
       product.id) {
       <div class="col-12 col-md-4 col-lg-3">
@@ -144,45 +168,63 @@
           [routerLink]="['/details', product.id]"
           class="product cursor-pointer p-3 position-relative"
         >
+          <!-- Wishlist/View Buttons -->
           <div class="btns position-absolute">
             <i class="fa-regular fa-eye"></i>
             <i class="fa-regular fa-heart"></i>
           </div>
+
+          <!-- Product Image -->
           <div class="product-img position-relative">
-            <img [src]="product.imageCover" [alt]="product.title" />
-            <div class="img-fade"></div>
+            <img
+              [src]="product.imageCover"
+              [alt]="product.title"
+              class="img-fluid"
+            />
           </div>
+
+          <!-- Product Details -->
           <div class="product-details">
             <h4 class="text-secondary fw-semibold">
-              {{ product.category.name }}
+              {{ product.category.name || "Uncategorized" }}
             </h4>
-            <h4>{{ product.title }}</h4>
+            <h4 class="product-title">{{ product.title }}</h4>
+
+            <!-- Rating -->
             <div class="rating mb-3 d-flex align-items-center gap-1">
               <p-rating
                 [ngModel]="calculateRate(product.ratingsAverage)"
                 [readonly]="true"
               />
               <p class="m-0 text-secondary opacity-75">
-                {{ product.ratingsAverage }}({{ product.ratingsQuantity }})
+                {{ product.ratingsAverage | number : "1.1-1" }} ({{
+                  product.ratingsQuantity
+                }})
               </p>
             </div>
+
+            <!-- Price and Add to Cart -->
             <div
               class="adding d-flex justify-content-between align-items-center"
             >
               <p class="price m-0 fs-6">
-                ${{ product.price }}
-                <span class="text-decoration-line-through"
-                  >${{ product.price + randomFakeSale }}</span
-                >
+                @if (product.priceAfterDiscount) {
+                <span>${{ product.priceAfterDiscount | number }}</span>
+                <span class="text-decoration-line-through text-secondary ms-2">
+                  ${{ product.price | number }}
+                </span>
+                } @else {
+                <span>${{ product.price | number }}</span>
+                }
               </p>
-              <button class="btn btn text-light">
+              <button class="btn btn-primary text-light">
                 <i class="fa-solid fa-plus"></i> Add
               </button>
             </div>
           </div>
         </div>
       </div>
-      }
+      } }
     </div>
   </div>
 </section>
