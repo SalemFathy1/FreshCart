@@ -2,12 +2,13 @@ import { SwiperContainer } from 'swiper/element';
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject, OnDestroy, OnInit, ViewChild, viewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { ProductService } from '../../core/Services/product.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule} from '@angular/common';
 import { Subscription } from 'rxjs';
 import { Rating } from 'primeng/rating';
 import { FormsModule } from '@angular/forms';
 import { SkeletonModule } from 'primeng/skeleton';
 import { IProduct } from '../../core/interfaces/iproduct';
+
 
 
 @Component({

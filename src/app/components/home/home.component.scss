@@ -1,3 +1,6 @@
+.icon{
+  cursor: pointer !important;
+}
 swiper-container {
   &::part(bullet){
     background-color: #ffffff;
@@ -30,7 +33,7 @@ swiper-container {
 
 .slide .title{
     width: 40%;
-    padding-left: 50px;
+    margin-left: 50px;
     .heads{
         color: #001e2b;
         font-size: 3rem;
@@ -62,12 +65,7 @@ swiper-container {
   align-items: center;
   margin-bottom: 20px;
 }
-.section-title {
-      font-size: 25px;
-      color: #001e2b;
-      font-weight: 600;
-      margin: 0;
-    }
+
 .featured-categories {
     
 

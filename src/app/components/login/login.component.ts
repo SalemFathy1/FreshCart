@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/Services/auth.service';
+import { AuthService } from '../../core/Services/Authentication/auth.service';
 import { MessageService } from 'primeng/api';
 import { Router, RouterLink } from '@angular/router';
 

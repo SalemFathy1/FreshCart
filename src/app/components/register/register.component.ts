@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import {  FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { AuthService } from '../../core/Services/auth.service';
+import { AuthService } from '../../core/Services/Authentication/auth.service';
 import { ButtonModule } from 'primeng/button';
 import { MessageService } from 'primeng/api';
 import { HttpErrorResponse } from '@angular/common/module.d-CnjH8Dlt';

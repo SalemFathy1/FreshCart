@@ -12,6 +12,7 @@ import { loginGuard } from './core/guards/login.guard';
 import { ProductComponent } from './components/product/product.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassword.component';
+import { AccountDetailsComponent } from './components/account-details/account-details.component';
 
 export const routes: Routes = [
     {
@@ -30,6 +31,7 @@ export const routes: Routes = [
             {path:"shop",component:ShopComponent,title:"FreshCart | Shop"},
             {path:"cart",component:CartComponent,title:"FreshCart | Cart"},
             {path:"wishlist",component:WishlistComponent,title:"FreshCart | wishlist"},
+            {path:"account",component:AccountDetailsComponent,title:"FreshCart | Account Details"},
             {path:"details/:productId",component:ProductComponent,title:"FreshCart | Product Details"}
     ]},
 

@@ -72,6 +72,11 @@ export class HomeComponent implements OnInit,OnDestroy {
     calculateRate(x:number){
         return Math.floor(x)
     }
+    calculateDiscountPercentage(originalPrice: number, discountedPrice: number): number {
+        if (!originalPrice || originalPrice <= 0) return 0; 
+        const discount = ((originalPrice - discountedPrice) / originalPrice) * 100;
+        return Math.round(discount); 
+    }
     ngOnDestroy(): void {
         // unsubscribe 
         this.getAllproductSub?.unsubscribe()

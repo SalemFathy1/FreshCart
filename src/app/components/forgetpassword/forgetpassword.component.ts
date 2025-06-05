@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { InputOtpModule } from 'primeng/inputotp';
-import { AuthService } from '../../core/Services/auth.service';
+import { AuthService } from '../../core/Services/Authentication/auth.service';
 import { HttpErrorResponse } from '@angular/common/module.d-CnjH8Dlt';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
@@ -42,6 +42,7 @@ export class ForgetpasswordComponent {
 
   verifyEmail(email?:string):void{
     this.email = this.emailCheckForm.get('email')?.value
+    this.resetCheckForm.get('email')?.patchValue(this.email)
     this.isLoading = true
     this._AuthService.setEmailVerify(this.emailCheckForm.value).subscribe({
       next:(res:any)=>{
@@ -53,6 +54,7 @@ export class ForgetpasswordComponent {
         
       },
       error:(err:HttpErrorResponse)=>{
+        this.isLoading = false
         console.log(err);
         this.msgError = err.error.message
       }

@@ -2,7 +2,7 @@
   <div class="container">
     <div class="upper d-flex align-items-center justify-content-between py-3">
       <div class="search d-flex">
-        <div class="icon">
+        <div class="icon d-flex align-items-center">
           <a routerLink="home"><img
             src="../../assets/svgs/freshcart-logo.svg"
             alt="FreshCart-Logo"
@@ -11,7 +11,7 @@
         <div class="search d-flex gap-2">
           <div class="position-relative">
             <input
-              class="search-bar items-border"
+              class="search-bar items-border m-0"
               type="search"
               placeholder="Search for products"
             />
@@ -28,17 +28,18 @@
       <div class="icon-links">
         <ul class="list-unstyled d-flex align-items-center">
           <li class="mx-2 fs-5">
-            <a routerLink="home"
+            <a routerLink="wishlist"
               ><i class="pi pi-heart"><span>5</span></i></a
             >
           </li>
           <li class="mx-2 fs-5">
-            <a routerLink="login"><i class="pi pi-user"></i></a>
-          </li>
-          <li class="mx-2 fs-5">
-            <a routerLink="home"
+            <a routerLink="cart"
               ><i class="pi pi-shopping-cart"><span>1</span></i></a
             >
+          </li>
+          <li class="mx-2 fs-5 position-relative">
+            <a (click)="menu.toggle($event)" class="cursor-pointer"><i class="pi pi-user"></i></a>
+            <p-menu #menu [model]="items" styleClass="menu" [popup]="true" />
           </li>
         </ul>
       </div>
@@ -54,27 +55,28 @@
               class="d-flex align-items-center gap-2"
               routerLinkActive="active-link"
               routerLink="home"
-              >Home<i class="pi pi-chevron-down"></i
-            ></a>
+              >Home</a>
           </li>
           <li>
             <a
               class="d-flex align-items-center gap-2"
               routerLinkActive="active-link"
               routerLink="shop"
-              >Shop<i class="pi pi-chevron-down"></i
-            ></a>
+              >Shop</a>
           </li>
           <li>
             <a
               class="d-flex align-items-center gap-2"
               routerLinkActive="active-link"
               routerLink="cart"
-              >Cart<i class="pi pi-chevron-down"></i
-            ></a>
+              >Cart</a>
           </li>
           <li>
-            <p-megamenu [model]="items" />
+            <a
+              class="d-flex align-items-center gap-2"
+              routerLinkActive="active-link"
+              routerLink="wishlist"
+              >Wishlist</a>
           </li>
         </ul>
       </div>

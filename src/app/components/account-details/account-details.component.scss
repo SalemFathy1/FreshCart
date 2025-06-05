@@ -1,0 +1,38 @@
+.personal-img{
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    position: relative;
+    img{
+        width: 100%;
+        object-fit: contain;
+    }
+}
+
+.icon{
+    color: #c9cdd2;
+    right: 10px;
+    top: 50%;
+    transform: translateY(40%);
+    margin: 0;
+    z-index: 99;
+    background-color: #FFF;
+    border-radius: 5px;
+}
+.img-fade{
+    cursor: pointer;
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    bottom: -10px;
+    background-color: #0000007b;
+    left: 0;
+    i{
+        font-size: 24px ;
+        color: #ffffffcc;
+    }
+}
+textarea{
+    height: 100px;
+}

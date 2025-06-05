@@ -103,7 +103,12 @@ a:hover {
 .container{
     padding: 0 15px !important;
 }
-
+.section-title {
+  font-size: 25px;
+  color: #001e2b;
+  font-weight: 600;
+  margin: 0;
+}
 .items-border{
     border: 1px solid var(--border-color);
     border-radius: 8px;

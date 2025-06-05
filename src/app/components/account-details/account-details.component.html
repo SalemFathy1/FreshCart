@@ -1,0 +1,71 @@
+<section>
+  <div class="container">
+    <div
+      class="details-head mb-5 d-flex justify-content-between align-items-center"
+    >
+      <h2 class="section-title d-flex gap-2 align-items-center">
+        Account Information
+      </h2>
+    </div>
+    <div class="row">
+      <div class="col-12 mb-3">
+        <div class="personal-img">
+          <img
+            src="./assets/images/userPlaceholder.jpg"
+            alt="personal-img"
+          />
+          <div class="img-fade d-flex justify-content-center">
+            <i class="pi pi-camera"></i>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <div>
+          <label>Username</label>
+          <input readonly type="text" value="User Name" class="form-control" />
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="position-relative">
+          <div class="d-flex justify-content-between align-items-center">
+            <label for="mail">Email Address</label>
+            <p class="text-main m-0 d-flex gap-1 align-items-center">
+              <i class="pi pi-verified"></i>Verified
+            </p>
+          </div>
+          <input
+            readonly
+            value="Example@gmail.com"
+            id="mail"
+            type="text"
+            class="form-control"
+          />
+          <i class="icon pi pi-envelope position-absolute"></i>
+        </div>
+      </div>
+      <div class="col-12">
+        <div class="position-relative">
+          <div class="d-flex justify-content-between align-items-center">
+            <label for="">Phone Number</label>
+            <p class="text-main m-0 d-flex gap-1 align-items-center">
+              <i class="pi pi-verified"></i>Verified
+            </p>
+          </div>
+          <input
+            readonly
+            value="01000000000"
+            type="text"
+            class="form-control"
+          />
+          <i class="icon pi pi-phone position-absolute"></i>
+        </div>
+      </div>
+      <div class="col-12">
+        <label for="Bio">Bio</label>
+        <textarea readonly id="Bio" class="form-control">
+Salem Fathy is a passionate Angular developer with 5+ years of crafting dynamic, responsive web apps. Specializing in RxJS, NgRx, and standalone components, Alex thrives on clean code and seamless UX. When not debugging or optimizing performance, they contribute to open-source projects and mentor junior devs. Loves TypeScript, coffee, and minimalist design.
+        </textarea>
+      </div>
+    </div>
+  </div>
+</section>
