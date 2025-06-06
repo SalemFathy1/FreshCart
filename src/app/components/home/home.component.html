@@ -225,7 +225,7 @@
                 <span>${{ product.price }}</span>
                 }
               </p>
-              <button class="btn text-light">
+              <button  (click)="addProductToCart(product.id); $event.stopPropagation()" class="btn text-light">
                 <i class="fa-solid fa-plus"></i> Add
               </button>
             </div>
