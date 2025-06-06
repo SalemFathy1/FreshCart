@@ -129,31 +129,7 @@
       color: #FFF;
     }
   }
-  .quantity{
-    overflow: hidden;
-    span{
-      border: 1px solid rgba(168, 168, 168, 0.358);
-      padding: 5px;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      i{
-        font-size: 12px;
-      }
-    }
-    .disabled {
-      opacity: 0.5;
-      cursor: not-allowed !important;
-    }
-    span:first-child{
-      border-radius: 5px 0 0 5px;
-    }
-    span:last-child{
-      border-radius: 0 5px 5px 0;
-    }
-  }
+
   .btns{
     button:nth-child(1){
       background-color: var(--main-color);

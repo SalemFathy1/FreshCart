@@ -7,6 +7,7 @@
 
 :root {
   --main-color: #0aad0a;
+  --sec-text-color:#001e2b;
   --light-color: #f0f3f2;
   --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
     rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
@@ -14,7 +15,7 @@
   --font-family: "Inter", sans-serif;
   --font-color:rgba(92, 108, 117, 0.75);
   --rating-color: #ffc908;
-  --border-color:rgba(168, 168, 168, 0.544);
+  --border-color:rgb(223, 226, 225);
   --font-weight : 500;
   --transition:all .2s ;
 }
@@ -129,6 +130,8 @@ button{
 label{
   color: #21313ccb;
   margin-bottom: 5px;
+  font-size: 14px !important;
+  font-weight: 500;
 }
 input{
   color: var(--font-color);
@@ -160,6 +163,7 @@ input:focus::placeholder{
 
 p{
   font-size: .8rem !important;
+  margin: 0 !important;
 }
 span a{
   color: var(--main-color) !important;
@@ -170,3 +174,30 @@ span a{
 // --------
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.quantity{
+  overflow: hidden;
+  span{
+    border: 1px solid var(--border-color);
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    i{
+      font-size: 10px;
+    }
+  }
+  .disabled {
+    opacity: 0.5;
+    cursor: not-allowed !important;
+  }
+  span:first-child{
+    border-radius: 5px 0 0 5px;
+  }
+  span:last-child{
+    border-radius: 0 5px 5px 0;
+  }
+}

@@ -1,3 +1,129 @@
-<div class="container">
-    <p>cart works!</p>
-</div>
+<section class="py-3">
+  <div class="container">
+    <div class="bread-crumb mb-3">
+      <p class="m-0 d-flex gap-3">
+        <a routerLink="/home" class="text-main">Home</a> /
+        <a class="text-main">Shop</a> /
+        <a>Shop Cart</a>
+      </p>
+    </div>
+  </div>
+</section>
+<section class="p-0">
+  <div class="container">
+    <div class="cart-header mb-5">
+      <h1 class="section-title mb-2">Shop Cart</h1>
+      <p class="text-secondary fw-medium">Shopping in 382480</p>
+    </div>
+    <div class="cart-details">
+      <div class="row g-5">
+        <div class="col-12 col-lg-8 col-md-7">
+          <div class="cart-item-container">
+            <div class="alert alert-danger">
+              You’ve got FREE delivery. Start
+              <a class="alert-link cursor-pointer fw-semibold">checkout now!</a>
+            </div>
+            <ul class="list-group list-group-flush list-unstyled">
+              @for (item of cartItems; track $index) {
+              <li>
+                <div class="row d-flex align-items-center">
+                  <div class="col-6 col-md-6 col-lg-7">
+                    <div class="product-left d-flex">
+                      <div class="img-container overflow-hidden me-2">
+                        <img
+                        class="object-fit-contain"
+                          [src]="item.product.imageCover"
+                          alt=""
+                        />
+                      </div>
+                      <div class="product-details">
+                        <h6>{{item.product.title}}</h6>
+                        <button class="d-flex align-items-center gap-1 text-secondary bg-transparent border-0 p-0">
+                          <i class="pi pi-trash text-main"></i> Remove
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 col-md-4 col-lg-3">
+                    <div class="quantity d-flex">
+                      <span
+                        class="text-secondary cursor-pointer"
+                        ><i class="fa-solid fa-minus"></i
+                      ></span>
+                      <span> 1 </span>
+                      <span
+                        class="text-secondary cursor-pointer"
+                        ><i class="fa-solid fa-plus"></i
+                      ></span>
+                    </div>
+                  </div>
+                  <div
+                    class="col-2 text-lg-end text-start text-md-end col-md-2"
+                  >
+                  <span class="fw-semibold fs-6">{{ 67 | currency }}</span>
+                  </div>
+                </div>
+              </li>
+              }
+            </ul>
+          </div>
+          <div class="btns d-flex justify-content-between">
+            <button routerLink="/home" class="btn-main">Continue Shopping</button>
+            <button class="clear-btn d-flex align-items-center gap-2">Remove All</button>
+          </div>
+        </div>
+        <div class="col-12 col-lg-4 col-md-5">
+          <div class="card-body d-flex flex-column p-4">
+            <div class="summry">
+              <h5>Summary</h5>
+              <div class="pay-details mb-2">
+                <div
+                  class="pay-detail d-flex justify-content-between align-items-center"
+                >
+                  <p>Item Subtotal</p>
+                  <span>{{ 70 | currency }}</span>
+                </div>
+                <div
+                  class="pay-detail d-flex justify-content-between align-items-center"
+                >
+                  <p>Service Fee</p>
+                  <span>{{ 3 | currency }}</span>
+                </div>
+                <div
+                  class="pay-detail d-flex justify-content-between align-items-center"
+                >
+                  <p class="fw-bold">Subtotal</p>
+                  <span class="fw-bold">{{ 67 | currency }}</span>
+                </div>
+              </div>
+              <button class="btn-main d-flex justify-content-between">
+                Checkout<span>{{ 67 | currency }}</span>
+              </button>
+              <p class="text-secondary opacity-75">
+                By placing your order, you agree to be bound by the Freshcart
+                <span><a role="button">Terms of Service</a></span> &
+                <span><a role="button">Privacy Policy</a></span> &
+              </p>
+            </div>
+            <div class="promo">
+              <h5>Add Promo or Gift Card</h5>
+              <div>
+                <form>
+                  <label for="promo">Promo Code</label>
+                  <input
+                    class="form-control mb-2"
+                    placeholder="Promo Or Gift Card"
+                    type="text"
+                    id="promo"
+                  />
+                  <button class="sec-btn w-100 mb-2">Redeem</button>
+                </form>
+              </div>
+              <p class="text-secondary">Terms & Conditions apply</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
