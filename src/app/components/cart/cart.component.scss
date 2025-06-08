@@ -82,6 +82,7 @@
                     .img-container{
                         width:70px;
                         height: 70px;
+                        border: 1px solid var(--border-color) !important;
                         img{
                             width: 100%;
                         }
@@ -117,3 +118,6 @@
         background-color: rgb(162, 50, 50);
     }
 }
+
+//skeleton style 
+

@@ -9,13 +9,13 @@
     </div>
   </div>
 </section>
-<section class="p-0">
+<section class="p-0 mb-5">
   <div class="container">
     <div class="cart-header mb-5">
       <h1 class="section-title mb-2">Shop Cart</h1>
       <p class="text-secondary fw-medium">Shopping in 382480</p>
     </div>
-    <div class="cart-details">
+    <div class="cart-details mb-4">
       <div class="row g-5">
         <div class="col-12 col-lg-8 col-md-7">
           <div class="cart-item-container">
@@ -24,53 +24,152 @@
               <a class="alert-link cursor-pointer fw-semibold">checkout now!</a>
             </div>
             <ul class="list-group list-group-flush list-unstyled">
-              @for (item of cartItems; track $index) {
+              @if (isLoading) { @for (item of [1,2,3,4,5]; track $index) {
               <li>
                 <div class="row d-flex align-items-center">
                   <div class="col-6 col-md-6 col-lg-7">
                     <div class="product-left d-flex">
-                      <div class="img-container overflow-hidden me-2">
-                        <img
-                        class="object-fit-contain"
-                          [src]="item.product.imageCover"
-                          alt=""
-                        />
+                      <div
+                        class="img-container overflow-hidden rounded rounded-2 me-2"
+                      >
+                        <p-skeleton
+                          width="100%"
+                          height="100%"
+                          shape="rectangle"
+                        ></p-skeleton>
                       </div>
                       <div class="product-details">
-                        <h6>{{item.product.title}}</h6>
-                        <button class="d-flex align-items-center gap-1 text-secondary bg-transparent border-0 p-0">
-                          <i class="pi pi-trash text-main"></i> Remove
+                        <p-skeleton
+                          width="120px"
+                          height="20px"
+                          class="mb-2"
+                        ></p-skeleton>
+                        <div class="d-flex align-items-center gap-1">
+                          <p-skeleton
+                            width="16px"
+                            height="16px"
+                            shape="circle"
+                          ></p-skeleton>
+                          <p-skeleton width="60px" height="16px"></p-skeleton>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4 col-md-4 col-lg-3">
+                    <div class="quantity d-flex align-items-center gap-2">
+                      <p-skeleton
+                        width="24px"
+                        height="24px"
+                        shape="circle"
+                      ></p-skeleton>
+                      <p-skeleton width="30px" height="24px"></p-skeleton>
+                      <p-skeleton
+                        width="24px"
+                        height="24px"
+                        shape="circle"
+                      ></p-skeleton>
+                    </div>
+                  </div>
+                  <div
+                    class="col-2 text-lg-end text-start text-md-end col-md-2"
+                  >
+                    <p-skeleton width="60px" height="20px"></p-skeleton>
+                  </div>
+                  <div class="fade"></div>
+                </div>
+              </li>
+              } }@else { @if (cartCount == 0) {
+              <div class="col-12">
+                <div class="d-flex align-items-center flex-column py-3">
+                  <img
+                    class="w-50"
+                    src="../../../assets/svgs/empty-cart-img.svg"
+                    alt=""
+                  />
+                  <h2>Your cart is <span class="text-main">Empty!</span></h2>
+                  <p class="mb-3">must add items to cart before proceed to check out.</p>
+                  <button
+                    routerLink="/home"
+                    class="btn-main d-flex align-items-center gap-2"
+                  >
+                  <i class="pi pi-shopping-bag"></i>
+                    Back To Shop
+                  </button>
+                </div>
+              </div>
+              }@else{ @for (item of cartDetails.products; track item.product.id)
+              {
+              <li>
+                <div class="row d-flex align-items-center">
+                  <div class="col-6 col-md-6 col-lg-7">
+                    <div class="product-left d-flex">
+                      <div
+                        class="img-container overflow-hidden rounded rounded-2 me-2"
+                      >
+                        <img [src]="item.product.imageCover" alt="" />
+                      </div>
+                      <div class="product-details">
+                        <h6>{{ item.product.title }}</h6>
+                        <button
+                          class="d-flex align-items-center gap-1 text-secondary bg-transparent border-0 p-0"
+                          (click)="removeItemFromCart(item.product.id)"
+                        >
+                          <i class="pi pi-trash text-main cursor-pointer"></i>
+                          Remove
                         </button>
                       </div>
                     </div>
                   </div>
                   <div class="col-4 col-md-4 col-lg-3">
                     <div class="quantity d-flex">
-                      <span
+                      <button
+                        (click)="
+                          updateQuantity(item.count, -1, item.product.id)
+                        "
+                        [class.disabled]="item.count == 1"
                         class="text-secondary cursor-pointer"
-                        ><i class="fa-solid fa-minus"></i
-                      ></span>
-                      <span> 1 </span>
-                      <span
+                      >
+                        <i class="fa-solid fa-minus"></i>
+                      </button>
+                      <span> {{ item.count }} </span>
+                      <button
+                        (click)="updateQuantity(item.count, 1, item.product.id)"
                         class="text-secondary cursor-pointer"
-                        ><i class="fa-solid fa-plus"></i
-                      ></span>
+                      >
+                        <i class="fa-solid fa-plus"></i>
+                      </button>
                     </div>
                   </div>
                   <div
                     class="col-2 text-lg-end text-start text-md-end col-md-2"
                   >
-                  <span class="fw-semibold fs-6">{{ 67 | currency }}</span>
+                    <span class="fw-semibold fs-6">{{
+                      item.price | currency : "GBP"
+                    }}</span>
                   </div>
                 </div>
               </li>
-              }
+              } } }
             </ul>
           </div>
+          @if (cartCount != 0){
           <div class="btns d-flex justify-content-between">
-            <button routerLink="/home" class="btn-main">Continue Shopping</button>
-            <button class="clear-btn d-flex align-items-center gap-2">Remove All</button>
+            <button
+              routerLink="/home"
+              class="btn-main d-flex align-items-center gap-2"
+            >
+              Continue Shopping
+              <i class="pi pi-shopping-bag"></i>
+            </button>
+            <button
+              (click)="clearCart()"
+              class="clear-btn d-flex align-items-center gap-2"
+            >
+              Remove All
+              <i class="pi pi-trash"></i>
+            </button>
           </div>
+          }
         </div>
         <div class="col-12 col-lg-4 col-md-5">
           <div class="card-body d-flex flex-column p-4">
@@ -81,23 +180,55 @@
                   class="pay-detail d-flex justify-content-between align-items-center"
                 >
                   <p>Item Subtotal</p>
-                  <span>{{ 70 | currency }}</span>
+                  @if (isLoading) {
+                  <p-skeleton width="100px" height="15px"></p-skeleton>
+                  }@else{
+                  <span>{{
+                    cartDetails.totalCartPrice | currency : "GBP"
+                  }}</span>
+                  }
                 </div>
                 <div
                   class="pay-detail d-flex justify-content-between align-items-center"
                 >
-                  <p>Service Fee</p>
-                  <span>{{ 3 | currency }}</span>
+                  <p>Service Fee <span class="text-main">(3%)</span></p>
+                  @if (isLoading) {
+                  <p-skeleton width="70px" height="15px"></p-skeleton>
+                  }@else{
+                  <span>{{
+                    cartDetails.totalCartPrice * 0.03 | currency : "GBP"
+                  }}</span>
+                  }
+                </div>
+                <div
+                  class="pay-detail d-flex justify-content-between align-items-center"
+                >
+                  <p>Delivery cost</p>
+                  @if (isLoading) {
+                  <p-skeleton width="90px" height="15px"></p-skeleton>
+                  }@else{
+                  <span> {{ 20 | currency : "GBP" }} </span>
+                  }
                 </div>
                 <div
                   class="pay-detail d-flex justify-content-between align-items-center"
                 >
                   <p class="fw-bold">Subtotal</p>
-                  <span class="fw-bold">{{ 67 | currency }}</span>
+                  @if (isLoading) {
+                  <p-skeleton width="110px" height="15px"></p-skeleton>
+                  }@else{
+                  <span class="fw-bold">{{
+                    cartDetails.totalCartPrice * 0.03 +
+                      cartDetails.totalCartPrice | currency : "GBP"
+                  }}</span>
+                  }
                 </div>
               </div>
               <button class="btn-main d-flex justify-content-between">
-                Checkout<span>{{ 67 | currency }}</span>
+                Checkout<span>{{
+                  cartDetails.totalCartPrice * 0.03 + cartDetails.totalCartPrice
+                    | currency : "GBP"
+                }}</span>
               </button>
               <p class="text-secondary opacity-75">
                 By placing your order, you agree to be bound by the Freshcart

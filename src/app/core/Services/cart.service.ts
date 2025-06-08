@@ -18,4 +18,16 @@ export class CartService {
     return this._HttpClient.get(`${environment.baseUrl}/api/v1/cart` , {headers:this.myHeader} )
   }
 
+
+  removeSpecificCartProduct(id:string):Observable<any>{
+    return this._HttpClient.delete(`${environment.baseUrl}/api/v1/cart/${id}`,{headers:this.myHeader})
+  }
+
+  updateProductQuantity(id:string,newCount:number):Observable<any>{
+    return this._HttpClient.put(`${environment.baseUrl}/api/v1/cart/${id}`,{count : newCount },{headers:this.myHeader})
+  }
+
+  clearCartItems():Observable<any>{
+    return this._HttpClient.delete(`${environment.baseUrl}/api/v1/cart`,{headers:this.myHeader})
+  }
 }

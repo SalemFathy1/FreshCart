@@ -11,6 +11,7 @@ import { RouterLink } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { CartService } from '../../core/Services/cart.service';
+import { MessageService } from 'primeng/api';
 
 @Component({
     selector: 'app-home',
@@ -20,6 +21,7 @@ import { CartService } from '../../core/Services/cart.service';
     schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeComponent implements OnInit,OnDestroy {
+    constructor(private messageService: MessageService) {}
     @ViewChild ('swiper') CatSwiper!:SwiperContainer
     private readonly _CategoiresService = inject(CategoiresService)
     private readonly _ProductService = inject(ProductService)
@@ -79,7 +81,7 @@ export class HomeComponent implements OnInit,OnDestroy {
             next:(res)=>{
                 console.log(res);
                 console.log(poductId);
-                
+                this.messageService.add({ severity: 'success', summary: 'Add to Cart', detail: 'Item added to cart successful', life: 3000 });
             },
             error:(err)=>{
                 console.log(err);
