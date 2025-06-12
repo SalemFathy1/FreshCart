@@ -83,8 +83,12 @@
                         width:70px;
                         height: 70px;
                         border: 1px solid var(--border-color) !important;
+                        transition: var(--transition);
                         img{
                             width: 100%;
+                        }
+                        &:hover{
+                        border: 1px solid var(--main-color) !important;
                         }
                     }
                     .product-details{

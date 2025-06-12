@@ -1,0 +1,65 @@
+<section>
+  <div class="container">
+    <div class="form-container m-auto p-3 rounded rounded-4">
+      <div class="form-head">
+        <h2 class="input-main fw-bold">Address Confirmation</h2>
+      </div>
+      <div class="form-body">
+        <form [formGroup]="AddressForm" (ngSubmit)="addressSubmit()">
+          <div class="my-2">
+            <label class="mb-2" for="details">Address Details</label>
+            <textarea
+              placeholder="Enter Address Details"
+              id="details"
+              class="form-control"
+              formControlName="detials"
+            ></textarea>
+
+            @if (AddressForm.get('detials')?.errors &&
+            (AddressForm.get('detials')?.touched || AddressForm.get('detials')?.dirty)) {
+            <div class="alert alert-danger">
+              @if (AddressForm.get('detials')?.getError('required')) {
+              <p class="m-0">
+                <i class="fa-solid fa-circle-exclamation"></i> detials Is Required
+                !
+              </p>
+              }
+            </div>
+            }
+
+          </div>
+          <div class="my-2">
+            <label class="mb-2" for="phone">Phone</label>
+            <input
+              placeholder="Enter Email address"
+              id="phone"
+              type="text"
+              class="form-control"
+              formControlName="phone"
+            />
+
+          </div>
+          <div class="my-2">
+            <label class="mb-2" for="password">City</label>
+            <select class="form-control" id="governorate" name="governorate">
+                <option value="">-- Select Governorate --</option>
+                @for (gov of egyptianGovernorates; track $index) {
+                    <option [value]="gov">{{gov}}</option>
+                }
+
+              </select>
+
+          </div>
+          <button class="btn-main mb-2 d-flex gap-2">
+            Place Order @if (isLoading) {
+            <span><i class="fa fa-spin fa-spinner"></i></span>
+            }
+          </button>
+          @if (msgError != "") {
+          <p class="ms-auto alert alert-danger text-center">{{ msgError }}</p>
+          }
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
