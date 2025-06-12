@@ -12,6 +12,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { CartService } from '../../core/Services/cart.service';
 import { MessageService } from 'primeng/api';
+import { WishlistService } from '../../core/Services/wishlist.service';
 
 @Component({
     selector: 'app-home',
@@ -26,6 +27,7 @@ export class HomeComponent implements OnInit,OnDestroy {
     private readonly _CategoiresService = inject(CategoiresService)
     private readonly _ProductService = inject(ProductService)
     private readonly _CartService = inject(CartService)
+    private readonly _WishlistService = inject(WishlistService)
 
     initProduct = Math.floor(Math.random() * 20)
     lastProduct = this.initProduct + 12
@@ -85,6 +87,19 @@ export class HomeComponent implements OnInit,OnDestroy {
             },
             error:(err)=>{
                 console.log(err);
+            }
+        })
+    }
+    addToWishlist(event: MouseEvent , id:string):void{
+        event.stopPropagation(); // Prevent the click from propagating to the product card
+        this._WishlistService.addToWishlist(id).subscribe({
+            next:(res)=>{
+                console.log(res);
+                this.messageService.add({ severity: 'success', summary: 'Add to Wishlist', detail: 'Item added to wishlist successful', life: 3000 });
+            },
+            error:(err)=>{
+                console.log(err);
+                this.messageService.add({ severity: 'error', summary: 'Add to Wishlist', detail: 'Failed to add item to wishlist', life: 3000 });
             }
         })
     }
