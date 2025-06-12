@@ -13,6 +13,8 @@ import { ProductComponent } from './components/product/product.component';
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 import { ForgetpasswordComponent } from './components/forgetpassword/forgetpassword.component';
 import { AccountDetailsComponent } from './components/account-details/account-details.component';
+import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { OrderComponent } from './components/order/order.component';
 
 export const routes: Routes = [
     {
@@ -28,11 +30,14 @@ export const routes: Routes = [
         children:[
             {path: '', redirectTo: 'home', pathMatch: 'full' },
             {path:"home",component:HomeComponent,title:"FreshCart | Home"},
+            {path:"account",component:AccountDetailsComponent,title:"FreshCart | Account Details"},
             {path:"shop",component:ShopComponent,title:"FreshCart | Shop"},
             {path:"cart",component:CartComponent,title:"FreshCart | Cart"},
+            {path:"details/:productId",component:ProductComponent,title:"FreshCart | Product Details"},
             {path:"wishlist",component:WishlistComponent,title:"FreshCart | wishlist"},
-            {path:"account",component:AccountDetailsComponent,title:"FreshCart | Account Details"},
-            {path:"details/:productId",component:ProductComponent,title:"FreshCart | Product Details"}
+            {path:"allorders",component:MyOrdersComponent,title:"FreshCart | My Orders"},
+            {path:"order/:cartid",component:OrderComponent,title:"FreshCart | Order"}
+
     ]},
 
     {

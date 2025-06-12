@@ -19,4 +19,13 @@ export class OrdersService {
       {headers: this.header }
     );
   }
+
+  CashPay(cartId: string, address: any):Observable<any> {
+    return this._HttpClient.post(`${environment.baseUrl}/api/v1/orders/${cartId}`, 
+      {
+        "shippingAddress": address
+      },
+      {headers: this.header }
+    );
+  }
 }

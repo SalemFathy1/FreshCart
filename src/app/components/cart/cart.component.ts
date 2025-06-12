@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SkeletonModule } from 'primeng/skeleton';
 import { CartService } from '../../core/Services/cart.service';
 import { ICart } from '../../core/interfaces/icart';
@@ -17,6 +17,7 @@ import { MessageService } from 'primeng/api';
 export class CartComponent implements OnInit,OnDestroy {
     constructor(private messageService: MessageService) {}
     private readonly _CartService = inject(CartService)
+    private readonly _Router = inject(Router)
     cartDetails:ICart = {} as ICart
     cartCount!:number
     cartItemsubscription!:Subscription
@@ -79,6 +80,16 @@ export class CartComponent implements OnInit,OnDestroy {
             }
         })
       }
+
+      navigateToCheckout() {
+        if (this.cartDetails?._id) {
+          this._Router.navigate(['/order', this.cartDetails._id]);
+        } else {
+          console.error('Cart ID is not available ');
+          // You might want to show a user-friendly message here
+        }
+      }
+
 
       clearCart():void{
         this._CartService.clearCartItems().subscribe({

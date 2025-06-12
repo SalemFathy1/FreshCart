@@ -1,65 +1,396 @@
+<section class="py-3">
+  <div class="container">
+    <div class="bread-crumb mb-3">
+      <p class="m-0 d-flex gap-3">
+        <a routerLink="/home" class="text-main">Home</a> /
+        <a routerLink="/shop" class="text-main">Shop</a> /
+        <a routerLink="/cart" class="text-main">Shop Cart</a> /
+        <a>checkout</a>
+      </p>
+    </div>
+  </div>
+</section>
 <section>
   <div class="container">
-    <div class="form-container m-auto p-3 rounded rounded-4">
-      <div class="form-head">
-        <h2 class="input-main fw-bold">Address Confirmation</h2>
-      </div>
-      <div class="form-body">
-        <form [formGroup]="AddressForm" (ngSubmit)="addressSubmit()">
-          <div class="my-2">
-            <label class="mb-2" for="details">Address Details</label>
-            <textarea
-              placeholder="Enter Address Details"
-              id="details"
-              class="form-control"
-              formControlName="detials"
-            ></textarea>
+    <div class="header mb-5">
+      <h1 class="section-title mb-2">Checkout</h1>
+      <p class="text-secondary fw-medium">
+        Already have an account? Click here to Sign in .
+      </p>
+    </div>
+    <div class="row">
+      <div class="col-xl-7 col-lg-6 col-md-12 mb-4">
+        <p-accordion value="0">
+          <p-accordion-panel value="0">
+            <p-accordion-header>
+              <div class="d-flex align-items-center gap-2">
+                <i class="pi pi-map-marker"></i>
+                <h5 class="m-0">Add delivery address</h5>
+              </div>
+            </p-accordion-header>
+            <p-accordion-content>
+              <div class="add-address d-flex justify-content-end mb-3">
+                <button class="btn-secondary-main" (click)="showDialog()">
+                  Add a new address
+                </button>
+              </div>
+              <div class="address-container">
+                <div class="row">
+                  @if (AddressArr && AddressArr.length == 0) {
+                  <div class="col-12 text-center">
+                    <img
+                      class="w-25"
+                      src="../../../assets/images/no-address-found.png"
+                      alt="no address Found"
+                    />
+                  </div>
+                  <div class="col-12">
+                    <p class="text-secondary text-center">
+                      <i class="pi pi-exclamation-triangle text-danger"></i> 
+                      You don't have any saved addresses. Please add a new
+                      address to proceed with your order.
+                    </p>
+                  </div>
+                  }@else { @if(isLoading){ @for (address of AddressArr; track
+                  $index) {
+                  <div class="col-xl-6 col-lg-12 col-md-6 col-12 mb-4">
+                    <div class="address-option">
+                      <div
+                        class="option justify-content-between d-flex align-items-center gap-2 mb-2"
+                      >
+                        <div
+                          class="justify-content-between d-flex align-items-center gap-2"
+                        >
+                          <p-radiobutton
+                            name="addressGroup"
+                            [value]="address._id"
+                            [(ngModel)]="selectedAddressId.value"
+                            [inputId]="address._id"
+                          />
+                          <p-skeleton width="5rem" />
+                        </div>
+                        <p-skeleton
+                          shape="circle"
+                          size="1.4rem"
+                          styleClass="mr-2"
+                        />
+                      </div>
+                      <div class="details">
+                        <p-skeleton
+                          width="5rem"
+                          height=".6rem"
+                          styleClass="mb-2"
+                        />
 
-            @if (AddressForm.get('detials')?.errors &&
-            (AddressForm.get('detials')?.touched || AddressForm.get('detials')?.dirty)) {
-            <div class="alert alert-danger">
-              @if (AddressForm.get('detials')?.getError('required')) {
+                        <p-skeleton
+                          width="3rem"
+                          height=".6rem"
+                          styleClass="mb-2"
+                        />
+
+                        <p-skeleton
+                          width="8rem"
+                          height=".6rem"
+                          styleClass="mb-2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  } }@else { @for (address of AddressArr; track $index) {
+                  <div class="col-xl-6 col-lg-12 col-md-6 col-12 mb-4">
+                    <div class="address-option">
+                      <div
+                        class="option justify-content-between d-flex align-items-center gap-2 mb-2"
+                      >
+                        <div
+                          class="justify-content-between d-flex align-items-center gap-2"
+                        >
+                          <p-radiobutton
+                            name="addressGroup"
+                            [value]="address._id"
+                            [(ngModel)]="selectedAddressId.value"
+                            [inputId]="address._id"
+                          />
+                          <label [for]="address._id" class="m-0 fw-bold">{{
+                            address.city
+                          }}</label>
+                        </div>
+                        <button
+                          class="d-flex align-items-center gap-1 text-secondary bg-transparent border-0 p-0 mt-2"
+                          (click)="removeAddress(address._id)"
+                        >
+                          <i class="pi pi-trash text-danger cursor-pointer"></i>
+                        </button>
+                      </div>
+                      <div class="details">
+                        <span class="fw-bold">{{ address.city }}</span>
+                        <p class="w-75">
+                          {{ address.details }}
+                        </p>
+                        <span>Phone: {{ address.phone }}</span>
+                      </div>
+                    </div>
+                  </div>
+                  } } }
+                </div>
+              </div>
+            </p-accordion-content>
+          </p-accordion-panel>
+
+          <p-accordion-panel value="3">
+            <p-accordion-header>
+              <div class="d-flex align-items-center gap-2">
+                <i class="pi pi-credit-card"></i>
+                <h5 class="m-0">Payment Method</h5>
+              </div>
+            </p-accordion-header>
+            <p-accordion-content>
+              <div class="row pt-2">
+                <div class="col-xl-6 col-lg-12 col-md-6 col-12 mb-4">
+                  <div class="address-option">
+                    <div
+                      class="option justify-content-between d-flex align-items-center gap-2"
+                    >
+                      <div
+                        class="justify-content-between d-flex align-items-center gap-2"
+                      >
+                        <p-radiobutton
+                          name="addressGroup"
+                          value="cash"
+                          [(ngModel)]="paymentMethod.value"
+                          inputId="Cash"
+                        />
+                        <label for="Cash" class="m-0 fw-bold">
+                          Cash on Delivery
+                        </label>
+                      </div>
+                      <i class="fa-solid fa-credit-card text-main"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-xl-6 col-lg-12 col-md-6 col-12 mb-4">
+                  <div class="address-option">
+                    <div
+                      class="option justify-content-between d-flex align-items-center gap-2"
+                    >
+                      <div
+                        class="justify-content-between d-flex align-items-center gap-2"
+                      >
+                        <p-radiobutton
+                          name="addressGroup"
+                          value="card"
+                          [(ngModel)]="paymentMethod.value"
+                          inputId="Card"
+                        />
+                        <label for="Card" class="m-0 fw-bold">
+                          Pay with Card
+                        </label>
+                      </div>
+                      <i class="fa-solid fa-money-bill text-main"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </p-accordion-content>
+          </p-accordion-panel>
+
+          <p-accordion-panel value="1">
+            <p-accordion-header>
+              <div class="d-flex align-items-center gap-2">
+                <i class="pi pi-clock"></i>
+                <h5 class="m-0">Delivery time</h5>
+              </div>
+            </p-accordion-header>
+            <p-accordion-content>
               <p class="m-0">
-                <i class="fa-solid fa-circle-exclamation"></i> detials Is Required
-                !
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore veritatis et quasi architecto beatae
+                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+                voluptas sit aspernatur aut odit aut fugit, sed quia
+                consequuntur magni dolores eos qui ratione voluptatem sequi
+                nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+                modi.
               </p>
-              }
-            </div>
-            }
+            </p-accordion-content>
+          </p-accordion-panel>
 
-          </div>
-          <div class="my-2">
-            <label class="mb-2" for="phone">Phone</label>
-            <input
-              placeholder="Enter Email address"
-              id="phone"
-              type="text"
-              class="form-control"
-              formControlName="phone"
-            />
-
-          </div>
-          <div class="my-2">
-            <label class="mb-2" for="password">City</label>
-            <select class="form-control" id="governorate" name="governorate">
-                <option value="">-- Select Governorate --</option>
-                @for (gov of egyptianGovernorates; track $index) {
-                    <option [value]="gov">{{gov}}</option>
-                }
-
-              </select>
-
-          </div>
-          <button class="btn-main mb-2 d-flex gap-2">
+          <p-accordion-panel value="2">
+            <p-accordion-header>
+              <div class="d-flex align-items-center gap-2">
+                <i class="pi pi-shopping-bag"></i>
+                <h5 class="m-0">Delivery instructions</h5>
+              </div>
+            </p-accordion-header>
+            <p-accordion-content>
+              <p class="m-0">
+                Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+                accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+                quae ab illo inventore veritatis et quasi architecto beatae
+                vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia
+                voluptas sit aspernatur aut odit aut fugit, sed quia
+                consequuntur magni dolores eos qui ratione voluptatem sequi
+                nesciunt. Consectetur, adipisci velit, sed quia non numquam eius
+                modi.
+              </p>
+            </p-accordion-content>
+          </p-accordion-panel>
+        </p-accordion>
+        <div
+          class="d-flex flex-column align-items-center mt-3"
+          [ngClass]="{
+            'justify-content-end': msgError == null,
+            'justify-content-between': msgError != null
+          }"
+        >
+          <button
+            (click)="addressSubmit()"
+            class="btn-main d-flex gap-2 align-self-end mb-2"
+          >
             Place Order @if (isLoading) {
             <span><i class="fa fa-spin fa-spinner"></i></span>
             }
           </button>
-          @if (msgError != "") {
-          <p class="ms-auto alert alert-danger text-center">{{ msgError }}</p>
-          }
-        </form>
+          <p
+            *ngIf="msgError != null"
+            class="alert alert-danger w-100 text-center"
+          >
+            {{ msgError }}
+          </p>
+        </div>
+      </div>
+      <div class="col-md-12 offset-xl-1 col-xl-4 col-lg-6">
+        <div class="order-details">
+          <div class="order-detail border-bottom px-4 py-3">
+            <h5>Order Details</h5>
+          </div>
+          <div class="order-detail border-bottom">
+            <ul class="list-group list-group-flush list-unstyled">
+              @for (item of cartDetails.products; track item.product.id) {
+              <li>
+                <div class="row d-flex align-items-center">
+                  <div class="col-2 col-md-2">
+                    <img
+                      [src]="item.product.imageCover"
+                      [alt]="item.product.title"
+                      class="img-fluid rounded-3"
+                    />
+                  </div>
+                  <div class="col-5 col-md-5">
+                    <h6>
+                      {{ item.product.title.slice(0, 20) + "..." }}
+                    </h6>
+                    <p class="text-secondary m-0">
+                      {{ item.product.category.name }}
+                    </p>
+                  </div>
+                  <div class="col-2 col-md-2 text-center">
+                    <span class="count">{{ item.count }}</span>
+                  </div>
+                  <div
+                    class="col-3 text-lg-end text-start text-md-end col-md-3"
+                  >
+                    <span class="fw-bold">
+                      {{ item.price * item.count | currency : "USD" }}
+                    </span>
+                  </div>
+                </div>
+              </li>
+              }
+            </ul>
+          </div>
+          <div class="order-detail border-bottom px-4 py-3">
+            <div class="d-flex justify-content-between mb-2">
+              <h6 class="m-0">Subtotal</h6>
+              <span class="m-0">
+                {{ cartDetails.totalCartPrice | currency : "USD" }}
+              </span>
+            </div>
+            <div class="d-flex justify-content-between">
+              <h6 class="m-0">Shipping</h6>
+              <span class="m-0">
+                {{ 3 | currency : "USD" }}
+              </span>
+            </div>
+          </div>
+          <div class="order-detail border-bottom px-4 py-2">
+            <div class="d-flex justify-content-between">
+              <h6 class="m-0 fw-bolder">Subtotal</h6>
+              <span class="m-0">
+                {{ cartDetails.totalCartPrice + 3 | currency : "USD" }}
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+
+<p-dialog
+  styleClass="dialog"
+  [(visible)]="visible"
+  [modal]="true"
+  position="top"
+  draggable="false"
+  [style]="{ width: '30rem', marginTop: '2rem' }"
+>
+  <ng-template #header>
+    <div class="inline-flex items-center justify-center gap-2 p-0 mb-3">
+      <span class="dialog-head fw-semibold whitespace-nowrap"
+        >New Shipping Address</span
+      >
+      <p>Add new shipping address for your order delivery.</p>
+    </div>
+  </ng-template>
+  <form [formGroup]="AddressForm" (ngSubmit)="addAddress()">
+    <div class="flex items-center gap-4 mb-3">
+      <textarea
+        pInputText
+        formControlName="details"
+        placeholder="details"
+        type="text"
+        class="flex-auto form-control"
+        autocomplete="off"
+      ></textarea>
+    </div>
+    <div class="flex items-center gap-4 mb-3">
+      <select
+        class="form-control"
+        formControlName="city"
+        place
+        id="governorate"
+        name="governorate"
+      >
+        @for (gov of egyptianGovernorates; track $index) {
+        <option [value]="gov">{{ gov }}</option>
+        }
+      </select>
+    </div>
+    <div class="flex items-center gap-4 mb-3">
+      <input
+        pInputText
+        placeholder="Phone Number"
+        formControlName="phone"
+        type="tel"
+        class="flex-auto form-control"
+        autocomplete="off"
+      />
+    </div>
+    <div class="d-flex justify-content-end gap-2">
+      <button type="button" class="btn-secondary" (click)="visible = false">
+        Cancel
+      </button>
+
+      <!-- Submit button (type="submit" triggers form submission) -->
+      <button
+        type="submit"
+        class="btn-main"
+        [disabled]="AddressForm.invalid"
+        [disabled]="AddressForm.invalid || isLoading"
+      >
+        Save Address
+      </button>
+    </div>
+  </form>
+</p-dialog>

@@ -77,6 +77,15 @@ a:hover {
   cursor: pointer;
   transition: var(--transition);
 }
+.btn-secondary-main {
+  background-color: transparent;
+  padding: 7px 20px;
+  border: 1px solid var(--main-color);
+  border-radius: 5px;
+  color: var(--main-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
 .btn-main:disabled {
   cursor: not-allowed;
   background-color: #ccc;
@@ -91,11 +100,22 @@ a:hover {
 .btn-secondary{
   background-color: transparent;
   padding: 7px 10px;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--main-color);
   border-radius: 5px;
-  color: #000;
+  color: var(--main-color);
   cursor: pointer;
   transition: var(--transition);
+  &:hover{
+  color: #FFF;
+  background-color: var(--main-color);
+  }
+}
+.header{
+  h1{
+      font-size: 35px;
+      color: #21313C;
+      font-weight: 700;
+  }
 }
 .btn-secondary:disabled {
   cursor: not-allowed;
@@ -138,12 +158,23 @@ input{
   font-size: .9rem;
   margin-bottom: 5px !important;
 }
-input::placeholder{
-  color: rgba(176, 176, 176, 0.717) !important;
-  font-size: 12px;
+textarea{
+  color: var(--font-color);
+  font-size: .9rem;
+  margin-bottom: 5px !important;
+  max-height: 150px;
+}
+
+input::placeholder,textarea::placeholder{
+  color: rgb(136, 147, 151) !important;
+  font-size: 14px !important;
   transition: var(--transition);
 }
-input:focus {
+select{
+  transition: var(--transition);
+  font-size: 14px !important;
+}
+input:focus , select:focus, textarea:focus{
 outline: none;  
 border: 1px solid var(--main-color) ;
 box-shadow: 0 0 0 4px rgba(#0aad0a, 0.3) !important;
@@ -160,7 +191,16 @@ input:focus::placeholder{
   min-width: 300px;
   max-width: 500px;
 }
-
+.bread-crumb{
+  a{
+    cursor: pointer;
+  }
+  p{
+      font-weight: 500 !important;
+      font-size: 14px !important;
+      color: #88939ac7 !important;
+  }
+}
 p{
   font-size: .8rem !important;
   margin: 0 !important;

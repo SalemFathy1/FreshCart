@@ -28,3 +28,24 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+.dialog{
+  padding: 20px !important;
+  .p-ripple{
+    border-radius: 5px  !important;
+    background-color: #fff  !important;
+    width: 20px !important;
+    height: 20px !important;
+  }
+  .p-dialog-header{
+    align-items: start !important;
+    padding: 0 !important;
+  }
+  .p-dialog-content{
+    overflow: visible !important;
+    padding: 0 !important;
+  }
+  .p-dialog-footer{
+    padding: 0 !important;
+  }
+}

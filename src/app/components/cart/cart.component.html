@@ -11,7 +11,7 @@
 </section>
 <section class="p-0 mb-5">
   <div class="container">
-    <div class="cart-header mb-5">
+    <div class="header mb-5">
       <h1 class="section-title mb-2">Shop Cart</h1>
       <p class="text-secondary fw-medium">Shopping in 382480</p>
     </div>
@@ -104,7 +104,8 @@
                   <div class="col-6 col-md-6 col-lg-7">
                     <div class="product-left d-flex">
                       <div
-                        class="img-container overflow-hidden rounded rounded-2 me-2"
+                      routerLink="/details/{{ item.product.id }}"
+                        class="img-container overflow-hidden rounded rounded-2 me-2 cursor-pointer"
                       >
                         <img [src]="item.product.imageCover" alt="" />
                       </div>
@@ -224,7 +225,7 @@
                   }
                 </div>
               </div>
-              <button class="btn-main d-flex justify-content-between">
+              <button (click)="navigateToCheckout()" [disabled]="!cartDetails._id" class="btn-main d-flex justify-content-between">
                 Checkout<span>{{
                   cartDetails.totalCartPrice * 0.03 + cartDetails.totalCartPrice
                     | currency : "GBP"
@@ -247,7 +248,7 @@
                     type="text"
                     id="promo"
                   />
-                  <button class="sec-btn w-100 mb-2">Redeem</button>
+                  <button type="button" class="sec-btn w-100 mb-2">Redeem</button>
                 </form>
               </div>
               <p class="text-secondary">Terms & Conditions apply</p>
