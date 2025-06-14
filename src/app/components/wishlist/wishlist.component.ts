@@ -46,6 +46,7 @@ addProductToCart(poductId:string):void{
           console.log(res);
           console.log(poductId);
           this.messageService.add({ severity: 'success', summary: 'Add to Cart', detail: 'Item added to cart successful', life: 3000 });
+          this._CartService.cartCount.next(res.numOfCartItems)
       },
       error:(err)=>{
           console.log(err);
@@ -61,6 +62,7 @@ removeFromWishlist(productId: string): void {
       console.log(res);
       this.getWishlistItems(false); // Refresh the wishlist after removal
       this.messageService.add({ severity: 'success', summary: 'Removed from Wishlist', detail: 'Item removed successfully', life: 3000 });
+      this._WishlistService.wishcounter.next(res.data.length)
     },
     error: (err) => {
       console.log(err);

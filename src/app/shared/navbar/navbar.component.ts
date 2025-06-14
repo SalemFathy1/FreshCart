@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/Services/Authentication/auth.service';
 import { MenuModule } from 'primeng/menu';
 import { CartService } from '../../core/Services/cart.service';
+import { WishlistService } from '../../core/Services/wishlist.service';
 
 @Component({
     selector: 'app-navbar',
@@ -15,10 +16,12 @@ export class NavbarComponent implements OnInit {
     public readonly _AuthService = inject(AuthService)
     private readonly _Router = inject(Router)
     private readonly _CartService = inject(CartService)
+    private readonly _WishlistService = inject(WishlistService)
     constructor(private message:MessageService){}
     isLoading:boolean = false
     items!:any[]
     cartCount!:number 
+    wishCount!:number 
     ngOnInit(): void {
         this._CartService.getUserCartProducts().subscribe({
             next:(res)=>{
@@ -30,10 +33,22 @@ export class NavbarComponent implements OnInit {
                 
             }
         })
+        this._WishlistService.getWishlist().subscribe({
+            next:(res)=>{
+                console.log(res);
+                this.wishCount = res.count
+            },
+            error:(err)=>{
+                console.log(err);
+                
+            }
+        })
         this._CartService.cartCount.subscribe((value)=>{
             this.cartCount = value
         })
-
+        this._WishlistService.wishcounter.subscribe((value)=>{
+            this.wishCount = value
+        })
         this.items = [
                     {
                         label: 'Account',

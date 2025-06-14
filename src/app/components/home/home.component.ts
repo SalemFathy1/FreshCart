@@ -97,6 +97,7 @@ export class HomeComponent implements OnInit,OnDestroy {
             next:(res)=>{
                 console.log(res);
                 this.messageService.add({ severity: 'success', summary: 'Add to Wishlist', detail: 'Item added to wishlist successful', life: 3000 });
+                this._WishlistService.wishcounter.next(res.data.length)
             },
             error:(err)=>{
                 console.log(err);
