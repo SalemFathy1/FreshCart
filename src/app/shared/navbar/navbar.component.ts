@@ -3,6 +3,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/Services/Authentication/auth.service';
 import { MenuModule } from 'primeng/menu';
+import { CartService } from '../../core/Services/cart.service';
 
 @Component({
     selector: 'app-navbar',
@@ -13,11 +14,25 @@ import { MenuModule } from 'primeng/menu';
 export class NavbarComponent implements OnInit {
     public readonly _AuthService = inject(AuthService)
     private readonly _Router = inject(Router)
+    private readonly _CartService = inject(CartService)
     constructor(private message:MessageService){}
     isLoading:boolean = false
     items!:any[]
+    cartCount!:number 
     ngOnInit(): void {
-        
+        this._CartService.getUserCartProducts().subscribe({
+            next:(res)=>{
+                console.log(res);
+                this.cartCount = res.numOfCartItems
+            },
+            error:(err)=>{
+                console.log(err);
+                
+            }
+        })
+        this._CartService.cartCount.subscribe((value)=>{
+            this.cartCount = value
+        })
 
         this.items = [
                     {

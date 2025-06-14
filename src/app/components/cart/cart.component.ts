@@ -54,6 +54,7 @@ export class CartComponent implements OnInit,OnDestroy {
                 console.log(res);
                 this.cartDetails = res.data 
                 this.cartCount = res.numOfCartItems
+                this._CartService.cartCount.next(res.numOfCartItems)
             },
             error:(err)=>{
                 console.log(err);
@@ -97,6 +98,7 @@ export class CartComponent implements OnInit,OnDestroy {
                 console.log(res);
                 this.getCartProducts()
                 this.messageService.add({ severity: 'error', summary: 'Clearing Cart ', detail: 'cart cleared successful', life: 2000 });
+                this._CartService.cartCount.next(0)
             },
             error:(err)=>{
                 console.log(err);

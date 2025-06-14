@@ -84,6 +84,7 @@ export class HomeComponent implements OnInit,OnDestroy {
                 console.log(res);
                 console.log(poductId);
                 this.messageService.add({ severity: 'success', summary: 'Add to Cart', detail: 'Item added to cart successful', life: 3000 });
+                this._CartService.cartCount.next(res.numOfCartItems)
             },
             error:(err)=>{
                 console.log(err);
