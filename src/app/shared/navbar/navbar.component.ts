@@ -28,6 +28,13 @@ export class NavbarComponent implements OnInit {
                         }
                     },
                     {
+                        label: 'My Orders',
+                        icon: 'pi pi-shopping-cart',
+                        command:()=>{
+                            this._Router.navigate(['/allorders'])
+                        }
+                    },
+                    {
                         label: 'Logout',
                         icon: 'pi pi-sign-out',
                         styleClass:"logout",

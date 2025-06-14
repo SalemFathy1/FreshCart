@@ -1,4 +1,225 @@
-<div class="container">
-<p>shop works!</p>
+<section class="py-3">
+  <div class="container">
+    <div class="bread-crumb mb-3">
+      <p class="m-0 d-flex gap-3">
+        <a routerLink="/home" class="text-main"><i class="fa fa-home"></i></a> /
+        <a class="text-main">Shop</a> /
+        <a>{{categoryName}}</a>
+      </p>
+    </div>
+  </div>
+</section>
+<section>
+  <div class="container">
+    <div class="row gx-5">
+      <aside class="col-lg-3 col-md-4 mb-6 mb-md-0">
+        <div class="pe-4">
+          <div class="cat-section">
+            <h5>Categories</h5>
+            <ul class="list-unstyled">
+              @if (isLoading) { @for (category of [1,2,3,4,5,6,7,8,9,0]; track $index)
+              {
+              <li class="border-bottom py-1">
+                <a  class="d-flex justify-content-between align-items-center">
+                  <p-skeleton
+                    [width]="`${getRandom}rem`"
+                    height=".6rem"
+                    styleClass="mb-2"
+                  ></p-skeleton> 
+                  <i class="pi pi-chevron-right"></i
+                ></a>
+              </li>
+              } }@else{ @for (category of CategoriesList; track $index) {
+              <li class="border-bottom py-2">
+                <a (click)="getSpesificCategoryProducts(category._id , category.name)" class="d-flex justify-content-between align-items-center"
+                  >{{ category.name }} <i class="pi pi-chevron-right"></i
+                ></a>
+              </li>
+              } }
+            </ul>
+          </div>
+        </div>
+      </aside>
+      <section class="shop-section col-lg-9 col-md-12 py-0">
+        <div class="card mb-3 p-5">
+          <h2 class="m-0 fw-semibold">{{categoryName}}</h2>
+        </div>
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <p class="text-sec">
+            <span class="text-main fw-medium me-1">{{ itemsPerPage }}</span>
+            Product found
+          </p>
+          <div class="d-flex align-items-center gap-3">
+            <div class="layouts d-flex align-items-center gap-3 text-secondary">
+              <i class="bi bi-list-ul"></i>
+              <i class="bi bi-grid"></i>
+              <i class="bi bi-grid-3x3-gap"></i>
+            </div>
+            <div class="showedNumber">
+              <select
+                class="form-select form-select-sm py-2 pe-5 ps-3 rounded-2"
+                (change)="changePageProductLimit($event)"
+              >
+                <option selected>Show: {{itemsPerPage}}</option>
+                <option value="1">Show: 24</option>
+                <option value="2">Show: 36</option>
+              </select>
+            </div>
+            <div class="sorting">
+              <select
+                class="form-select form-select-sm py-2 pe-5 ps-3 rounded-2"
+              >
+                <option selected>Sort by: Featured</option>
+                <option value="1">Price: Low to High</option>
+                <option value="2">Price: High to Low</option>
+                <option value="3">Newest</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3">
+          @if (isLoading) { @for (item of [1,2,3,4,5,6]; track $index) {
+          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+            <div class="product p-3 position-relative">
+              <!-- Image Skeleton -->
+              <p-skeleton
+                width="100%"
+                height="300px"
+                styleClass="mb-3"
+              ></p-skeleton>
 
-</div>
+              <!-- Content Skeletons -->
+              <p-skeleton
+                width="60%"
+                height="20px"
+                styleClass="mb-2"
+              ></p-skeleton>
+              <p-skeleton
+                width="80%"
+                height="24px"
+                styleClass="mb-2"
+              ></p-skeleton>
+
+              <!-- Rating Skeleton -->
+              <div class="d-flex align-items-center gap-2 mb-3">
+                <p-skeleton width="100px" height="20px"></p-skeleton>
+                <p-skeleton width="60px" height="20px"></p-skeleton>
+              </div>
+
+              <!-- Price Skeleton -->
+              <div class="d-flex justify-content-between">
+                <p-skeleton width="80px" height="30px"></p-skeleton>
+                <p-skeleton width="40px" height="30px"></p-skeleton>
+              </div>
+            </div>
+          </div>
+          } }@else{ @for (product of productsList | paginate: {id:
+          'ProductPagination', itemsPerPage: itemsPerPage, currentPage:
+          currentPage , totalItems: totalProducts }; track $index) {
+          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+            <div
+              [routerLink]="['/details', product.id]"
+              class="product cursor-pointer p-3 position-relative"
+            >
+              <!-- Wishlist/View Buttons -->
+              <div class="btns position-absolute">
+                <i class="fa-regular fa-eye"></i>
+                <i
+                  (click)="$event.stopPropagation()"
+                  (click)="addToWishlist($event, product.id)"
+                  class="fa-regular fa-heart"
+                ></i>
+              </div>
+
+              <!-- Product Image -->
+              <div class="product-img position-relative">
+                <img
+                  [src]="product.imageCover"
+                  [alt]="product.title"
+                  class="img-fluid"
+                />
+              </div>
+
+              <!-- Product Details -->
+              <div class="product-details">
+                <h4 class="text-secondary fw-semibold">
+                  {{ product.category.name }}
+                </h4>
+                <h4 class="product-title">{{ product.title }}</h4>
+
+                <!-- Rating -->
+                <div class="rating mb-3 d-flex align-items-center gap-1">
+                  <p-rating
+                    [ngModel]="calculateRate(product.ratingsAverage)"
+                    [readonly]="true"
+                  />
+                  <p class="m-0 text-secondary opacity-75">
+                    {{ product.ratingsAverage }} ({{ product.ratingsQuantity }})
+                  </p>
+                </div>
+
+                <!-- Price and Add to Cart -->
+                <div
+                  class="adding d-flex justify-content-between align-items-center"
+                >
+                  <p class="price m-0 fs-6 d-flex gap-1">
+                    @if (product.priceAfterDiscount) {
+                    <span>${{ product.priceAfterDiscount }}</span>
+                    <span class="text-decoration-line-through text-secondary">
+                      ${{ product.price }}
+                    </span>
+                    <span class="text-danger">
+                      {{
+                        calculateDiscountPercentage(
+                          product.price,
+                          product.priceAfterDiscount
+                        )
+                      }}% off
+                    </span>
+                    } @else {
+                    <span>${{ product.price }}</span>
+                    }
+                  </p>
+                  <button
+                    (click)="
+                      addProductToCart(product.id); $event.stopPropagation()
+                    "
+                    class="btn text-light"
+                  >
+                    <i class="fa-solid fa-plus"></i> Add
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+          } }
+          @if (categoryEmpty) {
+            <div class="col-12">
+                <div class="text-center">
+                    <img class="w-100" height="400px"  src="../../../assets/svgs/empty-cart-img.svg" alt="">
+                    <h5 class="lead"><i class="fa fa-warning me-2 text-danger"></i>No items In this Category <span class="text-main">({{categoryName}})</span> </h5>
+                </div>
+              </div>
+          }
+          
+          <pagination-controls
+            class="pagination"
+            id="ProductPagination"
+            (pageChange)="pageChanged($event)"
+            (pageBoundsCorrection)="pageChanged($event)"
+            [maxSize]="9"
+            [directionLinks]="true"
+            [autoHide]="true"
+            [responsive]="true"
+            previousLabel="Previous"
+            nextLabel="Next"
+            screenReaderPaginationLabel="Pagination"
+            screenReaderPageLabel="page"
+            screenReaderCurrentLabel="You're on page"
+          >
+          </pagination-controls>
+        </div>
+      </section>
+    </div>
+  </div>
+</section>

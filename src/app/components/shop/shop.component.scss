@@ -1,0 +1,35 @@
+.cat-section{
+    h5{
+        font-size: 1.125rem;
+        font-weight: 600;
+        color: var(--sec-text-color);
+    }
+    ul{
+        li{
+            cursor: pointer;
+            &:hover a{
+                color: var(--main-color);
+                transform: translateX(10px);
+            }
+            a{
+                transition: var(--transition);
+                color: var(--sec-text-color);
+                font-size: .875rem;
+                i{
+                    font-size: .625rem;
+                }
+            }
+        }
+    }
+}
+.shop-section{
+    .card{
+        border: 0;
+        background-color: #F0F3F2;
+        h2{
+            font-size: 2.1875rem;
+            font-weight: 600;
+            color: var(--sec-text-color);
+        }
+    }
+}
