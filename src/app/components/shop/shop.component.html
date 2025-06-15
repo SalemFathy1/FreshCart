@@ -4,7 +4,7 @@
       <p class="m-0 d-flex gap-3">
         <a routerLink="/home" class="text-main"><i class="fa fa-home"></i></a> /
         <a class="text-main">Shop</a> /
-        <a>{{categoryName}}</a>
+        <a>{{ categoryName }}</a>
       </p>
     </div>
   </div>
@@ -17,21 +17,25 @@
           <div class="cat-section">
             <h5>Categories</h5>
             <ul class="list-unstyled">
-              @if (isLoading) { @for (category of [1,2,3,4,5,6,7,8,9,0]; track $index)
-              {
+              @if (isLoading) { @for (category of [1,2,3,4,5,6,7,8,9,0]; track
+              $index) {
               <li class="border-bottom py-1">
-                <a  class="d-flex justify-content-between align-items-center">
+                <a class="d-flex justify-content-between align-items-center">
                   <p-skeleton
                     [width]="`${getRandom}rem`"
                     height=".6rem"
                     styleClass="mb-2"
-                  ></p-skeleton> 
+                  ></p-skeleton>
                   <i class="pi pi-chevron-right"></i
                 ></a>
               </li>
               } }@else{ @for (category of CategoriesList; track $index) {
               <li class="border-bottom py-2">
-                <a (click)="getSpesificCategoryProducts(category._id , category.name)" class="d-flex justify-content-between align-items-center"
+                <a
+                  (click)="
+                    getSpesificCategoryProducts(category._id, category.name)
+                  "
+                  class="d-flex justify-content-between align-items-center"
                   >{{ category.name }} <i class="pi pi-chevron-right"></i
                 ></a>
               </li>
@@ -42,13 +46,17 @@
       </aside>
       <section class="shop-section col-lg-9 col-md-12 py-0">
         <div class="card mb-3 p-5">
-          <h2 class="m-0 fw-semibold">{{categoryName}}</h2>
+          <h2 class="m-0 fw-semibold">{{ categoryName }}</h2>
         </div>
         <div class="d-flex justify-content-between align-items-center mb-3">
+          @if (categoryEmpty) {
+          <p class="text-sec">No Product found</p>
+          }@else {
           <p class="text-sec">
             <span class="text-main fw-medium me-1">{{ itemsPerPage }}</span>
             Product found
           </p>
+          }
           <div class="d-flex align-items-center gap-3">
             <div class="layouts d-flex align-items-center gap-3 text-secondary">
               <i class="bi bi-list-ul"></i>
@@ -60,7 +68,7 @@
                 class="form-select form-select-sm py-2 pe-5 ps-3 rounded-2"
                 (change)="changePageProductLimit($event)"
               >
-                <option selected>Show: {{itemsPerPage}}</option>
+                <option selected>Show: {{ itemsPerPage }}</option>
                 <option value="1">Show: 24</option>
                 <option value="2">Show: 36</option>
               </select>
@@ -78,7 +86,23 @@
           </div>
         </div>
         <div class="row g-3">
-          @if (isLoading) { @for (item of [1,2,3,4,5,6]; track $index) {
+          @if (categoryEmpty) {
+          <div class="col-12">
+            <div class="text-center">
+              <img
+                class="w-100"
+                height="400px"
+                src="../../../assets/svgs/empty-cart-img.svg"
+                alt=""
+              />
+              <h5 class="lead">
+                <i class="fa fa-warning me-2 text-danger"></i>No items In this
+                Category <span class="text-main">({{ categoryName }})</span>
+              </h5>
+            </div>
+          </div>
+          }@else { @if (isLoading) { @for (item of [1,2,3,4,5,6]; track $index)
+          {
           <div class="col-12 col-sm-6 col-md-4 col-lg-4">
             <div class="product p-3 position-relative">
               <!-- Image Skeleton -->
@@ -192,16 +216,7 @@
               </div>
             </div>
           </div>
-          } }
-          @if (categoryEmpty) {
-            <div class="col-12">
-                <div class="text-center">
-                    <img class="w-100" height="400px"  src="../../../assets/svgs/empty-cart-img.svg" alt="">
-                    <h5 class="lead"><i class="fa fa-warning me-2 text-danger"></i>No items In this Category <span class="text-main">({{categoryName}})</span> </h5>
-                </div>
-              </div>
-          }
-          
+          } } } @if (!categoryEmpty) {
           <pagination-controls
             class="pagination"
             id="ProductPagination"
@@ -218,6 +233,7 @@
             screenReaderCurrentLabel="You're on page"
           >
           </pagination-controls>
+          }
         </div>
       </section>
     </div>

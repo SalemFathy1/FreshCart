@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { IProduct } from '../../core/interfaces/iproduct';
 import { WishlistService } from '../../core/Services/wishlist.service';
 import { MessageService } from 'primeng/api';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink} from '@angular/router';
 import { RatingModule } from 'primeng/rating';
 import { CartService } from '../../core/Services/cart.service';
 import {NgxPaginationModule} from 'ngx-pagination';
@@ -15,7 +15,7 @@ import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
     selector: 'app-shop',
-    imports: [FormsModule,RouterLink,RatingModule,CommonModule,NgxPaginationModule,SkeletonModule,RouterLinkActive],
+    imports: [FormsModule,RouterLink,RatingModule,CommonModule,NgxPaginationModule,SkeletonModule],
     templateUrl: './shop.component.html',
     styleUrl: './shop.component.scss'
 })
