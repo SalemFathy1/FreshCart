@@ -31,7 +31,6 @@ export class NavbarComponent implements OnInit {
     ngOnInit(): void {
         this._AuthService.decodeToken()
         this.userName = this._AuthService.userData.name
-        console.log(this.userName);
         
         if(localStorage.getItem('userToken')){
         this.logedIn = true
@@ -39,7 +38,6 @@ export class NavbarComponent implements OnInit {
         this.logedIn
         this._CartService.getUserCartProducts().subscribe({
             next:(res)=>{
-                console.log(res);
                 this.cartCount = res.numOfCartItems
             },
             error:(err)=>{
@@ -49,7 +47,6 @@ export class NavbarComponent implements OnInit {
         })
         this._WishlistService.getWishlist().subscribe({
             next:(res)=>{
-                console.log(res);
                 this.wishCount = res.count
             },
             error:(err)=>{

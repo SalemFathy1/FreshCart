@@ -199,8 +199,12 @@
       </div>
       <h6 class="m-0"> {{userName}} </h6>
       </div>
-      <button *ngIf="logedIn" class=" btn btn-danger px-3 py-2 text-white w-100">
-        <i class="pi pi-sign-out px-2"></i> Logout  <!-- Changed icon to pi-sign-out -->
+      <button (click)="logout()" *ngIf="logedIn" class=" btn btn-danger px-3 py-2 text-white w-100 d-flex justify-content-between align-items-center">
+        logout @if (isLoading) {
+          <i class="fa fa-spin fa-spinner"></i>
+        }@else {
+          <i class="pi pi-sign-out px-2"></i> 
+        }
       </button>
     </div>
   </div>

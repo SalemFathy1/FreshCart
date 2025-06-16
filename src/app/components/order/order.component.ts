@@ -168,6 +168,7 @@ export class OrderComponent implements OnInit {
           this._OrdersService.CashPay(this.cartId!,shippingAddress).subscribe({
             next: (res) => {
               console.log(res);
+              this._CartService.cartCount.next(0)
               this._Router.navigate(['/allorders']);
             },error:(err)=>{
               this.msgError = err.error.message;
@@ -178,8 +179,7 @@ export class OrderComponent implements OnInit {
         else if(this.paymentMethod.value == 'card'){
           this._OrdersService.CheckOut(this.cartId!,shippingAddress).subscribe({
             next: (res) => {
-              // console.log(shippingAddress);
-              // console.log(res);
+              this._CartService.cartCount.next(0)
               window.open(res.session.url, '_self');
             },
             error: (err) => {
