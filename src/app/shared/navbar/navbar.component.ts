@@ -5,10 +5,13 @@ import { AuthService } from '../../core/Services/Authentication/auth.service';
 import { MenuModule } from 'primeng/menu';
 import { CartService } from '../../core/Services/cart.service';
 import { WishlistService } from '../../core/Services/wishlist.service';
+import { DrawerModule } from 'primeng/drawer';
+import { ButtonModule } from 'primeng/button';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-navbar',
-    imports: [RouterLink,RouterLinkActive,MenuModule],
+    imports: [RouterLink,RouterLinkActive,MenuModule,DrawerModule,ButtonModule,CommonModule],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss'
 })
@@ -19,10 +22,21 @@ export class NavbarComponent implements OnInit {
     private readonly _WishlistService = inject(WishlistService)
     constructor(private message:MessageService){}
     isLoading:boolean = false
+    visible: boolean = false
     items!:any[]
     cartCount!:number 
     wishCount!:number 
+    logedIn :boolean = false
+    userName : string = ''
     ngOnInit(): void {
+        this._AuthService.decodeToken()
+        this.userName = this._AuthService.userData.name
+        console.log(this.userName);
+        
+        if(localStorage.getItem('userToken')){
+        this.logedIn = true
+        }
+        this.logedIn
         this._CartService.getUserCartProducts().subscribe({
             next:(res)=>{
                 console.log(res);
@@ -71,6 +85,17 @@ export class NavbarComponent implements OnInit {
                         command :  ()=> this.logout()
                     }
                 ]
+    }
+    Visible(x:number):void{
+        if(x == 1){
+            this.visible =true
+        }else if(x == 0){
+            this.visible =false
+        }
+    }
+    navigate(destination : string):void{
+        this.Visible(0)
+        this._Router.navigate([`/${destination}`])
     }
     logout():void{
         this.isLoading = true

@@ -11,6 +11,8 @@
     width: 500px;
     color: var(--font-color);
     font-weight: var(--font-weight);
+    transition: var(--transition);
+
 }
 
 .search-bar::placeholder {
@@ -44,7 +46,9 @@
     
 }
 
-
+ul li i{
+    font-size: 12px;
+}
 
 .icon-links ul li a {
     color: var(--font-color);

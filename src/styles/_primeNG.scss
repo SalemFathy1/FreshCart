@@ -52,3 +52,65 @@
 .p-badge{
   background-color: green !important;
 }
+.drawer{
+  ul li {
+    cursor: pointer;
+    transition: var(--transition);
+    &:hover a,&:hover i{
+      color: var(--main-color);
+    }
+    a{
+      transition: var(--transition);
+      font-size: 14px;
+      
+    }
+    border-bottom: 1px solid var(--border-color);
+  }
+  .img-container{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid var(--main-color);
+  }
+  .bottom-container{
+    border-top: 1px solid var(--border-color);
+  }
+  .account{
+    background-color: #FFF;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    &:hover{
+      background-color: var(--border-color);
+    }
+  }
+  .p-drawer-header{
+    div{
+      width: 100%;
+      justify-content: space-between;
+      align-items: center;
+      
+      button{
+        height: 30px;
+        width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        color: var(--font-color);
+        border:0;
+        border-radius: 50px;
+        transition: var(--transition);
+        &:hover{
+          background-color: var(--border-color);
+        }
+        i{
+          font-size: 16px;
+        }
+      }
+    }
+  }
+}
+
