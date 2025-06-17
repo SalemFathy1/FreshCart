@@ -10,7 +10,7 @@ export class WishlistService {
   private readonly _HttpClient = inject(HttpClient);
   constructor() { }
   header : any = {"token" : localStorage.getItem('userToken')};
-  wishcounter : BehaviorSubject<number> = new BehaviorSubject(0)
+  wishcounter : BehaviorSubject<any> = new BehaviorSubject(0)
 
   getWishlist():Observable<any> {
     return this._HttpClient.get(`${environment.baseUrl}/api/v1/wishlist` , 
