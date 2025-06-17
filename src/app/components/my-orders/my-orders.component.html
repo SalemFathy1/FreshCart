@@ -102,12 +102,64 @@
       </div>
     </div>
     <div class="row g-3">
-      @for (order of myOrders; track order.id) {
+      @if (isLoading) { @for (order of [1,2,3,4]; track $index) {
+        <div class="col-12">
+            <div class="order p-4">
+              <div class="order-shape">
+                <img src="../../../assets/images/8882807.jpg" alt="" />
+              </div>
+              <div class="order-haeder d-flex justify-content-between">
+                <div class="order-id d-flex align-items-center gap-2">
+                  <span
+                    >Order ID : #
+                  </span>
+                  <p-skeleton width="2rem" styleClass="mb-0" height=".7rem" />
+                </div>
+                <div class="order-states d-flex gap-2 align-items-center">
+
+                    <p-skeleton width="3rem" styleClass="mb-2" />
+
+                    <p-skeleton width="5rem" styleClass="mb-2" />
+
+                    <p-skeleton width="5rem" styleClass="mb-2" />
+
+                </div>
+              </div>
+              <div class="order-body">
+                <div class="address-details mb-3">
+                  <p class="d-flex align-items-center gap-1">
+                    To : <strong><p-skeleton width="5rem" height=".7rem"  /></strong>
+                  </p>
+                  <p class="d-flex align-items-center gap-1">
+                    Phone : <strong><p-skeleton width="4rem" height=".7rem"  /></strong>
+                  </p>
+                  <p class="d-flex align-items-center gap-1">
+                    email : <strong><p-skeleton width="6rem" height=".7rem" /></strong>
+                  </p>
+                  <p class="d-flex align-items-center gap-1">
+                    Total Price :
+                    <strong><p-skeleton width="3rem" height=".7rem" /></strong>
+                  </p>
+                  <p class="d-flex align-items-center gap-1">
+                    Order items count :
+                    <strong><p-skeleton width="2rem" height=".7rem" /></strong>
+                  </p>
+                </div>
+                <div class="show-items">
+                  <button class="btn-main">
+                    Show Order Items
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+      } }@else{ @for
+      (order of myOrders; track order.id) {
       <div class="col-12">
         <div class="order p-4">
-            <div class="order-shape">
-                <img src="../../../assets/images/8882807.jpg" alt="">
-            </div>
+          <div class="order-shape">
+            <img src="../../../assets/images/8882807.jpg" alt="" />
+          </div>
           <div class="order-haeder d-flex justify-content-between">
             <div class="order-id">
               <span
@@ -187,7 +239,7 @@
         </div>
       </div>
       <p-dialog
-        header="Order #{{$index + 1}} Details"
+        header="Order #{{ $index + 1 }} Details"
         [(visible)]="dialogVisibility[order.id]"
         [modal]="true"
         [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
@@ -195,88 +247,92 @@
         [draggable]="false"
         [resizable]="false"
       >
-      <div class="order-details">
-        <div class="order-header mb-4">
-          <div class="d-flex flex-wrap gap-3 mb-3">
-            <div class="badge bg-primary-subtle text-primary p-2">
-              <i class="pi pi-calendar me-2"></i>
-              {{order.createdAt | date:'mediumDate'}}
-            </div>
-            <div class="badge bg-success-subtle text-success p-2">
-              <i class="pi pi-dollar me-2"></i>
-              Total: {{order.totalOrderPrice | currency:'USD'}}
-            </div>
-          </div>
-        </div>
-      
-        <div class="order-items">
-          <div class="table-responsive border rounded overflow-hidden">
-            <table class="table table-hover align-middle">
-              <thead class="table-light">
-                <tr>
-                  <th style="width: 60px"></th>
-                  <th>Product</th>
-                  <th class="text-center">Qty</th>
-                  <th class="text-end">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                @for (item of order.cartItems; track item.product.id) {
-                <tr>
-                  <td>
-                    <img [src]="item.product.imageCover" 
-                         [alt]="item.product.title"
-                         class="img-thumbnail rounded-2"
-                         style="width: 50px; height: 50px; object-fit: cover;">
-                  </td>
-                  <td>
-                    <h6 class="mb-1 fw-semibold">{{item.product.title}}</h6>
-                    <small class="text-muted">{{item.product.category.name}}</small>
-                  </td>
-                  <td class="text-center">
-                    <span class="badge bg-light text-dark border p-2">
-                      {{item.count}}
-                    </span>
-                  </td>
-                  <td class="text-end fw-bold">
-                    {{item.price * item.count | currency:'USD'}}
-                  </td>
-                </tr>
-                }
-              </tbody>
-            </table>
-          </div>
-        </div>
-      
-        <div class="order-summary mt-4 p-3 bg-light rounded">
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <h6 class="fw-bold">Shipping Address</h6>
-              <div class="text-muted">
-                <p class="mb-1">{{order.shippingAddress.city}}</p>
-                <p class="mb-1">{{order.shippingAddress.phone}}</p>
-                <p>{{order.user.email}}</p>
+        <div class="order-details">
+          <div class="order-header mb-4">
+            <div class="d-flex flex-wrap gap-3 mb-3">
+              <div class="badge bg-primary-subtle text-primary p-2">
+                <i class="pi pi-calendar me-2"></i>
+                {{ order.createdAt | date : "mediumDate" }}
               </div>
-            </div>
-            <div class="col-md-6">
-              <div class="d-flex justify-content-between mb-2">
-                <span>Subtotal:</span>
-                <span>{{order.totalOrderPrice | currency:'USD'}}</span>
-              </div>
-              <div class="d-flex justify-content-between mb-2">
-                <span>Shipping:</span>
-                <span>Free</span>
-              </div>
-              <div class="d-flex justify-content-between fw-bold fs-5">
-                <span>Total:</span>
-                <span>{{order.totalOrderPrice | currency:'USD'}}</span>
+              <div class="badge bg-success-subtle text-success p-2">
+                <i class="pi pi-dollar me-2"></i>
+                Total: {{ order.totalOrderPrice | currency : "USD" }}
               </div>
             </div>
           </div>
+
+          <div class="order-items">
+            <div class="table-responsive border rounded overflow-hidden">
+              <table class="table table-hover align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th style="width: 60px"></th>
+                    <th>Product</th>
+                    <th class="text-center">Qty</th>
+                    <th class="text-end">Price</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  @for (item of order.cartItems; track item.product.id) {
+                  <tr>
+                    <td>
+                      <img
+                        [src]="item.product.imageCover"
+                        [alt]="item.product.title"
+                        class="img-thumbnail rounded-2"
+                        style="width: 50px; height: 50px; object-fit: cover"
+                      />
+                    </td>
+                    <td>
+                      <h6 class="mb-1 fw-semibold">{{ item.product.title }}</h6>
+                      <small class="text-muted">{{
+                        item.product.category.name
+                      }}</small>
+                    </td>
+                    <td class="text-center">
+                      <span class="badge bg-light text-dark border p-2">
+                        {{ item.count }}
+                      </span>
+                    </td>
+                    <td class="text-end fw-bold">
+                      {{ item.price * item.count | currency : "USD" }}
+                    </td>
+                  </tr>
+                  }
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="order-summary mt-4 p-3 bg-light rounded">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <h6 class="fw-bold">Shipping Address</h6>
+                <div class="text-muted">
+                  <p class="mb-1">{{ order.shippingAddress.city }}</p>
+                  <p class="mb-1">{{ order.shippingAddress.phone }}</p>
+                  <p>{{ order.user.email }}</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Subtotal:</span>
+                  <span>{{ order.totalOrderPrice | currency : "USD" }}</span>
+                </div>
+                <div class="d-flex justify-content-between mb-2">
+                  <span>Shipping:</span>
+                  <span>Free</span>
+                </div>
+                <div class="d-flex justify-content-between fw-bold fs-5">
+                  <span>Total:</span>
+                  <span>{{ order.totalOrderPrice | currency : "USD" }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
       </p-dialog>
-      }
+      } }
     </div>
   </div>
 </section>

@@ -32,18 +32,22 @@ ngOnInit(): void {
 }
 
 filterOrders(key?:string):void{
-  this._OrdersService.getUserOrders(this._AuthService.userData.id).subscribe({
-    next:(res)=>{
-      this.myOrders = res
-      this.orderItems = res.cartItems
-      this.myCompletedOrders = this.myOrders.filter((order)=> order.isPaid == true && order.isDelivered == true)
-      this.pendingOrders = this.myOrders.filter((order)=> order.isDelivered == false)
-      this.allOrdersNumber = res.length
-    },
-    error:(err)=>{
-      console.log(err);
-    }
-  })
+  this.isLoading = true
+  setTimeout(() => {
+    this._OrdersService.getUserOrders(this._AuthService.userData.id).subscribe({
+      next:(res)=>{
+        this.isLoading = false; 
+        this.myOrders = res
+        this.orderItems = res.cartItems
+        this.myCompletedOrders = this.myOrders.filter((order)=> order.isPaid == true && order.isDelivered == true)
+        this.pendingOrders = this.myOrders.filter((order)=> order.isDelivered == false)
+        this.allOrdersNumber = res.length
+      },
+      error:(err)=>{
+        console.log(err);
+      }
+    })
+  }, 500);
 }
 toggleDialog(orderId: string): void {
   this.dialogVisibility[orderId] = !this.dialogVisibility[orderId];
