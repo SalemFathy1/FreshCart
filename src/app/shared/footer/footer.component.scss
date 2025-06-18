@@ -40,7 +40,7 @@ p{
 .app-img{
     width: 140px;
 }
-.social-list li:not(:nth-child(1)) a i{
+.social-list li a i{
         color: #2c3b4563;
         font-size: 1.1rem;
         border: 1px solid #2c3b4563;
@@ -49,6 +49,10 @@ p{
         border-radius: 8px !important;
 }
 
-.social-list li:not(:nth-child(1)):hover a i{
+.social-list li:hover a i{
     color: var(--main-color);
 }
+
+// @media  (max-width : 576px) {
+    
+// }
