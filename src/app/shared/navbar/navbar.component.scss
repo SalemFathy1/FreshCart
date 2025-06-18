@@ -97,3 +97,12 @@ ul li i{
         height: auto;
     }
 }
+
+
+@media (max-width: 576px) {
+.icon{
+    img{
+        width: 120px;
+    }
+}
+}
