@@ -13,6 +13,7 @@ import { IProduct } from '../../core/interfaces/iproduct';
 import { CartService } from '../../core/Services/cart.service';
 import { MessageService } from 'primeng/api';
 import { WishlistService } from '../../core/Services/wishlist.service';
+import { SwiperOptions } from 'swiper/types';
 
 @Component({
     selector: 'app-home',
@@ -33,11 +34,32 @@ export class HomeComponent implements OnInit,OnDestroy {
     lastProduct = this.initProduct + 12
     randomFakeSale = Math.floor(Math.random() * 200)
     categoriesList:any[] = []
-    productsList:IProduct[] = [
-
-    ] 
+    productsList:IProduct[] = [] 
     getAllproductSub!:Subscription
     isLoading:boolean = false
+
+    swiperBreakpoints : SwiperOptions['breakpoints'] = {
+        0:{
+            slidesPerView : 1,
+            spaceBetween : 5
+        },
+        576:{
+            slidesPerView : 2,
+        },
+        768 : { 
+            slidesPerView : 3,
+        },
+        992:{
+            slidesPerView : 4,
+        },
+        1200:{
+            slidesPerView : 5,
+        },
+        1400:{
+            slidesPerView : 6,
+        }
+        
+    }
 
     ngOnInit(): void {
         this.getCategoies()
@@ -58,6 +80,7 @@ export class HomeComponent implements OnInit,OnDestroy {
             }
         })
     }
+
     getProducts():void{
         this.isLoading = true
         this.getAllproductSub = this._ProductService.getAllProducts().subscribe({
@@ -70,14 +93,17 @@ export class HomeComponent implements OnInit,OnDestroy {
             }
         })
     }
+
     calculateRate(x:number){
         return Math.floor(x)
     }
+
     calculateDiscountPercentage(originalPrice: number, discountedPrice: number): number {
         if (!originalPrice || originalPrice <= 0) return 0; 
         const discount = ((originalPrice - discountedPrice) / originalPrice) * 100;
         return Math.round(discount); 
     }
+
     addProductToCart(poductId:string):void{
         this._CartService.addProductToCart(poductId).subscribe({
             next:(res)=>{
@@ -91,6 +117,7 @@ export class HomeComponent implements OnInit,OnDestroy {
             }
         })
     }
+
     addToWishlist(event: MouseEvent , id:string):void{
         event.stopPropagation(); // Prevent the click from propagating to the product card
         this._WishlistService.addToWishlist(id).subscribe({
@@ -105,6 +132,7 @@ export class HomeComponent implements OnInit,OnDestroy {
             }
         })
     }
+
     ngOnDestroy(): void {
         // unsubscribe 
         this.getAllproductSub?.unsubscribe()

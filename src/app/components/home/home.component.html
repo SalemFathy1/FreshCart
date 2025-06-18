@@ -1,5 +1,6 @@
-<section class="main-slider">
-  <div class="container">
+<div class="container">
+  <section class="main-slider">
+    <!-- Main Swiper -->
     <swiper-container
       autoplay-delay="3000"
       autoplay-disable-on-interaction="false"
@@ -55,10 +56,8 @@
         </div>
       </swiper-slide>
     </swiper-container>
-  </div>
-</section>
-<section class="featured-categories">
-  <div class="container">
+  </section>
+  <section class="featured-categories">
     <div class="section-header">
       <h2 class="section-title">Featured Categories</h2>
       <div class="slider-controls">
@@ -74,6 +73,7 @@
     <div class="categories-slider-container position-relative">
       <swiper-container
         #swiper
+        [breakpoints]="swiperBreakpoints"
         autoplay-delay="3000"
         autoplay-disable-on-interaction="false"
         class="categories-swiper p-1"
@@ -93,16 +93,14 @@
         }
       </swiper-container>
     </div>
-  </div>
-</section>
-<section>
-  <div class="container">
-    <div class="row">
-      <div class="col-6">
+  </section>
+  <section>
+    <div class="row g-3">
+      <div class="column col-12 col-md-6">
         <div class="card border-0 position-relative overflow-hidden">
           <div class="title position-absolute">
             <h3>Fruits & Vegetables</h3>
-            <p class="text-secondary fw-semibold">
+            <p class="text-secondary fw-semibold mb-2">
               Get Up to <span class="fw-bolder">30%</span> Off
             </p>
 
@@ -110,11 +108,11 @@
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="column col-12 col-md-6">
         <div class="card border-0 position-relative overflow-hidden">
           <div class="title position-absolute">
             <h3>Freshly Baked Buns</h3>
-            <p class="text-secondary fw-semibold">
+            <p class="text-secondary fw-semibold mb-2">
               Get Up to <span class="fw-bolder">25%</span> Off
             </p>
             <button class="home-btns">Shop Now</button>
@@ -122,10 +120,8 @@
         </div>
       </div>
     </div>
-  </div>
-</section>
-<section class="products">
-  <div class="container">
+  </section>
+  <section class="products">
     <div class="section-header">
       <h2 class="section-title">Popular Products</h2>
     </div>
@@ -161,8 +157,7 @@
       </div>
       } } @else {
       <!-- Product Display State -->
-      @for (product of productsList; track
-      product.id) {
+      @for (product of productsList; track product.id) {
       <div class="col-6 col-md-4 col-lg-3">
         <div
           [routerLink]="['/details', product.id]"
@@ -171,7 +166,11 @@
           <!-- Wishlist/View Buttons -->
           <div class="btns position-absolute">
             <i class="fa-regular fa-eye"></i>
-            <i (click)="$event.stopPropagation()" (click)="addToWishlist($event , product.id)" class="fa-regular fa-heart"></i>
+            <i
+              (click)="$event.stopPropagation()"
+              (click)="addToWishlist($event, product.id)"
+              class="fa-regular fa-heart"
+            ></i>
           </div>
 
           <!-- Product Image -->
@@ -205,15 +204,13 @@
             <div
               class="adding d-flex justify-content-between align-items-center"
             >
-              <p class="price m-0 fs-6 d-flex gap-1">
+              <p class="price m-0 fs-6 d-flex gap-1 text-main">
                 @if (product.priceAfterDiscount) {
                 <span>${{ product.priceAfterDiscount }}</span>
                 <span class="text-decoration-line-through text-secondary">
                   ${{ product.price }}
                 </span>
-                <span
-                  class="text-danger"
-                >
+                <span class="text-danger">
                   {{
                     calculateDiscountPercentage(
                       product.price,
@@ -225,7 +222,10 @@
                 <span>${{ product.price }}</span>
                 }
               </p>
-              <button  (click)="addProductToCart(product.id); $event.stopPropagation()" class="btn text-light">
+              <button
+                (click)="addProductToCart(product.id); $event.stopPropagation()"
+                class="btn text-light"
+              >
                 <i class="fa-solid fa-plus"></i> Add
               </button>
             </div>
@@ -234,9 +234,9 @@
       </div>
       } }
     </div>
-  </div>
-</section>
-<section class="subscription my-5">
+  </section>
+</div>
+<section class="subscription mt-5">
   <div class="container">
     <div class="row">
       <div class="col-12 col-md-6 col-lg-6">
@@ -248,20 +248,59 @@
               Join our email subscription now to get updates on promotions and
               coupons.
             </p>
-            <div>
+            <div class="input-container">
               <input type="email" placeholder="Enter Email Address" />
               <button class="btn-main">Sign Up</button>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-12 col-md-6 col-lg-6">
         <div class="right text-center">
           <img
             class="mx-auto"
             src="./assets/images/girl-email.png"
             alt="girl-Email"
           />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="app bg-light">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-12 col-md-6 col-lg-6">
+        <div class="left text-center text-sm-end">
+          <img
+            class="mx-auto"
+            src="../../../assets/images/iphone.png"
+            alt="girl-Email"
+          />
+        </div>
+      </div>
+      <div class="col-12 col-md-6 col-lg-6 d-flex align-items-center">
+        <div class="right text-center text-sm-end">
+          <div class="title mb-3">
+            <h3>Get the FreshCart app</h3>
+            <p>
+              We will send you a link, open it on your phone to download the app.
+            </p>
+          </div>
+            <div class="inputs d-flex align-items-center justify-content-center justify-content-sm-start gap-3">
+              <div class="input-groub d-flex align-items-center gap-2">
+                <input id="email" type="radio" class="form-check-input">
+                <label for="email">Email</label>
+              </div>
+              <div class="input-groub d-flex align-items-center gap-2">
+                <input id="phone" type="radio" class="form-check-input">
+                <label for="phone">Phone</label>
+              </div>
+            </div>
+            <div class="input-container">
+              <input class="form-control mb-3" type="email" placeholder="Enter Email Address" />
+              <button class="btn-main">Sign Up</button>
+            </div>
         </div>
       </div>
     </div>

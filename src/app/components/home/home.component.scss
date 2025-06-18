@@ -1,6 +1,4 @@
-.icon{
-  cursor: pointer !important;
-}
+
 swiper-container {
   &::part(bullet){
     background-color: #ffffff;
@@ -146,33 +144,21 @@ swiper-container {
     }
     
   }
-  .fade-right,.fade-left{
-    position: absolute;
-  }
-  .fade-right{
-    background: linear-gradient(to left, white,rgba(255, 255, 255, 0.455), transparent);
-    height: 100%;
-    width: 200px;
-    right: 0;
-    top: 0;
-    z-index: 999;
-  }
-  .fade-left{
-      background: linear-gradient(to right, white,rgba(255, 255, 255, 0.455), transparent);
-      height: 100%;
-      width: 200px;
-      left: 0;
-      top: 0;
-      z-index: 999;
-    }
-//---------
+
+
 
 //two-cards section 
-.col-6:nth-child(1) .card{
+.column:nth-child(1) .card{
   background: url('/assets/images/grocery-banner.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-.col-6:nth-child(2) .card{
+.column:nth-child(2) .card{
+  background-size: cover;
   background: url('/assets/images/grocery-banner-2.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
 }
 .card{ 
   border-radius: 10px;
@@ -190,13 +176,18 @@ swiper-container {
   }
 }
 }
-:host ::ng-deep .p-rating .p-rating-icon.p-rating-icon-active {
-  color: var(--main-color);
-}
+
 //---------------
 
 .p-rating-option-active .p-rating-icon {
   color: var(--main-color);
+}
+
+.price{
+  span{
+    color: var(--main-color);
+    font-size: 14px;
+  }
 }
 
 .subscription{
@@ -227,4 +218,132 @@ swiper-container {
         font-weight: 600;
       }
     }
+  }
+
+
+
+.right{
+  .title{
+    h3{
+      color: var(--sec-text-color);
+      font-weight: 600;
+      font-size: 28px;
+    }
+    p{
+      color: var(--font-color);
+      font-size: 14px;
+      font-weight: 500;
+    }
+  }
+}
+
+
+
+  
+// Responsive breakpoints
+  //main slider
+  @media (max-width: 1200px) {
+    .slide .title {
+      width: 50%;
+      
+      .heads {
+        font-size: 2.5rem;
+      }
+    }
+  }
+
+  @media (max-width: 992px) {
+    .slide {
+      min-height: 30rem;
+    }
+    
+    .slide .title {
+      width: 60%;
+      margin-left: 30px;
+      
+      .heads {
+        font-size: 2.2rem;
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .slide {
+      min-height: 25rem;
+      justify-content: center;
+    border: 1px solid var(--main-color);
+    text-align: center;
+    p{
+      color: #001E2B;
+    }
+    }
+    .slide img{
+      filter: blur(2px);
+  }
+    .slide .title {
+      width: 80%;
+      margin: 0 auto;
+      padding: 15px;
+      
+      .heads {
+        font-size: 1.8rem;
+      }
+    }
+    .subscription{
+      padding-top: 20px;
+     text-align: center; 
+    }
+  }
+
+  @media (max-width: 576px) {
+    .slide {
+      min-height: 15rem;
+    }
+    
+    .slide .title {
+      width: 90%;
+      
+      .heads {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .home-btns {
+      padding: 8px 15px;
+      font-size: 0.9rem;
+    }
+    .product{
+      .rating{
+        p{
+          display: none;
+        }
+      }
+      .adding{
+        justify-content: start;
+        align-items: start !important;
+        flex-direction: column;
+        button{
+          margin-top: 5px;
+
+          width: 100%;
+        }
+      }
+    }
+
+    .subscription{
+      .left{
+        width: 100%;
+        .input-container{
+          width: 100%;
+        }
+      }
+      img{
+        width: 100%;
+      } 
+    }
+
   }

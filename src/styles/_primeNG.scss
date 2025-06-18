@@ -8,6 +8,10 @@
     left: unset !important;
   }
 
+  :host ::ng-deep .p-rating .p-rating-icon.p-rating-icon-active {
+    color: var(--main-color) !important;
+  }
+
   .logout{
     a{
         transition: var(--transition);
