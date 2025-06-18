@@ -1,5 +1,5 @@
 import { MessageService } from 'primeng/api';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { AuthService } from '../../core/Services/Authentication/auth.service';
 import { MenuModule } from 'primeng/menu';
@@ -28,6 +28,15 @@ export class NavbarComponent implements OnInit {
     wishCount!:number 
     logedIn :boolean = false
     userName : string = ''
+    hasScrolled = false;
+
+    @HostListener('window:scroll', [])
+    onWindowScroll() {
+      const scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+      this.hasScrolled = scrollPosition > 0;
+    }
+
+
     ngOnInit(): void {
         this._AuthService.decodeToken()
         this.userName = this._AuthService.userData.name

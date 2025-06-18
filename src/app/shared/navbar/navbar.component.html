@@ -1,19 +1,31 @@
-<nav class="border-bottom">
-  <div class="container">
-    <div class="upper d-flex align-items-center justify-content-between py-3">
-      <div class="search d-flex">
-        <div class="icon d-flex align-items-center cursor-pointer">
-          <a 
-            ><img
+<nav class="border-bottom" [class.scrolled]="hasScrolled">
+  <div class="container-fluid px-3 px-sm-4">
+    <div
+      class="upper d-flex align-items-center justify-content-between py-3 gap-sm-5"
+    >
+      <div class="search d-flex flex-sm-grow-1 flex-grow-0">
+        <div class="meun-button me-sm-2 me-1">
+          <img
             (click)="Visible(1)"
+            class=""
+            src="../../../assets/svgs/menu.svg"
+            alt=""
+          />
+        </div>
+        <div
+          routerLink="/home"
+          class="icon d-flex align-items-center my-auto cursor-pointer d-none d-sm-block me-5"
+        >
+          <a
+            ><img
               src="../../assets/svgs/freshcart-logo.svg"
               alt="FreshCart-Logo"
           /></a>
         </div>
-        <div class="search d-flex gap-2">
-          <div class="position-relative">
+        <div class="search-contianer w-50 gap-2 d-none d-lg-flex">
+          <div class="position-relative flex-grow-1">
             <input
-              class="search-bar items-border m-0"
+              class="search-bar items-border m-0 w-100"
               type="search"
               placeholder="Search for products"
             />
@@ -24,75 +36,37 @@
           </div>
         </div>
       </div>
+      <div
+      routerLink="/home"
+      class="icon ms-4 d-flex align-items-center cursor-pointer d-sm-none d-block"
+    >
+      <a
+        ><img
+          src="../../assets/svgs/freshcart-logo.svg"
+          alt="FreshCart-Logo"
+      /></a>
+    </div>
       <div class="icon-links">
         <ul class="list-unstyled d-flex align-items-center">
-          <li class="mx-2 fs-5">
-            <a routerLink="wishlist"
+          <li class="mx-sm-2 mx-1  d-sm-block d-none">
+            <a class="p-1 p-sm-2 " routerLink="wishlist"
               ><i class="pi pi-heart"
                 ><span>{{ wishCount }}</span></i
               ></a
             >
           </li>
-          <li class="mx-2 fs-5">
-            <a routerLink="cart"
-              ><i class="pi pi-shopping-cart"
-                ><span>{{ cartCount }}</span></i
-              ></a
-            >
-          </li>
-          <li class="mx-2 fs-5 position-relative">
-            <a (click)="menu.toggle($event)" class="cursor-pointer"
+
+          <li class="mx-sm-2 mx-1  position-relative">
+            <a  class="p-1 p-sm-2 "(click)="menu.toggle($event)" class="cursor-pointer"
               ><i class="pi pi-user"></i
             ></a>
             <p-menu #menu [model]="items" styleClass="menu" [popup]="true" />
           </li>
-        </ul>
-      </div>
-    </div>
-    <div class="lower d-flex align-items-center gap-4">
-      <button class="items-border px-3 py-2">
-        <i class="pi pi-bars px-2"></i> All Categories
-      </button>
-      <div class="list">
-        <ul class="list-unstyled d-flex align-items-center gap-4">
-          <li>
-            <a
-              class="d-flex align-items-center gap-2"
-              routerLinkActive="active-link"
-              routerLink="home"
-              >Home</a
-            >
-          </li>
-          <li>
-            <a
-              class="d-flex align-items-center gap-2"
-              routerLinkActive="active-link"
-              routerLink="shop"
-              >Shop</a
-            >
-          </li>
-          <li>
-            <a
-              class="d-flex align-items-center gap-2"
-              routerLinkActive="active-link"
-              routerLink="cart"
-              >Cart</a
-            >
-          </li>
-          <li>
-            <a
-              class="d-flex align-items-center gap-2"
-              routerLinkActive="active-link"
-              routerLink="wishlist"
-              >Wishlist</a
-            >
-          </li>
-          <li>
-            <a
-              class="d-flex align-items-center gap-2"
-              routerLinkActive="active-link"
-              routerLink="allorders"
-              >My Orders</a
+          <li class="mx-sm-2 mx-1 ">
+            <a class="p-1 p-sm-2 " routerLink="cart"
+              ><i class="pi pi-shopping-cart"
+                ><span>{{ cartCount }}</span></i
+              ></a
             >
           </li>
         </ul>
@@ -101,20 +75,21 @@
   </div>
 </nav>
 
-<!-- side bar  -->
 <p-drawer
-
   [(visible)]="visible"
   [style]="{ width: '24rem' }"
   styleClass="drawer"
   [showCloseIcon]="false"
   blockScroll="false"
 >
-  <ng-template styleClass="header-side-nav"  pTemplate="header">
+  <ng-template styleClass="header-side-nav" pTemplate="header">
     <div class="d-flex justify-content-between">
       <div class="icon d-flex align-items-center">
         <a routerLink="home"
-          ><img src="../../assets/svgs/freshcart-logo.svg" alt="FreshCart-Logo"
+          ><img
+            width="150px"
+            src="../../assets/svgs/freshcart-logo.svg"
+            alt="FreshCart-Logo"
         /></a>
       </div>
       <button (click)="Visible(0)"><i class="pi pi-times"></i></button>
@@ -122,7 +97,8 @@
   </ng-template>
   <div class="d-flex flex-column h-100 position-relative">
     <!-- Main Content (Scrollable) -->
-    <div class="flex-grow-1 overflow-auto">  <!-- Allows scrolling if content overflows -->
+    <div class="flex-grow-1 overflow-auto">
+      <!-- Allows scrolling if content overflows -->
       <div class="search d-flex gap-2 w-100 my-2">
         <div class="position-relative w-100">
           <input
@@ -146,67 +122,84 @@
       <div class="list">
         <ul class="list-unstyled d-flex flex-column align-items-center gap-3">
           <li
-          (click)="navigate('home')"
+            (click)="navigate('home')"
             routerLinkActive="active-link"
             class="border-bottom d-flex w-100 justify-content-between py-2 align-items-center"
           >
-            <a class="d-flex align-items-center" routerLinkActive="active-link">Home</a>
+            <a class="d-flex align-items-center" routerLinkActive="active-link"
+              >Home</a
+            >
             <i class="pi pi-chevron-right"></i>
           </li>
           <li
-          (click)="navigate('shop')"
+            (click)="navigate('shop')"
             routerLinkActive="active-link"
             class="border-bottom d-flex w-100 justify-content-between py-2 align-items-center"
           >
-            <a class="d-flex align-items-center" routerLinkActive="active-link">Shop</a>
+            <a class="d-flex align-items-center" routerLinkActive="active-link"
+              >Shop</a
+            >
             <i class="pi pi-chevron-right"></i>
           </li>
           <li
-          (click)="navigate('cart')"
+            (click)="navigate('cart')"
             routerLinkActive="active-link"
             class="border-bottom d-flex w-100 justify-content-between py-2 align-items-center"
           >
-            <a class="d-flex align-items-center" routerLinkActive="active-link">Cart</a>
+            <a class="d-flex align-items-center" routerLinkActive="active-link"
+              >Cart</a
+            >
             <i class="pi pi-chevron-right"></i>
           </li>
           <li
-          (click)="navigate('wishlist')"
+            (click)="navigate('wishlist')"
             routerLinkActive="active-link"
             class="border-bottom d-flex w-100 justify-content-between py-2 align-items-center"
           >
-            <a class="d-flex align-items-center" routerLinkActive="active-link">Wishlist</a>
+            <a class="d-flex align-items-center" routerLinkActive="active-link"
+              >Wishlist</a
+            >
             <i class="pi pi-chevron-right"></i>
           </li>
           <li
-          (click)="navigate('allorders')"
+            (click)="navigate('allorders')"
             routerLinkActive="active-link"
             class="border-bottom d-flex w-100 justify-content-between py-2 align-items-center"
           >
-            <a class="d-flex align-items-center" routerLinkActive="active-link">My Orders</a>
+            <a class="d-flex align-items-center" routerLinkActive="active-link"
+              >My Orders</a
+            >
             <i class="pi pi-chevron-right"></i>
           </li>
         </ul>
       </div>
     </div>
-  
-    <div class="bottom-container mt-auto w-100 pt-3 d-flex flex-column gap-3">
 
+    <div class="bottom-container mt-auto w-100 pt-3 d-flex flex-column gap-3">
       <div
-      (click)="navigate('account')"
-      class="account d-flex justify-content-between align-items-center">
+        (click)="navigate('account')"
+        class="account d-flex justify-content-between align-items-center"
+      >
         <div class="img-container">
-        <img class="w-100" src="../../../assets/images/userPlaceholder.jpg" alt="user-place-holder">
+          <img
+            class="w-100"
+            src="../../../assets/images/userPlaceholder.jpg"
+            alt="user-place-holder"
+          />
+        </div>
+        <h6 class="m-0">{{ userName }}</h6>
       </div>
-      <h6 class="m-0"> {{userName}} </h6>
-      </div>
-      <button (click)="logout()" *ngIf="logedIn" class=" btn btn-danger px-3 py-2 text-white w-100 d-flex justify-content-between align-items-center">
+      <button
+        (click)="logout()"
+        *ngIf="logedIn"
+        class="btn btn-danger px-3 py-2 text-white w-100 d-flex justify-content-between align-items-center"
+      >
         logout @if (isLoading) {
-          <i class="fa fa-spin fa-spinner"></i>
+        <i class="fa fa-spin fa-spinner"></i>
         }@else {
-          <i class="pi pi-sign-out px-2"></i> 
+        <i class="pi pi-sign-out px-2"></i>
         }
       </button>
     </div>
   </div>
 </p-drawer>
-
