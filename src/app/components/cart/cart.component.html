@@ -16,9 +16,9 @@
       <p class="text-secondary fw-medium">Shopping in 382480</p>
     </div>
     <div class="cart-details mb-4">
-      <div class="row g-5">
+      <div class="row g-5 mx-0">
         <div class="col-12 col-lg-8 col-md-7">
-          <div class="cart-item-container">
+          <div class="cart-item-container w-100">
             <div class="alert alert-danger">
               You’ve got FREE delivery. Start
               <a class="alert-link cursor-pointer fw-semibold">checkout now!</a>
@@ -78,7 +78,8 @@
                   <div class="fade"></div>
                 </div>
               </li>
-              } }@else { @if (cartCount == 0) {
+              } }@else
+               { @if (cartCount == 0) {
               <div class="col-12">
                 <div class="d-flex align-items-center flex-column py-3">
                   <img
@@ -101,11 +102,11 @@
               {
               <li>
                 <div class="row d-flex align-items-center">
-                  <div class="col-6 col-md-6 col-lg-7">
-                    <div class="product-left d-flex">
+                  <div class="col-12 col-md-6 col-lg-7">
+                    <div class="product-left d-flex mb-3 mb-md-0">
                       <div
                       routerLink="/details/{{ item.product.id }}"
-                        class="img-container overflow-hidden rounded rounded-2 me-2 cursor-pointer"
+                        class="img-container overflow-hidden rounded rounded-2 me-2 cursor-pointer flex-shrink-0"
                       >
                         <img [src]="item.product.imageCover" alt="" />
                       </div>
@@ -121,28 +122,28 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-4 col-md-4 col-lg-3">
+                  <div class="col-6 col-md-4 col-lg-3">
                     <div class="quantity d-flex">
                       <button
                         (click)="
                           updateQuantity(item.count, -1, item.product.id)
                         "
                         [class.disabled]="item.count == 1"
-                        class="text-secondary cursor-pointer"
+                        class="text-secondary cursor-pointer flex-shrink-0"
                       >
                         <i class="fa-solid fa-minus"></i>
                       </button>
-                      <span> {{ item.count }} </span>
+                      <span class="flex-shrink-0"> {{ item.count }} </span>
                       <button
                         (click)="updateQuantity(item.count, 1, item.product.id)"
-                        class="text-secondary cursor-pointer"
+                        class="text-secondary cursor-pointer flex-shrink-0"
                       >
                         <i class="fa-solid fa-plus"></i>
                       </button>
                     </div>
                   </div>
                   <div
-                    class="col-2 text-lg-end text-start text-md-end col-md-2"
+                    class="col-6 text-lg-end text-end text-md-start col-md-2"
                   >
                     <span class="fw-semibold fs-6">{{
                       item.price | currency : "GBP"
@@ -154,17 +155,17 @@
             </ul>
           </div>
           @if (cartCount != 0){
-          <div class="btns d-flex justify-content-between">
+          <div class="btns d-flex flex-column flex-sm-row justify-content-between gap-2 ">
             <button
               routerLink="/home"
-              class="btn-main d-flex align-items-center gap-2"
+              class="btn-main d-flex align-items-center justify-content-center gap-2"
             >
               Continue Shopping
               <i class="pi pi-shopping-bag"></i>
             </button>
             <button
               (click)="clearCart()"
-              class="clear-btn d-flex align-items-center gap-2"
+              class="clear-btn d-flex align-items-center justify-content-center gap-2"
             >
               Remove All
               <i class="pi pi-trash"></i>
