@@ -287,14 +287,30 @@ input:focus::placeholder{
   min-width: 300px;
   max-width: 500px;
 }
-.bread-crumb{
-  a{
-    cursor: pointer;
+
+.bread-crumb {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.bread-crumb p {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  color: #88939ac7 !important;
+}
+
+
+/* For mobile devices */
+@media (max-width: 420px) {
+  .bread-crumb p {
+    flex-wrap: nowrap;
   }
-  p{
-      font-weight: 500 !important;
-      font-size: 14px !important;
-      color: #88939ac7 !important;
+  
+  .text-truncate {
+    max-width: 80px; /* Smaller max-width for mobile */
   }
 }
 p{
