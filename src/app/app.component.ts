@@ -10,4 +10,12 @@ import { ToastModule } from 'primeng/toast';
 })
 export class AppComponent {
   title = 'FreshCart';
+  isMobile: boolean = false;
+  ngOnInit() {
+    this.checkScreenSize();
+  }
+
+  checkScreenSize() {
+    this.isMobile = window.innerWidth <= 768; // Adjust breakpoint as needed
+  }
 }
