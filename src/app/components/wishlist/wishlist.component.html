@@ -18,18 +18,9 @@
       </p>
     </div>
     <div class="table-responsive">
-      <table class="table text-nowrap table-with-checkbox">
+      <table class="table text-nowrap">
         <thead class="table-light">
           <tr>
-            <th>
-              <div class="form-check">
-                <input
-                  class="form-check-input"
-                  type="checkbox"
-                  id="selectAll"
-                />
-              </div>
-            </th>
             <th>Cover</th>
             <th>Product</th>
             <th>Price</th>
@@ -42,15 +33,6 @@
             @if (isLoading && wishListItems) {
                 @for (item of [1,1,1,1]; track $index) {
                     <tr>
-                        <td class="align-middle">
-                            <div class="form-check">
-                                <input
-                                  class="form-check-input"
-                                  type="checkbox"
-                                  id="selectAll"
-                                />
-                              </div>
-                        </td>
                         <td class="align-middle">
                             <div class="img-container">
                                 <p-skeleton size="4rem" styleClass="mr-2" />
@@ -78,15 +60,6 @@
             }
             @for (item of wishListItems; track $index) {
                 <tr>
-                    <td class="align-middle">
-                        <div class="form-check">
-                            <input
-                              class="form-check-input"
-                              type="checkbox"
-                              id="selectAll"
-                            />
-                          </div>
-                    </td>
                     <td class="align-middle">
                         <div routerLink="/details/{{item.id}}" class="img-container overflow-hidden rounded">
                         <img class="w-100" [src]="item.imageCover" [alt]="item.title">
