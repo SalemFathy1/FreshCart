@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { ToastModule } from 'primeng/toast';
 
@@ -8,14 +9,19 @@ import { ToastModule } from 'primeng/toast';
     templateUrl: './app.component.html',
     styleUrl: './app.component.scss'
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'FreshCart';
   isMobile: boolean = false;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
   ngOnInit() {
     this.checkScreenSize();
   }
 
   checkScreenSize() {
-    this.isMobile = window.innerWidth <= 768; // Adjust breakpoint as needed
+    if (isPlatformBrowser(this.platformId)) {
+      this.isMobile = window.innerWidth <= 768; // Adjust breakpoint as needed
+    }
   }
 }
