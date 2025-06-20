@@ -16,8 +16,8 @@
       <p class="text-secondary fw-medium">All Orders info here !</p>
     </div>
     <div class="row gx-5">
-      <aside class="col-lg-3 col-md-4 mb-6 mb-md-0">
-        <div class="pe-4">
+      <aside class="col-lg-3 col-md-4 pb-6 pb-md-0">
+        <div class="pe-0 pe-md-4">
           <div class="cat-section">
             <h5>Categories</h5>
             <ul class="list-unstyled">
@@ -48,44 +48,58 @@
           </div>
         </div>
       </aside>
-      <section class="shop-section col-lg-9 col-md-12 py-0">
+      <section class="shop-section col-lg-9 col-md-8 py-0">
         <div class="card mb-3 p-5">
           <h2 class="m-0 fw-semibold">{{ categoryName }}</h2>
         </div>
-        <div class="d-flex justify-content-between align-items-center mb-3">
-          @if (categoryEmpty) {
-          <p class="text-sec">No Product found</p>
-          }@else {
-          <p class="text-sec">
-            <span class="text-main fw-medium me-1">{{ itemsPerPage }}</span>
-            Product found
-          </p>
-          }
-          <div class="d-flex align-items-center gap-3">
-            <div class="layouts d-flex align-items-center gap-3 text-secondary">
-              <i class="bi bi-list-ul"></i>
-              <i class="bi bi-grid"></i>
-              <i class="bi bi-grid-3x3-gap"></i>
+        <div
+          class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-3 gap-3 gap-md-0"
+        >
+          <div class="col-12 col-md-6 order-1 order-md-0">
+            <div class="row align-items-center">
+              <div class="col-12 col-sm-6 mb-2 mb-sm-0">
+                @if (categoryEmpty) {
+                <p class="text-sec mb-0">No Product found</p>
+                } @else {
+                <p class="text-sec mb-0">
+                  <span class="text-main fw-medium me-1">{{ itemsFound }}</span>
+                  Product{{ itemsFound !== 1 ? "s" : "" }} found
+                </p>
+                }
+              </div>
+              <div class="col-12 col-sm-6">
+                <div
+                  class="layouts d-flex align-items-center justify-content-end gap-2 gap-sm-3 text-secondary"
+                >
+                  <i class="bi bi-list-ul cursor-pointer"></i>
+                  <i class="bi bi-grid cursor-pointer"></i>
+                  <i class="bi bi-grid-3x3-gap cursor-pointer"></i>
+                </div>
+              </div>
             </div>
-            <div class="showedNumber">
-              <select
-                class="form-select form-select-sm py-2 pe-5 ps-3 rounded-2"
-                (change)="changePageProductLimit($event)"
-              >
-                <option selected>Show: {{ itemsPerPage }}</option>
-                <option value="1">Show: 24</option>
-                <option value="2">Show: 36</option>
-              </select>
-            </div>
-            <div class="sorting">
-              <select
-                class="form-select form-select-sm py-2 pe-5 ps-3 rounded-2"
-              >
-                <option selected>Sort by: Featured</option>
-                <option value="1">Price: Low to High</option>
-                <option value="2">Price: High to Low</option>
-                <option value="3">Newest</option>
-              </select>
+          </div>
+          <div class="col-12 col-md-6 order-0 order-md-1">
+            <div class="row g-2 g-sm-3 justify-content-end">
+              <div class="col-12 col-sm-6">
+                <select
+                  class="form-select form-select-sm py-2 pe-5 ps-3 rounded-2 w-100"
+                  (change)="changePageProductLimit($event)"
+                >
+                  <option selected>Show: {{ itemsPerPage }}</option>
+                  <option value="1">Show: 24</option>
+                  <option value="2">Show: 36</option>
+                </select>
+              </div>
+              <div class="col-12 col-sm-6">
+                <select
+                  class="form-select form-select-sm py-2 pe-5 ps-3 rounded-2 w-100"
+                >
+                  <option selected>Sort by: Featured</option>
+                  <option value="1">Price: Low to High</option>
+                  <option value="2">Price: High to Low</option>
+                  <option value="3">Newest</option>
+                </select>
+              </div>
             </div>
           </div>
         </div>
@@ -109,14 +123,11 @@
           {
           <div class="col-12 col-sm-6 col-md-4 col-lg-4">
             <div class="product p-3 position-relative">
-              <!-- Image Skeleton -->
               <p-skeleton
                 width="100%"
                 height="300px"
                 styleClass="mb-3"
               ></p-skeleton>
-
-              <!-- Content Skeletons -->
               <p-skeleton
                 width="60%"
                 height="20px"
@@ -127,14 +138,10 @@
                 height="24px"
                 styleClass="mb-2"
               ></p-skeleton>
-
-              <!-- Rating Skeleton -->
               <div class="d-flex align-items-center gap-2 mb-3">
                 <p-skeleton width="100px" height="20px"></p-skeleton>
                 <p-skeleton width="60px" height="20px"></p-skeleton>
               </div>
-
-              <!-- Price Skeleton -->
               <div class="d-flex justify-content-between">
                 <p-skeleton width="80px" height="30px"></p-skeleton>
                 <p-skeleton width="40px" height="30px"></p-skeleton>
@@ -144,12 +151,11 @@
           } }@else{ @for (product of productsList | paginate: {id:
           'ProductPagination', itemsPerPage: itemsPerPage, currentPage:
           currentPage , totalItems: totalProducts }; track $index) {
-          <div class="col-12 col-sm-6 col-md-4 col-lg-4">
+          <div class="col-6 col-lg-3">
             <div
               [routerLink]="['/details', product.id]"
               class="product cursor-pointer p-3 position-relative"
             >
-              <!-- Wishlist/View Buttons -->
               <div class="btns position-absolute">
                 <i class="fa-regular fa-eye"></i>
                 <i
@@ -158,8 +164,6 @@
                   class="fa-regular fa-heart"
                 ></i>
               </div>
-
-              <!-- Product Image -->
               <div class="product-img position-relative">
                 <img
                   [src]="product.imageCover"
@@ -167,16 +171,14 @@
                   class="img-fluid"
                 />
               </div>
-
-              <!-- Product Details -->
               <div class="product-details">
                 <h4 class="text-secondary fw-semibold">
                   {{ product.category.name }}
                 </h4>
                 <h4 class="product-title">{{ product.title }}</h4>
-
-                <!-- Rating -->
-                <div class="rating mb-3 d-flex align-items-center gap-1">
+                <div
+                  class="rating mb-3 d-flex flex-column flex-sm-row align-items-start gap-1"
+                >
                   <p-rating
                     [ngModel]="calculateRate(product.ratingsAverage)"
                     [readonly]="true"
@@ -185,10 +187,8 @@
                     {{ product.ratingsAverage }} ({{ product.ratingsQuantity }})
                   </p>
                 </div>
-
-                <!-- Price and Add to Cart -->
                 <div
-                  class="adding d-flex justify-content-between align-items-center"
+                  class="adding d-flex flex-column flex-sm-row justify-content-between align-items-start"
                 >
                   <p class="price m-0 fs-6 d-flex gap-1">
                     @if (product.priceAfterDiscount) {

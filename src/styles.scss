@@ -354,3 +354,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     border-radius: 0 5px 5px 0;
   }
 }
+
+
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  .current{
+    background-color: var(--main-color) !important;
+  }
+  .ngx-pagination{
+    display: flex;
+    gap: 10px !important;
+  }
+  .ng-star-inserted:not(:first-child):not(:last-child) {
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+  }
+}
