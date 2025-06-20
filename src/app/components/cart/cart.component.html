@@ -84,8 +84,8 @@
                 <div class="d-flex align-items-center flex-column py-3">
                   <img
                     class="w-50"
-                    src="../../../assets/svgs/empty-cart-img.svg"
-                    alt=""
+                    src="./assets/svgs/empty-cart-img.svg"
+                    alt="empty-cart-img"
                   />
                   <h2>Your cart is <span class="text-main">Empty!</span></h2>
                   <p class="mb-3">must add items to cart before proceed to check out.</p>
@@ -108,7 +108,7 @@
                       routerLink="/details/{{ item.product.id }}"
                         class="img-container overflow-hidden rounded rounded-2 me-2 cursor-pointer flex-shrink-0"
                       >
-                        <img [src]="item.product.imageCover" alt="" />
+                        <img [src]="item.product.imageCover" alt="product-cover" />
                       </div>
                       <div class="product-details">
                         <h6>{{ item.product.title }}</h6>
