@@ -75,31 +75,6 @@
           </div>
         </div>
       </div>
-      <div class="orders-nav mb-3">
-        <ul class="list-unstyled d-flex gap-3 border-bottom">
-          <li
-            (click)="filterOrders('all')"
-            [ngClass]="{ active: active == 'all' }"
-            class="p-3"
-          >
-            <a>All orders</a>
-          </li>
-          <li
-            (click)="filterOrders('completed')"
-            [ngClass]="{ active: active == 'completed' }"
-            class="p-3 active-link"
-          >
-            <a>Completed</a>
-          </li>
-          <li
-            (click)="filterOrders('pending')"
-            [ngClass]="{ active: active == 'pending' }"
-            class="p-3"
-          >
-            <a>Pending</a>
-          </li>
-        </ul>
-      </div>
     </div>
     <div class="row g-3">
       @if (isLoading) { @for (order of [1,2,3,4]; track $index) {
@@ -160,13 +135,13 @@
           <div class="order-shape">
             <img src="../../../assets/images/8882807.jpg" alt="" />
           </div>
-          <div class="order-haeder d-flex justify-content-between">
+          <div class="order-haeder d-flex flex-column-reverse flex-sm-row justify-content-between">
             <div class="order-id">
               <span
                 >Order ID : <strong class="text-main">#{{ $index + 1 }}</strong>
               </span>
             </div>
-            <div class="order-states d-flex gap-2 align-items-center">
+            <div class="order-states d-flex justify-content-start mb-3 mb-sm-0 gap-2 align-items-center">
               @if(order.isPaid){
               <p
                 class="text-success bg-success-subtle px-2 py-1 rounded-3 d-flex align-items-center gap-1"
@@ -238,6 +213,7 @@
           </div>
         </div>
       </div>
+      
       <p-dialog
         header="Order #{{ $index + 1 }} Details"
         [(visible)]="dialogVisibility[order.id]"

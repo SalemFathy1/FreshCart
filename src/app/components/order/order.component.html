@@ -345,20 +345,21 @@
   </ng-template>
   <form [formGroup]="AddressForm" (ngSubmit)="addAddress()">
     <div class="flex items-center gap-4 mb-3">
+      <label for="details"> Address details</label>
       <textarea
-        pInputText
         formControlName="details"
-        placeholder="details"
+        id="details"
         type="text"
         class="flex-auto form-control"
         autocomplete="off"
       ></textarea>
     </div>
     <div class="flex items-center gap-4 mb-3">
+      <label for="governorate"> Your city </label>
+
       <select
         class="form-control"
         formControlName="city"
-        place
         id="governorate"
         name="governorate"
       >
@@ -368,10 +369,11 @@
       </select>
     </div>
     <div class="flex items-center gap-4 mb-3">
+      <label for="phone"> Phone Number </label>
       <input
         pInputText
-        placeholder="Phone Number"
         formControlName="phone"
+        id="phone"
         type="tel"
         class="flex-auto form-control"
         autocomplete="off"

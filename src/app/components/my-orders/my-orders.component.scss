@@ -23,27 +23,6 @@
     background-color: rgba(255, 193, 7, 0.1);
   }
   
-
-  .orders-nav{
-    ul{
-        li{
-            transition: var(--transition);
-            &:hover{
-                a{
-                    color: var(--main-color);
-                }
-                color: var(--main-color);
-            }
-            cursor: pointer;
-            a{
-                transition: var(--transition);
-                color: var(--sec-text-color);
-                font-size: 16px;
-                font-weight: 500;
-            }
-        }
-    }
-  }
 .active{
      a{
         color: var(--main-color) !important;
@@ -69,3 +48,7 @@
     }
 }
 
+.show-items{
+  position: relative;
+  z-index: 99999;
+}
