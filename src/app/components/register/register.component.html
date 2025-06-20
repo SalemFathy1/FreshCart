@@ -9,11 +9,16 @@
           <div class="my-2">
             <label class="mb-2" for="name">Name</label>
             <input
-            [ngClass]="{
-              'is-valid': !RegisterForm.get('name')?.errors,
-              'is-invalid':RegisterForm.get('name')?.errors && RegisterForm.get('name')?.touched,
-              'invalid-focus': RegisterForm.get('name')?.errors && (RegisterForm.get('name')?.touched || RegisterForm.get('name')?.dirty ) 
-            }"
+              [ngClass]="{
+                'is-valid': !RegisterForm.get('name')?.errors,
+                'is-invalid':
+                  RegisterForm.get('name')?.errors &&
+                  RegisterForm.get('name')?.touched,
+                'invalid-focus':
+                  RegisterForm.get('name')?.errors &&
+                  (RegisterForm.get('name')?.touched ||
+                    RegisterForm.get('name')?.dirty)
+              }"
               placeholder="Enter Your Name"
               id="name"
               type="text"
@@ -22,7 +27,8 @@
             />
 
             @if (RegisterForm.get('name')?.errors &&
-            (RegisterForm.get('name')?.touched || RegisterForm.get('name')?.dirty)) {
+            (RegisterForm.get('name')?.touched ||
+            RegisterForm.get('name')?.dirty)) {
             <div class="alert alert-danger">
               @if (RegisterForm.get('name')?.getError('required')) {
               <p class="m-0">
@@ -46,11 +52,16 @@
           <div class="my-2">
             <label class="mb-2" for="email">Email</label>
             <input
-            [ngClass]="{
-              'is-valid': !RegisterForm.get('email')?.errors,
-              'is-invalid':RegisterForm.get('email')?.errors && RegisterForm.get('email')?.touched,
-              'invalid-focus': RegisterForm.get('email')?.errors && (RegisterForm.get('email')?.touched || RegisterForm.get('email')?.dirty ) 
-            }"
+              [ngClass]="{
+                'is-valid': !RegisterForm.get('email')?.errors,
+                'is-invalid':
+                  RegisterForm.get('email')?.errors &&
+                  RegisterForm.get('email')?.touched,
+                'invalid-focus':
+                  RegisterForm.get('email')?.errors &&
+                  (RegisterForm.get('email')?.touched ||
+                    RegisterForm.get('email')?.dirty)
+              }"
               placeholder="Enter Email address"
               id="email"
               type="email"
@@ -59,7 +70,8 @@
             />
 
             @if (RegisterForm.get('email')?.errors &&
-            (RegisterForm.get('email')?.touched || RegisterForm.get('email')?.dirty)) {
+            (RegisterForm.get('email')?.touched ||
+            RegisterForm.get('email')?.dirty)) {
             <div class="alert alert-danger">
               @if (RegisterForm.get('email')?.getError('required')) {
               <p class="m-0">
@@ -78,11 +90,16 @@
           <div class="my-2">
             <label class="mb-2" for="password">Password</label>
             <input
-            [ngClass]="{
-              'is-valid': !RegisterForm.get('password')?.errors,
-              'is-invalid':RegisterForm.get('password')?.errors && RegisterForm.get('password')?.touched,
-              'invalid-focus': RegisterForm.get('password')?.errors && (RegisterForm.get('password')?.touched || RegisterForm.get('password')?.dirty ) 
-            }"
+              [ngClass]="{
+                'is-valid': !RegisterForm.get('password')?.errors,
+                'is-invalid':
+                  RegisterForm.get('password')?.errors &&
+                  RegisterForm.get('password')?.touched,
+                'invalid-focus':
+                  RegisterForm.get('password')?.errors &&
+                  (RegisterForm.get('password')?.touched ||
+                    RegisterForm.get('password')?.dirty)
+              }"
               placeholder="Enter Password"
               id="password"
               type="password"
@@ -90,9 +107,9 @@
               formControlName="password"
             />
 
-              @if (RegisterForm.get('password')?.errors &&
-              (RegisterForm.get('password')?.touched || RegisterForm.get('password')?.dirty)){
-
+            @if (RegisterForm.get('password')?.errors &&
+            (RegisterForm.get('password')?.touched ||
+            RegisterForm.get('password')?.dirty)){
 
             <div class="alert alert-danger">
               @if (RegisterForm.get('password')?.getError('required')) {
@@ -112,11 +129,18 @@
           <div class="my-2">
             <label class="mb-2" for="repassword">Re-Passwrod</label>
             <input
-            [ngClass]="{
-              'is-valid': !RegisterForm.get('rePassword')?.errors && RegisterForm.get('rePassword')?.touched,
-              'is-invalid':RegisterForm.get('rePassword')?.errors && RegisterForm.get('rePassword')?.touched,
-              'invalid-focus': RegisterForm.get('rePassword')?.errors && (RegisterForm.get('rePassword')?.touched || RegisterForm.get('rePassword')?.dirty ) 
-            }"
+              [ngClass]="{
+                'is-valid':
+                  !RegisterForm.get('rePassword')?.errors &&
+                  RegisterForm.get('rePassword')?.touched,
+                'is-invalid':
+                  RegisterForm.get('rePassword')?.errors &&
+                  RegisterForm.get('rePassword')?.touched,
+                'invalid-focus':
+                  RegisterForm.get('rePassword')?.errors &&
+                  (RegisterForm.get('rePassword')?.touched ||
+                    RegisterForm.get('rePassword')?.dirty)
+              }"
               placeholder="Repeat Your Password"
               id="repassword"
               type="password"
@@ -124,7 +148,8 @@
               formControlName="rePassword"
             />
             @if (RegisterForm.get("rePassword")?.errors &&
-            (RegisterForm.get('rePassword')?.touched || RegisterForm.get('rePassword')?.dirty)) {
+            (RegisterForm.get('rePassword')?.touched ||
+            RegisterForm.get('rePassword')?.dirty)) {
             <div class="alert alert-danger">
               <p class="m-0">
                 <i class="fa-solid fa-circle-exclamation"></i> rePassword does
@@ -136,11 +161,16 @@
           <div class="my-2">
             <label class="mb-2" for="phone">Phone</label>
             <input
-            [ngClass]="{
-              'is-valid': !RegisterForm.get('phone')?.errors,
-              'is-invalid':RegisterForm.get('phone')?.errors && RegisterForm.get('phone')?.touched,
-              'invalid-focus': RegisterForm.get('phone')?.errors && (RegisterForm.get('phone')?.touched || RegisterForm.get('phone')?.dirty ) 
-            }"
+              [ngClass]="{
+                'is-valid': !RegisterForm.get('phone')?.errors,
+                'is-invalid':
+                  RegisterForm.get('phone')?.errors &&
+                  RegisterForm.get('phone')?.touched,
+                'invalid-focus':
+                  RegisterForm.get('phone')?.errors &&
+                  (RegisterForm.get('phone')?.touched ||
+                    RegisterForm.get('phone')?.dirty)
+              }"
               placeholder="Enter Your Phone Number"
               id="phone"
               type="text"
@@ -148,7 +178,8 @@
               formControlName="phone"
             />
             @if (RegisterForm.get('phone')?.errors &&
-            (RegisterForm.get('phone')?.touched || RegisterForm.get('phone')?.dirty)) {
+            (RegisterForm.get('phone')?.touched ||
+            RegisterForm.get('phone')?.dirty)) {
             <div class="alert alert-danger">
               @if (RegisterForm.get('phone')?.getError('required')) {
               <p class="m-0">
@@ -163,22 +194,18 @@
               }
             </div>
             }
-          <p class="text-secondary opacity-75">
+            <p class="text-secondary opacity-75">
               By Signup, you agree to our Terms of
               <span><a role="button">Service</a></span> &
               <span><a role="button">Privacy Policy</a></span> &
             </p>
           </div>
-          <button  class="btn-main mb-2 d-flex gap-2">
-            Sign Up
-            
-            @if (isLoading) {
+          <button class="btn-main mb-2 d-flex gap-2">
+            Sign Up @if (isLoading) {
             <span><i class="fa fa-spin fa-spinner"></i></span>
             }
-
           </button>
-          @if (msgError != "") 
-          {
+          @if (msgError != "") {
           <p class="ms-auto alert alert-danger text-center">{{ msgError }}</p>
           }
         </form>

@@ -30,68 +30,80 @@
           </tr>
         </thead>
         <tbody>
-            @if (isLoading && wishListItems) {
-                @for (item of [1,1,1,1]; track $index) {
-                    <tr>
-                        <td class="align-middle">
-                            <div class="img-container">
-                                <p-skeleton size="4rem" styleClass="mr-2" />
-                            </div>
-                        </td>
-                        <td class="align-middle">
-                            <div d="flex" class="flex-column">
-                                <p-skeleton width="25rem" styleClass="mb-2" />
-                                <p-skeleton width="3rem" styleClass="mb-2" />
-    
-                            </div>
-                        </td>
-                        <td class="align-middle text-secondary"><p-skeleton width="5rem" styleClass="mb-2" /></td>
-                        <td class="align-middle">
-                            <p-skeleton width="3rem" styleClass="mb-2" />
-                        </td>
-                        <td class="align-middle">
-                            <p-skeleton width="3rem" styleClass="mb-2" />
-                        </td>
-                        <td class="align-middle">
-                            <p-skeleton size="2rem" styleClass="mr-2" />
-                        </td>
-                    </tr>
+          @if (isLoading && wishListItems) { @for (item of [1,1,1,1]; track
+          $index) {
+          <tr>
+            <td class="align-middle">
+              <div class="img-container">
+                <p-skeleton size="4rem" styleClass="mr-2" />
+              </div>
+            </td>
+            <td class="align-middle">
+              <div d="flex" class="flex-column">
+                <p-skeleton width="25rem" styleClass="mb-2" />
+                <p-skeleton width="3rem" styleClass="mb-2" />
+              </div>
+            </td>
+            <td class="align-middle text-secondary">
+              <p-skeleton width="5rem" styleClass="mb-2" />
+            </td>
+            <td class="align-middle">
+              <p-skeleton width="3rem" styleClass="mb-2" />
+            </td>
+            <td class="align-middle">
+              <p-skeleton width="3rem" styleClass="mb-2" />
+            </td>
+            <td class="align-middle">
+              <p-skeleton size="2rem" styleClass="mr-2" />
+            </td>
+          </tr>
+          } } @for (item of wishListItems; track $index) {
+          <tr>
+            <td class="align-middle">
+              <div
+                routerLink="/details/{{ item.id }}"
+                class="img-container overflow-hidden rounded"
+              >
+                <img class="w-100" [src]="item.imageCover" [alt]="item.title" />
+              </div>
+            </td>
+            <td class="align-middle">
+              <div d="flex" class="flex-column">
+                <h6 class="mb-1">{{ item.title }}</h6>
+                <p class="text-secondary mb-0">{{ item.brand.name }}</p>
+              </div>
+            </td>
+            <td class="align-middle text-secondary">
+              {{ item.price | currency : "GBP" }}
+            </td>
+            <td class="align-middle">
+              <p-badge
+                *ngIf="item.quantity > 0"
+                styleClass="p-badge"
+                value="In Stock"
+                badgeSize="small"
+                severity="success"
+              />
+            </td>
+            <td class="align-middle">
+              <button class="btn-main" (click)="addProductToCart(item.id)">
+                Add to cart
+              </button>
+            </td>
+            <td class="align-middle">
+              <button
+                (click)="removeFromWishlist(item.id)"
+                class="delete-btn btn btn-outline-danger px-2 py-1"
+              >
+                @if (loadingStates[item.id]) {
+                <i class="fa fa-spin fa-spinner"></i>
+                }@else {
+                <i class="pi pi-trash text-danger cursor-pointer"></i>
                 }
-            }
-            @for (item of wishListItems; track $index) {
-                <tr>
-                    <td class="align-middle">
-                        <div routerLink="/details/{{item.id}}" class="img-container overflow-hidden rounded">
-                        <img class="w-100" [src]="item.imageCover" [alt]="item.title">
-                        </div>
-                    </td>
-                    <td class="align-middle">
-                        <div d="flex" class="flex-column">
-                            <h6 class="mb-1">{{item.title}}</h6>
-                            <p class="text-secondary mb-0">{{item.brand.name}}</p>
-
-                        </div>
-                    </td>
-                    <td class="align-middle text-secondary">{{ item.price | currency:"GBP" }}</td>
-                    <td class="align-middle">
-                        <p-badge *ngIf="item.quantity > 0" styleClass="p-badge" value="In Stock" badgeSize="small" severity="success" />
-                    </td>
-                    <td class="align-middle">
-                            <button  class="btn-main" (click)="addProductToCart(item.id)">
-                              Add to cart
-                            </button>
-                    </td>
-                    <td class="align-middle">
-                        <button (click)="removeFromWishlist(item.id)" class="delete-btn btn btn-outline-danger px-2 py-1">
-                            @if (loadingStates[item.id]) {
-                                <i class="fa fa-spin fa-spinner"></i>
-                            }@else {
-                                <i class="pi pi-trash text-danger cursor-pointer"></i>
-                            }
-                        </button>
-                    </td>
-                </tr>
-            }
+              </button>
+            </td>
+          </tr>
+          }
         </tbody>
       </table>
     </div>

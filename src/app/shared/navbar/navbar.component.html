@@ -17,9 +17,7 @@
           class="icon d-flex align-items-center my-auto cursor-pointer d-none d-sm-block me-5"
         >
           <a
-            ><img
-              src="./assets/svgs/freshcart-logo.svg"
-              alt="FreshCart-Logo"
+            ><img src="./assets/svgs/freshcart-logo.svg" alt="FreshCart-Logo"
           /></a>
         </div>
         <div class="search-contianer w-50 gap-2 d-none d-lg-flex">
@@ -37,33 +35,34 @@
         </div>
       </div>
       <div
-      routerLink="/home"
-      class="icon ms-4 d-flex align-items-center cursor-pointer d-sm-none d-block"
-    >
-      <a
-        ><img
-          src="./assets/svgs/freshcart-logo.svg"
-          alt="FreshCart-Logo"
-      /></a>
-    </div>
+        routerLink="/home"
+        class="icon ms-4 d-flex align-items-center cursor-pointer d-sm-none d-block"
+      >
+        <a
+          ><img src="./assets/svgs/freshcart-logo.svg" alt="FreshCart-Logo"
+        /></a>
+      </div>
       <div class="icon-links">
         <ul class="list-unstyled d-flex align-items-center">
-          <li class="mx-sm-2 mx-1  d-sm-block d-none">
-            <a class="p-1 p-sm-2 " routerLink="wishlist"
+          <li class="mx-sm-2 mx-1 d-sm-block d-none">
+            <a class="p-1 p-sm-2" routerLink="wishlist"
               ><i class="pi pi-heart"
                 ><span>{{ wishCount }}</span></i
               ></a
             >
           </li>
 
-          <li class="mx-sm-2 mx-1  position-relative">
-            <a  class="p-1 p-sm-2 "(click)="menu.toggle($event)" class="cursor-pointer"
+          <li class="mx-sm-2 mx-1 position-relative">
+            <a
+              class="p-1 p-sm-2"
+              (click)="menu.toggle($event)"
+              class="cursor-pointer"
               ><i class="pi pi-user"></i
             ></a>
             <p-menu #menu [model]="items" styleClass="menu" [popup]="true" />
           </li>
-          <li class="mx-sm-2 mx-1 ">
-            <a class="p-1 p-sm-2 " routerLink="cart"
+          <li class="mx-sm-2 mx-1">
+            <a class="p-1 p-sm-2" routerLink="cart"
               ><i class="pi pi-shopping-cart"
                 ><span>{{ cartCount }}</span></i
               ></a

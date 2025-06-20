@@ -19,37 +19,43 @@
       <aside class="col-lg-3 col-md-4 pb-6 pb-md-0">
         <div class="pe-0 pe-md-4">
           <div class="cat-section border p-3 rounded mb-3">
-            <h5 (click)="toggleCategories()" class="d-flex justify-content-between align-items-center cursor-pointer mb-0">
+            <h5
+              (click)="toggleCategories()"
+              class="d-flex justify-content-between align-items-center cursor-pointer mb-0"
+            >
               Categories
-              <i class="pi" [class.pi-chevron-down]="!showCategories" [class.pi-chevron-up]="showCategories"></i>
+              <i
+                class="pi"
+                [class.pi-chevron-down]="!showCategories"
+                [class.pi-chevron-up]="showCategories"
+              ></i>
             </h5>
             <ul class="list-unstyled" *ngIf="showCategories">
-              @if (isLoading) { 
-                @for (category of [1,2,3,4,5,6,7,8,9,0]; track $index) {
-                  <li class="border-bottom py-1">
-                    <a class="d-flex justify-content-between align-items-center">
-                      <p-skeleton
-                        [width]="`${getRandom}rem`"
-                        height=".6rem"
-                        styleClass="mb-2"
-                      ></p-skeleton>
-                      <i class="pi pi-chevron-right"></i>
-                    </a>
-                  </li>
-                } 
-              } @else { 
-                @for (category of CategoriesList; track $index) {
-                  <li class="border-bottom py-2">
-                    <a
-                      (click)="getSpesificCategoryProducts(category._id, category.name)"
-                      class="d-flex justify-content-between align-items-center"
-                    >
-                      {{ category.name }} 
-                      <i class="pi pi-chevron-right"></i>
-                    </a>
-                  </li>
-                } 
-              }
+              @if (isLoading) { @for (category of [1,2,3,4,5,6,7,8,9,0]; track
+              $index) {
+              <li class="border-bottom py-1">
+                <a class="d-flex justify-content-between align-items-center">
+                  <p-skeleton
+                    [width]="`${getRandom}rem`"
+                    height=".6rem"
+                    styleClass="mb-2"
+                  ></p-skeleton>
+                  <i class="pi pi-chevron-right"></i>
+                </a>
+              </li>
+              } } @else { @for (category of CategoriesList; track $index) {
+              <li class="border-bottom py-2">
+                <a
+                  (click)="
+                    getSpesificCategoryProducts(category._id, category.name)
+                  "
+                  class="d-flex justify-content-between align-items-center"
+                >
+                  {{ category.name }}
+                  <i class="pi pi-chevron-right"></i>
+                </a>
+              </li>
+              } }
             </ul>
           </div>
         </div>

@@ -2,7 +2,8 @@
   <div class="container">
     <div class="bread-crumb mb-3" *ngIf="productData">
       <p class="m-0 d-flex gap-3">
-        <a routerLink="/home" class="text-main"><i class="fa fa-home"></i></a> / <a class="text-main" routerLink="/shop">Shop</a> / @if (isLoading) {
+        <a routerLink="/home" class="text-main"><i class="fa fa-home"></i></a> /
+        <a class="text-main" routerLink="/shop">Shop</a> / @if (isLoading) {
         <p-skeleton width="5rem" />
         }@else {
         <a class="text-main">{{ productData.category.name }}</a>
