@@ -46,6 +46,7 @@ export class ShopComponent implements OnInit, OnDestroy {
   itemsFound: number = 0;
   categoryEmpty: boolean = false;
   currentCategoryId: string | null = null;
+  showCategories: boolean = true;
 
   constructor(private messageService: MessageService) {}
 
@@ -192,7 +193,10 @@ export class ShopComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  
+  toggleCategories(): void {
+    this.showCategories = !this.showCategories;
+  }
   pageChanged(event: any): void {
     this.currentPage = event;
     this.getProducts(this.currentCategoryId || undefined);
