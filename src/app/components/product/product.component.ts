@@ -72,10 +72,9 @@ export class ProductComponent implements OnInit ,OnDestroy {
                         this.isLoading = false
                         this.productData = res.data
                         this.productImages = res.data.images
-                        console.log(res.data);
                     },
                     error:(err)=>{
-                        console.log(err);              
+                        console.error(err);              
                         this.isLoading = false
                     }
                 })

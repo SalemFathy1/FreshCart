@@ -46,7 +46,6 @@ export class ForgetpasswordComponent {
     this.isLoading = true
     this._AuthService.setEmailVerify(this.emailCheckForm.value).subscribe({
       next:(res:any)=>{
-        // console.log(res);
         this.isLoading = false
         this.step = 2
         this.emailCheckForm.reset()
@@ -55,7 +54,7 @@ export class ForgetpasswordComponent {
       },
       error:(err:HttpErrorResponse)=>{
         this.isLoading = false
-        console.log(err);
+        console.error(err);
         this.msgError = err.error.message
       }
     })
@@ -67,7 +66,6 @@ export class ForgetpasswordComponent {
     this.isLoading = true
     this._AuthService.setCodeVerify(this.codeCheckForm.value).subscribe({
       next:(res)=>{
-        console.log(res);
         this.isLoading = false
         this.codeCheckForm.reset()
         if (res.status === "Success") {
@@ -75,7 +73,7 @@ export class ForgetpasswordComponent {
         }
       },
       error:(err)=>{
-        console.log(err);
+        console.error(err);
         this.isLoading = false
         this.codeCheckForm.reset()
         this.msgError = err.error.message
@@ -87,7 +85,6 @@ export class ForgetpasswordComponent {
     this.isLoading = true
     this._AuthService.setResetPassword(this.resetCheckForm.value).subscribe({
       next:(res)=>{
-        console.log(res);
         this.isLoading = false
         this.messageService.add({ severity: 'success', summary: 'Password Changes', detail: 'Password reset successful', life: 3000 });
 
@@ -96,7 +93,7 @@ export class ForgetpasswordComponent {
         }, 1000);
       },
       error:(err)=>{
-        console.log(err);
+        console.error(err);
         
       }
     })    

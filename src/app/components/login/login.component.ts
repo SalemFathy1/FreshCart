@@ -28,9 +28,7 @@ loginSubmit():void{
         this.isLoading = true
         this._AuthService.setLoginrForm(this.LoginForm.value).subscribe({
             next:(res)=>{
-                console.log("good");
                 this.messageService.add({ severity: 'success', summary: 'Logged In successful', detail: 'Logged In successful', life: 3000 });
-                console.log(res);
                 
                 //save token
                 localStorage.setItem('userToken',res.token)

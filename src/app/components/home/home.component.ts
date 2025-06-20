@@ -107,13 +107,11 @@ export class HomeComponent implements OnInit,OnDestroy {
     addProductToCart(poductId:string):void{
         this._CartService.addProductToCart(poductId).subscribe({
             next:(res)=>{
-                console.log(res);
-                console.log(poductId);
                 this.messageService.add({ severity: 'success', summary: 'Add to Cart', detail: 'Item added to cart successful', life: 3000 });
                 this._CartService.cartCount.next(res.numOfCartItems)
             },
             error:(err)=>{
-                console.log(err);
+                console.error(err);
             }
         })
     }
@@ -122,12 +120,11 @@ export class HomeComponent implements OnInit,OnDestroy {
         event.stopPropagation(); // Prevent the click from propagating to the product card
         this._WishlistService.addToWishlist(id).subscribe({
             next:(res)=>{
-                console.log(res);
                 this.messageService.add({ severity: 'success', summary: 'Add to Wishlist', detail: 'Item added to wishlist successful', life: 3000 });
                 this._WishlistService.wishcounter.next(res.data.length)
             },
             error:(err)=>{
-                console.log(err);
+                console.error(err);
                 this.messageService.add({ severity: 'error', summary: 'Add to Wishlist', detail: 'Failed to add item to wishlist', life: 3000 });
             }
         })

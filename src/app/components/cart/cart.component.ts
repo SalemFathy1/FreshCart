@@ -32,17 +32,12 @@ export class CartComponent implements OnInit,OnDestroy {
         this.cartItemsubscription = this._CartService.getUserCartProducts().subscribe({
             next:(res)=>{
                 this.cartCount = res.numOfCartItems
-                console.log(this.cartCount);
-                
                 this.isLoading = false
-                console.log(res);
-                
-                console.log(res.data);
                 this.cartDetails = res.data 
             },
             error:(err)=>{
                 this.isLoading = false
-                console.log(err);
+                console.error(err);
             }
         })
       }
@@ -51,13 +46,12 @@ export class CartComponent implements OnInit,OnDestroy {
         this._CartService.removeSpecificCartProduct(id).subscribe({
             next:(res)=>{
                 this.messageService.add({ severity: 'error', summary: 'Item Removed ', detail: 'Item Removed from cart successful', life: 2000 });
-                console.log(res);
                 this.cartDetails = res.data 
                 this.cartCount = res.numOfCartItems
                 this._CartService.cartCount.next(res.numOfCartItems)
             },
             error:(err)=>{
-                console.log(err);
+                console.error(err);
                 this.isLoading = false   
             }
         })
@@ -71,11 +65,10 @@ export class CartComponent implements OnInit,OnDestroy {
         }
         this._CartService.updateProductQuantity(id , Count).subscribe({
             next:(res)=>{
-                console.log(res);
                 this.cartDetails = res.data 
             },
             error:(err)=>{
-                console.log(err);
+                console.error(err);
                 this.isLoading = false
 
             }
@@ -95,13 +88,12 @@ export class CartComponent implements OnInit,OnDestroy {
       clearCart():void{
         this._CartService.clearCartItems().subscribe({
             next:(res)=>{
-                console.log(res);
                 this.getCartProducts()
                 this.messageService.add({ severity: 'error', summary: 'Clearing Cart ', detail: 'cart cleared successful', life: 2000 });
                 this._CartService.cartCount.next(0)
             },
             error:(err)=>{
-                console.log(err);
+                console.error(err);
                 this.isLoading = false
             }
         })

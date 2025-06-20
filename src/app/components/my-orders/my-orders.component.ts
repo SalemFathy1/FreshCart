@@ -44,7 +44,7 @@ filterOrders(key?:string):void{
         this.allOrdersNumber = res.length
       },
       error:(err)=>{
-        console.log(err);
+        console.error(err);
       }
     })
   }, 500);

@@ -50,7 +50,7 @@ export class NavbarComponent implements OnInit {
                 this.cartCount = res.numOfCartItems
             },
             error:(err)=>{
-                console.log(err);
+                console.error(err);
                 
             }
         })
@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
                 this.wishCount = res.count
             },
             error:(err)=>{
-                console.log(err);
+                console.error(err);
                 
             }
         })

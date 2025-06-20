@@ -51,7 +51,7 @@ export class OrderComponent implements OnInit {
          this.getCartProducts()
         }
       },error:(err)=>{
-       console.log(err);
+       console.error(err);
      }
     })
     this.getAddress()
@@ -101,13 +101,12 @@ export class OrderComponent implements OnInit {
     this.isLoading = true
     this.cartItemsubscription = this._CartService.getUserCartProducts().subscribe({
         next:(res)=>{
-          console.log(res);
             this.isLoading = false
             this.cartDetails = res.data 
         },
         error:(err)=>{
             this.isLoading = false
-            console.log(err);
+            console.error(err);
         }
     })
   }
@@ -116,19 +115,16 @@ export class OrderComponent implements OnInit {
     this.isLoading = true;
     this._AddressService.getAddresses().subscribe({
       next:(res)=>{
-        console.log("Address Data");
         this.isLoading = false;
-        console.log(res);
         this.AddressArr = res.data
       },error:(err)=>{
-        console.log(err);
+        console.error(err);
       }
     })
   }
 
   addressSubmit():void{
 
-    console.log(this.paymentMethod.value);
     if (this.cartItems) {
       this.isLoading = false;
       this.msgError = 'Your cart is empty';
@@ -167,12 +163,11 @@ export class OrderComponent implements OnInit {
         if(this.paymentMethod.value == 'cash'){
           this._OrdersService.CashPay(this.cartId!,shippingAddress).subscribe({
             next: (res) => {
-              console.log(res);
               this._CartService.cartCount.next(0)
               this._Router.navigate(['/allorders']);
             },error:(err)=>{
               this.msgError = err.error.message;
-              console.log(err);
+              console.error(err);
             }
           })
         }
@@ -184,7 +179,7 @@ export class OrderComponent implements OnInit {
             },
             error: (err) => {
               this.msgError = err.error.message;
-              console.log(err);
+              console.error(err);
             }
          })
         }
@@ -201,11 +196,10 @@ export class OrderComponent implements OnInit {
     this._AddressService.addAddress(this.AddressForm.value).subscribe({
       next:(res)=>{
       this.isLoading = false
-        console.log(res);
         this.getAddress();
       this.AddressForm.reset();
       },error:(err)=>{
-        console.log(err);
+        console.error(err);
       }
   })
 }
@@ -213,10 +207,9 @@ export class OrderComponent implements OnInit {
 removeAddress(id:string){
   this._AddressService.deleteAddress(id).subscribe({
     next:(res)=>{
-      console.log(res);
       this.getAddress();
     },error:(err)=>{
-      console.log(err);
+      console.error(err);
     }
   })
 }

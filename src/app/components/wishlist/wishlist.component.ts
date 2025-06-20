@@ -30,11 +30,10 @@ getWishlistItems(load : boolean):void{
   this.isLoading = load;
   this._WishlistService.getWishlist().subscribe({
     next:(res)=>{
-      console.log(res);
       this.isLoading = false;
       this.wishListItems = res.data;
     },error:(err)=>{
-      console.log(err);
+      console.error(err);
       
     }
   })
@@ -43,13 +42,11 @@ getWishlistItems(load : boolean):void{
 addProductToCart(poductId:string):void{
   this._CartService.addProductToCart(poductId).subscribe({
       next:(res)=>{
-          console.log(res);
-          console.log(poductId);
           this.messageService.add({ severity: 'success', summary: 'Add to Cart', detail: 'Item added to cart successful', life: 3000 });
           this._CartService.cartCount.next(res.numOfCartItems)
       },
       error:(err)=>{
-          console.log(err);
+          console.error(err);
       }
   })
 }
@@ -59,13 +56,12 @@ removeFromWishlist(productId: string): void {
   this._WishlistService.removeFromWishlist(productId).subscribe({
     next: (res) => {
       delete this.loadingStates[productId];
-      console.log(res);
       this.getWishlistItems(false); // Refresh the wishlist after removal
       this.messageService.add({ severity: 'success', summary: 'Removed from Wishlist', detail: 'Item removed successfully', life: 3000 });
       this._WishlistService.wishcounter.next(res.data.length)
     },
     error: (err) => {
-      console.log(err);
+      console.error(err);
       this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Failed to remove item from wishlist', life: 3000 });
     }
   });
