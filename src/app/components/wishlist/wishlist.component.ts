@@ -57,7 +57,7 @@ removeFromWishlist(productId: string): void {
     next: (res) => {
       delete this.loadingStates[productId];
       this.getWishlistItems(false); // Refresh the wishlist after removal
-      this.messageService.add({ severity: 'success', summary: 'Removed from Wishlist', detail: 'Item removed successfully', life: 3000 });
+      this.messageService.add({ severity: 'erroe', summary: 'Removed from Wishlist', detail: 'Item removed successfully', life: 3000 });
       this._WishlistService.wishcounter.next(res.data.length)
     },
     error: (err) => {

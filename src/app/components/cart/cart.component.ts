@@ -76,18 +76,22 @@ export class CartComponent implements OnInit,OnDestroy {
       }
 
       navigateToCheckout() {
-        if (this.cartDetails?._id) {
+        if (this.cartDetails?._id , this.cartCount > 0) {
           this._Router.navigate(['/order', this.cartDetails._id]);
         } else {
-          console.error('Cart ID is not available ');
-          // You might want to show a user-friendly message here
+          console.error('Cart ID is not available Or cart is empty');
+          this.messageService.add({ severity: 'error', summary: 'Checkout Error', detail: 'Cart is empty or not available', life: 3000 });
+          
         }
       }
 
 
       clearCart():void{
+          this.cartCount = 0
+        this.isLoading = true
         this._CartService.clearCartItems().subscribe({
             next:(res)=>{
+                this.isLoading = false
                 this.getCartProducts()
                 this.messageService.add({ severity: 'error', summary: 'Clearing Cart ', detail: 'cart cleared successful', life: 2000 });
                 this._CartService.cartCount.next(0)

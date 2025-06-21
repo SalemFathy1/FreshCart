@@ -129,10 +129,10 @@
               ></span>
             </div>
             <div class="btns d-flex gap-2">
-              <button>
+              <button (click)="addProductToCart(productData.id,buyQuantity)">
                 <i class="fa-solid fa-bag-shopping me-3"></i>Add to cart
               </button>
-              <button><i class="fa-regular fa-heart"></i></button>
+              <button (click)="addToWishlist($event, productData.id)"><i class="fa-regular fa-heart"></i></button>
             </div>
           </div>
           <hr />

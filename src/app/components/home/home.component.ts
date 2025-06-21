@@ -72,7 +72,6 @@ export class HomeComponent implements OnInit,OnDestroy {
             next:(res)=>{
                 this.categoriesList = res.data 
                 this.isLoading = false
-
             },
             error:(err)=>{
                 this.isLoading = false
@@ -86,8 +85,9 @@ export class HomeComponent implements OnInit,OnDestroy {
         this.getAllproductSub = this._ProductService.getAllProducts().subscribe({
             next:(res)=>{
                 this.productsList = res.data
-                this.isLoading = false
-
+                setTimeout(() => {
+                    this.isLoading = false
+                }, 3000);
             },error:(err)=>{
                 this.isLoading = false
             }

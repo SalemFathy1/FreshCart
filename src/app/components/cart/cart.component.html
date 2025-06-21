@@ -3,8 +3,8 @@
     <div class="bread-crumb mb-3">
       <p class="m-0 d-flex gap-3">
         <a routerLink="/home" class="text-main"><i class="fa fa-home"></i></a> /
-        <a class="text-main">Shop</a> /
-        <a>Shop Cart</a>
+        <a class="text-main " routerLink="/shop">Shop</a> /
+        <a [class.text-main]="cartDetails._id">{{cartDetails._id || "shopping cart is Empty !"}}</a>
       </p>
     </div>
   </div>
@@ -19,10 +19,12 @@
       <div class="row g-5 mx-0">
         <div class="col-12 col-lg-8 col-md-7 px-0">
           <div class="cart-item-container w-100">
-            <div class="alert alert-danger">
-              You’ve got FREE delivery. Start
-              <a class="alert-link cursor-pointer fw-semibold">checkout now!</a>
-            </div>
+            @if (cartCount != 0) {
+              <div class="alert alert-danger">
+                You’ve got FREE delivery. Start
+                <a class="alert-link cursor-pointer fw-semibold">checkout now!</a>
+              </div>
+            }
             <ul class="list-group list-group-flush list-unstyled">
               @if (isLoading) { @for (item of [1,2,3,4,5]; track $index) {
               <li>
@@ -234,7 +236,7 @@
               </div>
               <button
                 (click)="navigateToCheckout()"
-                [disabled]="!cartDetails._id"
+                [disabled]="cartCount == 0"
                 class="btn-main d-flex justify-content-between"
               >
                 Checkout<span>{{
